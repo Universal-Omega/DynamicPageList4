@@ -49,7 +49,6 @@ use function str_replace;
 use function str_starts_with;
 use function strtotime;
 use function substr;
-use function version_compare;
 use function wfMessage;
 use const NS_CATEGORY;
 use const NS_FILE;
