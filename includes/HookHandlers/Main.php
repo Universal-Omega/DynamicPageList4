@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace MediaWiki\Extension\DynamicPageList4\HookHandlers;
 
 use MediaWiki\Extension\DynamicPageList4\Config;
@@ -243,8 +245,8 @@ class Main implements ParserFirstCallInitHook {
 	public function dplReplaceParserFunction(
 		Parser $parser,
 		string $text,
-		string $pat,
-		string $repl
+		string $pat = '',
+		string $repl = ''
 	): string {
 		$parser->addTrackingCategory( 'dplreplace-parserfunc-tracking-category' );
 		if ( $text === '' || $pat === '' ) {
@@ -304,11 +306,11 @@ class Main implements ParserFirstCallInitHook {
 
 	public function dplMatrixParserFunction(
 		Parser $parser,
-		string $name,
-		string $yes,
-		string $no,
-		string $flip,
-		string $matrix
+		string $name = '',
+		string $yes = '',
+		string $no = '',
+		string $flip = '',
+		string $matrix = ''
 	): string {
 		$parser->addTrackingCategory( 'dplmatrix-parserfunc-tracking-category' );
 

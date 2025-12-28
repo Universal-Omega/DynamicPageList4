@@ -1,5 +1,7 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace MediaWiki\Extension\DynamicPageList4\Maintenance;
 
 use MediaWiki\Maintenance\LoggedUpdateMaintenance;
@@ -22,7 +24,7 @@ class CreateView extends LoggedUpdateMaintenance {
 		return 'dynamic-page-list-4-create-view';
 	}
 
-	protected function updateSkippedMessage(): string {
+	public function updateSkippedMessage(): string {
 		return 'VIEW already created.';
 	}
 

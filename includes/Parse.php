@@ -1,10 +1,12 @@
 <?php
 
+declare( strict_types = 1 );
+
 namespace MediaWiki\Extension\DynamicPageList4;
 
-use Exception;
 use ExtVariables;
 use MediaWiki\Context\RequestContext;
+use MediaWiki\Extension\DynamicPageList4\Exceptions\QueryException;
 use MediaWiki\Extension\DynamicPageList4\Heading\Heading;
 use MediaWiki\Extension\DynamicPageList4\HookHandlers\Eliminate;
 use MediaWiki\Extension\DynamicPageList4\HookHandlers\Reset;
@@ -60,19 +62,11 @@ class Parse {
 	private readonly Parameters $parameters;
 	private readonly WebRequest $request;
 
-	/** Header Output */
 	private string $header = '';
-
-	/** Footer Output */
 	private string $footer = '';
-
-	/** Body Output */
 	private string $output = '';
 
-	/** Replacement Variables */
 	private array $replacementVariables = [];
-
-	/** Array of possible URL arguments. */
 	private array $urlArguments = [
 		'DPL_offset',
 		'DPL_count',
@@ -117,7 +111,7 @@ class Parse {
 			$this->config->get( 'runFromProtectedPagesOnly' ) &&
 			$title && !$restrictionStore->isProtected( $title, 'edit' )
 		) {
-			// Ideally we would like to allow using a DPL query if the query istelf is coded on a
+			// Ideally we would like to allow using a DPL query if the query itself is coded on a
 			// template page which is protected. Then there would be no need for the article to
 			// be protected. However, how can one find out from which wiki source an extension
 			// has been invoked???
@@ -129,8 +123,8 @@ class Parse {
 		/* Check for URL Arguments in Input */
 		/************************************/
 		if ( str_contains( $input, '{%DPL_' ) ) {
-			foreach ( range( 1, 5 ) as $i ) {
-				$this->urlArguments[] = 'DPL_arg' . $i;
+			foreach ( range( 1, 5 ) as $index ) {
+				$this->urlArguments[] = "DPL_arg$index";
 			}
 		}
 
@@ -223,7 +217,7 @@ class Parse {
 				$this->logger->addMessage( Constants::FATAL_POOLCOUNTER );
 				return $this->getFullOutput( totalResults: 0, skipHeaderFooter: true );
 			}
-		} catch ( Exception $e ) {
+		} catch ( QueryException $e ) {
 			$this->logger->addMessage( Constants::FATAL_SQLBUILDERROR, $e->getMessage() );
 			return $this->getFullOutput( totalResults: 0, skipHeaderFooter: true );
 		}
@@ -334,7 +328,7 @@ class Parse {
 		$parser->getOutput()->updateCacheExpiry( $expiry );
 
 		$finalOutput = $this->getFullOutput(
-			totalResults: $foundRows,
+			totalResults: (int)$foundRows,
 			skipHeaderFooter: false
 		);
 
@@ -342,10 +336,7 @@ class Parse {
 		return $finalOutput;
 	}
 
-	/**
-	 * Process Query Results
-	 * @return Article[]
-	 */
+	/** @return Article[] */
 	private function processQueryResults( array $rows, Parser $parser ): array {
 		/*******************************/
 		/* Random Count Pick Generator */
@@ -388,12 +379,12 @@ class Parse {
 					$pageTitle = $row->il_to;
 				} else {
 					// Maybe non-existing title
-					$pageNamespace = $row->lt_namespace;
+					$pageNamespace = (int)$row->lt_namespace;
 					$pageTitle = $row->lt_title;
 				}
 			} else {
 				// Existing PAGE TITLE
-				$pageNamespace = $row->page_namespace;
+				$pageNamespace = (int)$row->page_namespace;
 				$pageTitle = $row->page_title;
 			}
 
@@ -448,10 +439,10 @@ class Parse {
 			}
 
 			if ( !$this->parameters->exists( $parameter ) ) {
-				$this->logger->addMessage(
-					Constants::WARN_UNKNOWNPARAM, $parameter,
+				$this->logger->addMessage( Constants::WARN_UNKNOWNPARAM, $parameter,
 					implode( ', ', $this->parameters->getParametersForRichness() )
 				);
+
 				continue;
 			}
 
@@ -473,19 +464,11 @@ class Parse {
 		return $parameters;
 	}
 
-	/**
-	 * Concatenate output
-	 */
 	private function addOutput( string $output ): void {
 		$this->output .= $output;
 	}
 
-	/**
-	 * Set the output text.
-	 */
 	private function getOutput(): string {
-		// @TODO: 2015-08-28 Consider calling $this->replaceVariables() here.
-		// Might cause issues with text returned in the results.
 		return $this->output;
 	}
 
@@ -577,12 +560,11 @@ class Parse {
 	 * Return text with variables replaced.
 	 */
 	private function replaceVariables( string $text ): string {
-		$text = self::replaceNewLines( $text );
-		foreach ( $this->replacementVariables as $variable => $replacement ) {
-			$text = str_replace( $variable, $replacement, $text );
-		}
-
-		return $text;
+		return str_replace(
+			array_keys( $this->replacementVariables ),
+			array_values( $this->replacementVariables ),
+			self::replaceNewLines( $text )
+		);
 	}
 
 	/**
@@ -599,7 +581,6 @@ class Parse {
 		/**************************/
 		/* Parameter Error Checks */
 		/**************************/
-
 		$totalCategories = 0;
 		foreach ( [ 'category', 'notcategory' ] as $param ) {
 			foreach ( $this->parameters->getParameter( $param ) ?? [] as $operatorTypes ) {
@@ -625,13 +606,13 @@ class Parse {
 			$totalCategories > $this->config->get( 'maxCategoryCount' ) &&
 			!$this->config->get( 'allowUnlimitedCategories' )
 		) {
-			$this->logger->addMessage( Constants::FATAL_TOOMANYCATS, $this->config->get( 'maxCategoryCount' ) );
+			$this->logger->addMessage( Constants::FATAL_TOOMANYCATS, (string)$this->config->get( 'maxCategoryCount' ) );
 			return false;
 		}
 
 		// Not enough categories.
 		if ( $totalCategories < $this->config->get( 'minCategoryCount' ) ) {
-			$this->logger->addMessage( Constants::FATAL_TOOFEWCATS, $this->config->get( 'minCategoryCount' ) );
+			$this->logger->addMessage( Constants::FATAL_TOOFEWCATS, (string)$this->config->get( 'minCategoryCount' ) );
 			return false;
 		}
 
@@ -656,7 +637,7 @@ class Parse {
 		}
 
 		// No more than one type of date at a time!
-		// @TODO: Can this be fixed to allow all three later after fixing the article class?
+		// @TODO: Can this be fixed to allow all three later after fixing the Article class?
 		if (
 			(int)$this->parameters->getParameter( 'addpagetoucheddate' ) +
 			(int)$this->parameters->getParameter( 'addfirstcategorydate' ) +
@@ -682,6 +663,7 @@ class Parse {
 			$this->logger->addMessage( Constants::FATAL_WRONGORDERMETHOD,
 				'mode=category', 'sortkey | title | titlewithoutnamespace'
 			);
+
 			return false;
 		}
 
@@ -693,6 +675,7 @@ class Parse {
 			$this->logger->addMessage( Constants::FATAL_WRONGORDERMETHOD,
 				'addpagetoucheddate=true', 'pagetouched | title'
 			);
+
 			return false;
 		}
 
@@ -751,18 +734,17 @@ class Parse {
 				'addauthor',
 				'addcontribution',
 				'addlasteditor',
-			], fn ( string $param ): mixed => $this->parameters->getParameter( $param ) )
+			], fn ( string $param ): bool => $this->parameters->getParameter( $param ) ?? false )
 		) {
 			$this->logger->addMessage( Constants::WARN_CATOUTPUTBUTWRONGPARAMS );
 		}
 
 		// headingmode has effects with ordermethod on multiple components only.
 		if ( $this->parameters->getParameter( 'headingmode' ) !== 'none' && count( $orderMethods ) < 2 ) {
-			$this->logger->addMessage(
-				Constants::WARN_HEADINGBUTSIMPLEORDERMETHOD,
-				$this->parameters->getParameter( 'headingmode' ),
-				'none'
+			$this->logger->addMessage( Constants::WARN_HEADINGBUTSIMPLEORDERMETHOD,
+				$this->parameters->getParameter( 'headingmode' ), 'none'
 			);
+
 			$this->parameters->setParameter( 'headingmode', 'none' );
 		}
 
@@ -781,33 +763,32 @@ class Parse {
 	/**
 	 * Create keys for TableRow which represent the structure of the "include=" arguments.
 	 */
-	private static function updateTableRowKeys( array $tableRow, array $sectionLabels ): array {
+	private function updateTableRowKeys( array $tableRow, array $sectionLabels ): array {
 		$originalRow = $tableRow;
-		$tableRow = [];
-		$groupNr = -1;
-		$t = 0;
+		$updatedRow = [];
+		$sectionIndex = -1;
+		$cellIndex = 0;
 
 		foreach ( $sectionLabels as $label ) {
-			$groupNr++;
+			$sectionIndex++;
 			if ( !str_contains( $label, '}:' ) ) {
-				if ( isset( $originalRow[$t] ) ) {
-					$tableRow[$groupNr] = $originalRow[$t];
+				if ( isset( $originalRow[$cellIndex] ) ) {
+					$updatedRow[$sectionIndex] = $originalRow[$cellIndex];
 				}
-				$t++;
+				$cellIndex++;
 				continue;
 			}
 
-			[ , $colsPart ] = explode( '}:', $label, 2 );
-			$n = substr_count( $colsPart, ':' ) + 1;
-
-			for ( $colNr = 0; $colNr < $n; $colNr++, $t++ ) {
-				if ( isset( $originalRow[$t] ) ) {
-					$tableRow["$groupNr.$colNr"] = $originalRow[$t];
+			[ , $columnPart ] = explode( '}:', $label, 2 );
+			$columnCount = substr_count( $columnPart, ':' ) + 1;
+			for ( $columnIndex = 0; $columnIndex < $columnCount; $columnIndex++, $cellIndex++ ) {
+				if ( isset( $originalRow[$cellIndex] ) ) {
+					$updatedRow["$sectionIndex.$columnIndex"] = $originalRow[$cellIndex];
 				}
 			}
 		}
 
-		return $tableRow;
+		return $updatedRow;
 	}
 
 	/**
