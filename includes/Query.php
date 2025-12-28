@@ -357,7 +357,7 @@ class Query {
 			->getReplicaDatabase( group: 'vslow' );
 
 		if ( $depth > 2 ) {
-			// Recursive limit to prevent full-blown explosion
+			// Hard constrain depth because lots of recursion is bad.
 			$depth = 2;
 		}
 
