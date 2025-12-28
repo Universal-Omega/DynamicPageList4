@@ -51,13 +51,11 @@ use function strtotime;
 use function substr;
 use function version_compare;
 use function wfMessage;
-use const MW_VERSION;
 use const NS_CATEGORY;
 use const NS_FILE;
 use const NS_MAIN;
 use const PREG_SPLIT_DELIM_CAPTURE;
 use const PREG_SPLIT_NO_EMPTY;
-use const SCHEMA_COMPAT_READ_NEW;
 
 class Query {
 
@@ -723,31 +721,20 @@ class Query {
 	 * Set SQL for 'articlecategory' parameter.
 	 */
 	private function _articlecategory( string $option ): void {
-		$dbKey = str_replace( ' ', '_', $option );
-		$isNewSchema = false;
-		if ( version_compare( MW_VERSION, '1.45', '>=' ) ) {
-			$schemaStage = $this->config->get( 'CategoryLinksSchemaMigrationStage' );
-			$isNewSchema = $schemaStage & SCHEMA_COMPAT_READ_NEW;
-		}
-
-		$builder = $this->queryBuilder->newSubquery()
+		$subquery = $this->queryBuilder->newSubquery()
 			->select( 'p2.page_title' )
 			->from( 'page', 'p2' )
 			->join( 'categorylinks', 'clstc', 'clstc.cl_from = p2.page_id' )
+			->join( 'linktarget', 'lt', 'lt.lt_id = clstc.cl_target_id' )
 			->where( [ 'p2.page_namespace' => NS_MAIN ] )
-			->caller( __METHOD__ );
-
-		if ( $isNewSchema ) {
-			$builder->join( 'linktarget', 'lt', 'lt.lt_id = clstc.cl_target_id' );
-			$builder->andWhere( [
+			->andWhere( [
 				'lt.lt_namespace' => NS_CATEGORY,
-				'lt.lt_title' => $dbKey,
-			] );
-		} else {
-			$builder->andWhere( [ 'clstc.cl_to' => $dbKey ] );
-		}
+				'lt.lt_title' => $option,
+			] )
+			->caller( __METHOD__ )
+			->getSQL();
 
-		$this->queryBuilder->where( 'p.page_title IN (' . $builder->getSQL() . ')' );
+		$this->queryBuilder->where( "p.page_title IN ($subquery)" );
 	}
 
 	/**
