@@ -725,8 +725,8 @@ class Query {
 			->from( 'page', 'p2' )
 			->join( 'categorylinks', 'clstc', 'clstc.cl_from = p2.page_id' )
 			->join( 'linktarget', 'lt', 'lt.lt_id = clstc.cl_target_id' )
-			->where( [ 'p2.page_namespace' => NS_MAIN ] )
-			->andWhere( [
+			->where( [
+				'p2.page_namespace' => NS_MAIN,
 				'lt.lt_namespace' => NS_CATEGORY,
 				'lt.lt_title' => $option,
 			] )
