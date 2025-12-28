@@ -360,12 +360,14 @@ class Query {
 
 		try {
 			$categories = $dbr->newSelectQueryBuilder()
-				->select( 'page_title' )
-				->from( 'page' )
-				->join( 'categorylinks', 'cl', 'page_id = cl.cl_from' )
+				->select( 'p.page_title' )
+				->from( 'page', 'p' )
+				->join( 'categorylinks', 'cl', 'p.page_id = cl.cl_from' )
+				->join( 'linktarget', 'lt', 'cl.cl_target_id = lt.lt_id' )
 				->where( [
-					'page_namespace' => NS_CATEGORY,
-					'cl.cl_to' => str_replace( ' ', '_', $categoryName ),
+					'p.page_namespace' => NS_CATEGORY,
+					'lt.lt_namespace' => NS_CATEGORY,
+					'lt.lt_title' => str_replace( ' ', '_', $categoryName ),
 				] )
 				->caller( __METHOD__ )
 				->distinct()
