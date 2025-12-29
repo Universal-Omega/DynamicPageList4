@@ -3,7 +3,8 @@
 		"authors": [
 			"Frisk",
 			"Rail",
-			"Sp5uhe"
+			"Sp5uhe",
+			"Woytecr"
 		]
 	},
 	"intersection-desc": "Zwraca listę wypunktowaną najnowszych elementów w kategorii lub grupie kilku kategorii",
@@ -23,7 +24,7 @@
 	"dpl_log_8": "Błąd – można dodać tylko jeden typ daty na raz.",
 	"dpl_log_9": "Błąd – parametr „$1” musi być używany wraz z „ordermethod=[ $2 ]”.",
 	"dpl_log_10": "Błąd – indeksem dominującej sekcji musi być liczba pomiędzy 1 a liczbą argumentów parametru „includepage” ($0 w tym przypadku).",
-	"dpl_log_11": "Błąd – nie można wykonywać logicznych operacji na nieskategoryzowanych stronach (np. z parametrem „category”), ponieważ podgląd $0 nie istnieje w bazie danych! Pomoc: administrator bazy danych musi wykonać to zapytanie: <code>$1</code>.",
+	"dpl_log_11": "Błąd – nie można wykonywać logicznych operacji na nieskategoryzowanych stronach (czyli z parametrem „category”), ponieważ widok $0 nie istnieje w bazie danych! Pomoc: administrator bazy danych musi wykonać to zapytanie: <code>$1</code>.",
 	"dpl_log_12": "Błąd – podawanie parametru „openreferences” jest niekompatybilne z inną podaną opcją. Usuń proszę tę inną opcję lub „openreferences”. Zobacz poradnik aby dowiedzieć się więcej.",
 	"dpl_log_13": "Ostrzeżenie – nieznany parametr „$1” został zignorowany. Pomoc: dostępne parametry – <code>$2</code>.",
 	"dpl_log_14": "Ostrzeżenie – pominięto złą opcję „$2” dla parametru „$1”.",
@@ -41,7 +42,7 @@
 	"dpl_articlecount": "W tym nagłówku {{PLURAL:$1|znajduje się jeden artykuł|znajdują się $1 artykuły|znajduje się $1 artykułów}}.",
 	"action-dpl_param_update_rules": "używania parametru „updaterules”",
 	"action-dpl_param_delete_rules": "używania parametru „deleterules”",
-	"dpl_query_error": "Rozszerzenie DynamicPageList3 (wersja $1) wyprodukowało wyrażenie SQL, które doprowadziło do błędu bazy danych.<br />Powodem może być wewnętrzny błąd DynamicPageList3 lub problem spowodowany przez Ciebie; szczególnie podczas używania takich parametrów jak „categoryregexp” lub „titleregexp”. Używanie wzorców dopasowywania takich jak *? nie jest wspierane.<br />Komunikat o błędzie:<br/><code>$2</code>",
+	"dpl_query_error": "Rozszerzenie DynamicPageList3 (wersja $1) wyprodukowało wyrażenie SQL, które doprowadziło do błędu bazy danych.<br />Powodem może być wewnętrzny błąd DynamicPageList3 lub problem spowodowany przez Ciebie; szczególnie podczas używania takich parametrów jak „categoryregexp” lub „titleregexp”. Używanie wzorców dopasowywania takich jak <code>*?</code> nie jest wspierane.<br />Komunikat o błędzie:<br/><code>$2</code>",
 	"dpl-tag-tracking-category": "Strony używające znacznika parsera DynamicPageList3",
 	"dpl-intersection-tracking-category": "Strony używające znacznika parsera DynamicPageList3 Intersection",
 	"dpl-parserfunc-tracking-category": "Strony używające funkcji parsera DynamicPageList3",
