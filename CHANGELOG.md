@@ -35,7 +35,7 @@
 * Added compatability with the Video extension.
 * [Performance] Removed tables from `FOUND_ROWS`.
 * [Performance] Optimized query for `ordermethod=lastedit`.
-* [Performance] Only parse image URLs for `%IMAGE` if needed.
+* [Performance] Only parse image URLs for `%IMAGE%` if needed.
 * Use `strict_types`
 * Don't let `titleText` become null if match fails. This fixes exceptions if regex is invalid in `replaceintitle`.
 * Escape category links in gallery. Fixes creating a gallery with category pages adding every category in the gallery to the page.
