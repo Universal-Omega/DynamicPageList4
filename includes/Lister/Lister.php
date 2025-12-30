@@ -475,10 +475,11 @@ class Lister {
 			}
 		}
 
+		$result = substr( $format, $n + 1 );
 		$result = str_replace(
 			[ '%%', '%PAGE%', '%IMAGE%' ],
 			[ $arg, $article->mTitle->getPrefixedText(), $this->lazyParseImageUrlWithPath( $result, $arg ) ],
-			substr( $format, $n + 1 )
+			$result
 		);
 
 		$result = $this->cutAt( $maxLength, $result );
