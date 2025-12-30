@@ -326,17 +326,19 @@ class Query {
 
 				$query = $this->dbr->selectSQLText(
 					[
-						'clgoal' => 'categorylinks'
+						'clgoal' => 'categorylinks',
+						'ltgoal' => 'linktarget'
 					],
 					[
-						'clgoal.cl_to'
+						'ltgoal.lt_title'
 					],
 					[
-						'clgoal.cl_from' => $pageIds
+						'clgoal.cl_from' => $pageIds,
+						'clgoal.cl_target_id = ltgoal.lt_id'
 					],
 					__METHOD__,
 					[
-						'ORDER BY' => 'clgoal.cl_to ' . $this->direction
+						'ORDER BY' => 'ltgoal.lt_title ' . $this->direction
 					]
 				);
 			} else {
@@ -702,18 +704,23 @@ class Query {
 
 		$categories = [];
 		$res = $dbr->select(
-			[ 'page', 'categorylinks' ],
+			[ 'page', 'categorylinks', 'linktarget' ],
 			[ 'page_title' ],
 			[
 				'page_namespace' => NS_CATEGORY,
-				'cl_to' => str_replace( ' ', '_', $categoryName )
+				'linktarget.lt_namespace' => NS_CATEGORY,
+				'linktarget.lt_title' => str_replace( ' ', '_', $categoryName )
 			],
 			__METHOD__,
 			[ 'DISTINCT' ],
 			[
 				'categorylinks' => [
 					'INNER JOIN',
-					'page_id = cl_from'
+					'page_id = categorylinks.cl_from'
+				],
+				'linktarget' => [
+					'INNER JOIN',
+					'categorylinks.cl_target_id = linktarget.lt_id'
 				]
 			]
 		);
@@ -804,9 +811,10 @@ class Query {
 	 */
 	private function _addcategories( $option ) {
 		$this->addTable( 'categorylinks', 'cl_gc' );
+		$this->addTable( 'linktarget', 'lt_gc' );
 		$this->addSelect(
 			[
-				'cats' => "GROUP_CONCAT(DISTINCT cl_gc.cl_to ORDER BY cl_gc.cl_to ASC SEPARATOR ' | ')"
+				'cats' => "GROUP_CONCAT(DISTINCT lt_gc.lt_title ORDER BY lt_gc.lt_title ASC SEPARATOR ' | ')"
 			]
 		);
 
@@ -815,6 +823,14 @@ class Query {
 			[
 				'LEFT OUTER JOIN',
 				'page_id = cl_gc.cl_from'
+			]
+		);
+
+		$this->addJoin(
+			'lt_gc',
+			[
+				'LEFT OUTER JOIN',
+				'cl_gc.cl_target_id = lt_gc.lt_id'
 			]
 		);
 
@@ -1027,7 +1043,9 @@ class Query {
 		$this->addWhere(
 			$this->dbr->tableName( 'page' ) . '.page_title IN (SELECT p2.page_title FROM ' .
 			$this->dbr->tableName( 'page' ) . ' p2 INNER JOIN ' .
-			$this->dbr->tableName( 'categorylinks' ) . ' clstc ON (clstc.cl_from = p2.page_id AND clstc.cl_to = ' .
+			$this->dbr->tableName( 'categorylinks' ) . ' clstc ON clstc.cl_from = p2.page_id INNER JOIN ' .
+			$this->dbr->tableName( 'linktarget' ) . ' ltstc ON (clstc.cl_target_id = ltstc.lt_id AND ltstc.lt_namespace = ' .
+			NS_CATEGORY . ' AND ltstc.lt_title = ' .
 			$this->dbr->addQuotes( $option ) . ') WHERE p2.page_namespace = 0)'
 		);
 	}
@@ -1075,12 +1093,21 @@ class Query {
 						foreach ( $categories as $category ) {
 							$i++;
 							$tableAlias = "cl{$i}";
+							$linkTargetAlias = "lt{$i}";
 							$this->addTable( $tableName, $tableAlias );
+							$this->addTable( 'linktarget', $linkTargetAlias );
 							$this->addJoin(
 								$tableAlias, [
 									'INNER JOIN',
-									"{$this->dbr->tableName( 'page' )}.page_id = {$tableAlias}.cl_from AND " .
-										"$tableAlias.cl_to {$comparisonType} " .
+									"{$this->dbr->tableName( 'page' )}.page_id = {$tableAlias}.cl_from"
+								]
+							);
+							$this->addJoin(
+								$linkTargetAlias, [
+									'INNER JOIN',
+									"{$tableAlias}.cl_target_id = {$linkTargetAlias}.lt_id AND " .
+										"{$linkTargetAlias}.lt_namespace = " . NS_CATEGORY . " AND " .
+										"{$linkTargetAlias}.lt_title {$comparisonType} " .
 										$this->dbr->addQuotes( str_replace( ' ', '_', $category ) )
 								]
 							);
@@ -1088,24 +1115,35 @@ class Query {
 					} elseif ( $operatorType == 'OR' ) {
 						$i++;
 						$tableAlias = "cl{$i}";
+						$linkTargetAlias = "lt{$i}";
 						$this->addTable( $tableName, $tableAlias );
+						$this->addTable( 'linktarget', $linkTargetAlias );
 
-						$joinOn = "{$this->dbr->tableName( 'page' )}.page_id = {$tableAlias}.cl_from AND (";
-						$ors = [];
-
-						foreach ( $categories as $category ) {
-							$ors[] = "{$tableAlias}.cl_to {$comparisonType} " .
-								$this->dbr->addQuotes( str_replace( ' ', '_', $category ) );
-						}
-
-						$joinOn .= implode( " {$operatorType} ", $ors );
-						$joinOn .= ')';
+						$joinOn = "{$this->dbr->tableName( 'page' )}.page_id = {$tableAlias}.cl_from";
 
 						$this->addJoin(
 							$tableAlias,
 							[
 								'INNER JOIN',
 								$joinOn
+							]
+						);
+
+						$ors = [];
+						foreach ( $categories as $category ) {
+							$ors[] = "{$linkTargetAlias}.lt_title {$comparisonType} " .
+								$this->dbr->addQuotes( str_replace( ' ', '_', $category ) );
+						}
+
+						$linkTargetJoinOn = "{$tableAlias}.cl_target_id = {$linkTargetAlias}.lt_id AND " .
+							"{$linkTargetAlias}.lt_namespace = " . NS_CATEGORY . " AND (" .
+							implode( " {$operatorType} ", $ors ) . ')';
+
+						$this->addJoin(
+							$linkTargetAlias,
+							[
+								'INNER JOIN',
+								$linkTargetJoinOn
 							]
 						);
 					}
@@ -1126,20 +1164,30 @@ class Query {
 				$i++;
 
 				$tableAlias = "ecl{$i}";
+				$linkTargetAlias = "elt{$i}";
 				$this->addTable( 'categorylinks', $tableAlias );
+				$this->addTable( 'linktarget', $linkTargetAlias );
 
 				$this->addJoin(
 					$tableAlias, [
 						'LEFT OUTER JOIN',
-						"{$this->dbr->tableName( 'page' )}.page_id = {$tableAlias}.cl_from AND " .
-							"{$tableAlias}.cl_to {$operatorType}" .
+						"{$this->dbr->tableName( 'page' )}.page_id = {$tableAlias}.cl_from"
+					]
+				);
+
+				$this->addJoin(
+					$linkTargetAlias, [
+						'LEFT OUTER JOIN',
+						"{$tableAlias}.cl_target_id = {$linkTargetAlias}.lt_id AND " .
+							"{$linkTargetAlias}.lt_namespace = " . NS_CATEGORY . " AND " .
+							"{$linkTargetAlias}.lt_title {$operatorType}" .
 							$this->dbr->addQuotes( str_replace( ' ', '_', $category ) )
 					]
 				);
 
 				$this->addWhere(
 					[
-						"{$tableAlias}.cl_to" => null
+						"{$linkTargetAlias}.lt_id" => null
 					]
 				);
 			}
@@ -1900,8 +1948,8 @@ class Query {
 		foreach ( $option as $orderMethod ) {
 			switch ( $orderMethod ) {
 				case 'category':
-					$this->addOrderBy( 'cl_head.cl_to' );
-					$this->addSelect( [ 'cl_head.cl_to' ] );
+					$this->addOrderBy( 'lt_head.lt_title' );
+					$this->addSelect( [ 'lt_head.lt_title' ] );
 
 					if (
 						(
@@ -1921,11 +1969,19 @@ class Query {
 					}
 
 					$this->addTable( $_clTableName, $_clTableAlias );
+					$this->addTable( 'linktarget', 'lt_head' );
 					$this->addJoin(
 						$_clTableAlias,
 						[
 							'LEFT OUTER JOIN',
 							'page_id = cl_head.cl_from'
+						]
+					);
+					$this->addJoin(
+						'lt_head',
+						[
+							'LEFT OUTER JOIN',
+							'cl_head.cl_target_id = lt_head.lt_id'
 						]
 					);
 
@@ -1935,7 +1991,7 @@ class Query {
 					) {
 						$this->addWhere(
 							[
-								'cl_head.cl_to' => $this->parameters->getParameter( 'catheadings' )
+								'lt_head.lt_title' => $this->parameters->getParameter( 'catheadings' )
 							]
 						);
 					}
@@ -1946,7 +2002,7 @@ class Query {
 					) {
 						$this->addNotWhere(
 							[
-								'cl_head.cl_to' => $this->parameters->getParameter( 'catnotheadings' )
+								'lt_head.lt_title' => $this->parameters->getParameter( 'catnotheadings' )
 							]
 						);
 					}

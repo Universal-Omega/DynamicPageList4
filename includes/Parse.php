@@ -408,7 +408,7 @@ class Parse {
 
 			if ( $this->parameters->getParameter( 'goal' ) == 'categories' ) {
 				$pageNamespace = NS_CATEGORY;
-				$pageTitle = $row->cl_to;
+				$pageTitle = $row->lt_title;
 			} elseif ( $this->parameters->getParameter( 'openreferences' ) ) {
 				if ( count( $this->parameters->getParameter( 'imagecontainer' ) ?? [] ) > 0 ) {
 					$pageNamespace = NS_FILE;

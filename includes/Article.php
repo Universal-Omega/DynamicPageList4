@@ -380,14 +380,15 @@ class Article {
 				switch ( $parameters->getParameter( 'ordermethod' )[0] ) {
 					case 'category':
 						// Count one more page in this heading
-						self::$headings[$row->cl_to] = ( self::$headings[$row->cl_to] ?? 0 ) + 1;
-						if ( $row->cl_to == '' ) {
+						$categoryTitle = $row->lt_title ?? '';
+						self::$headings[$categoryTitle] = ( self::$headings[$categoryTitle] ?? 0 ) + 1;
+						if ( $categoryTitle == '' ) {
 							// Uncategorized page (used if ordermethod=category,...)
 							$article->mParentHLink = '[[:Special:Uncategorizedpages|' .
 								wfMessage( 'uncategorizedpages' ) . ']]';
 						} else {
-							$article->mParentHLink = '[[:Category:' . $row->cl_to . '|' .
-								str_replace( '_', ' ', $row->cl_to ) . ']]';
+							$article->mParentHLink = '[[:Category:' . $categoryTitle . '|' .
+								str_replace( '_', ' ', $categoryTitle ) . ']]';
 						}
 
 						break;
