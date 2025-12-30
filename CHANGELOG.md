@@ -44,6 +44,7 @@
 * Added more PHPUnit and Parser tests.
 
 ## New Features
+* Added new configuration option to support overriding the parameter defaults, `$wgDplSettings['overrideParameterDefaults']`.
 * Added support for display titles:
   * New format option: `%DISPLAYTITLE%` (falls back to `%TITLE%` if no display title is set; available only when using the `title` parameter).
   * New order method: `ordermethod=displaytitle` (automatically falls back to sorting by `title` when no display title exists).
@@ -81,6 +82,10 @@ The template transclusion (`Extension DPL`) has been replaced with a proper trac
 
 ----
 
+`notcategory` now applies to the `maxCategoryCount` limitation as well. This was done because they both use queries, so the limit, designed for query limitation, should apply to both. This may break existing pages as well, so the limit may need changed in user's configuration as well.
+
+----
+
 Removed the `suppresserrors` parameter.
 <br />**NOTE:** This one was documented as deprecated and slated for removal long ago and hasn't done anything at all prior to removal.
 
@@ -91,8 +96,11 @@ Removed support for updating/deleting articles.
 
 ----
 
-Updated some config defaults.
-<br />**NOTE:** Changed the default for `$wgDplSettings['allowedNamespaces']` to an empty array (`[]`) instead of `null` and changed `$wgDplSettings['recursivePreprocess']` to be enabled by default.
+Updated some config defaults, changing:
+* `$wgDplSettings['allowedNamespaces']` to be an empty array (`[]`) instead of `null`. 
+* `$wgDplSettings['recursivePreprocess']` to be enabled by default.
+* `$wgDplSettings['maxCategoryCount']` increased to 8 instead of 4.
+  * This was done since `notcategory` now applies to the limit as well, so since double the parameters affect it, the default limit was doubled as well.
 
 ----
 
