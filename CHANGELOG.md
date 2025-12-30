@@ -41,6 +41,7 @@
 * Fixed multiple bugs in `reset` and `eliminate` parameters.
 * Fixed catching `DBQueryError`, and improved query exception handling, adding a new exception type, `QueryException` to more reliably and explicitly catch proper query errors.
 * Fixed `nottitlematch` bug where only the first pattern is excluded.
+* Added validation for regex in `replaceintitle` to avoid potential PHP warnings for invalid regex.
 * Added more PHPUnit and Parser tests.
 
 ## New Features
