@@ -17,12 +17,14 @@ use function array_map;
 use function array_merge;
 use function array_shift;
 use function array_unique;
+use function count;
 use function explode;
 use function filter_var;
 use function html_entity_decode;
 use function in_array;
 use function is_array;
 use function is_numeric;
+use function is_string;
 use function ltrim;
 use function method_exists;
 use function min;
@@ -875,6 +877,14 @@ class Parameters extends ParametersData {
 	private function _replaceintitle( string $option ): bool {
 		// We offer a possibility to replace some part of the title
 		$replaceInTitle = explode( ',', $option, 2 );
+		if ( count( $replaceInTitle ) !== 2 || !is_string( $replaceInTitle[0] ) ) {
+			return false;
+		}
+
+		if ( !$this->isRegexValid( [ $replaceInTitle[0] ], forDb: false ) ) {
+			return false;
+		}
+		
 		if ( isset( $replaceInTitle[1] ) ) {
 			$replaceInTitle[1] = $this->stripHtmlTags( $replaceInTitle[1] );
 		}
