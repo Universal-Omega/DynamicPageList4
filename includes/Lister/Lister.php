@@ -330,7 +330,6 @@ class Lister {
 
 		$contLang = MediaWikiServices::getInstance()->getContentLanguage();
 		$namespaces = $contLang->getNamespaces();
-		$imageUrl = $this->parseImageUrlWithPath( $article );
 
 		$pageName = $article->mTitle->getPrefixedText();
 		if ( $this->escapeLinks && $article->mTitle->inNamespaces( NS_CATEGORY, NS_FILE ) ) {
@@ -352,7 +351,7 @@ class Lister {
 			'%PAGE%' => $pageName,
 			'%PAGEID%' => (string)$article->mID,
 			'%NAMESPACE%' => $namespaces[$article->mNamespace],
-			'%IMAGE%' => $imageUrl,
+			'%IMAGE%' => $this->lazyParseImageUrlWithPath( $tag, $article ),
 			'%EXTERNALLINK%' => $article->mExternalLink,
 			'%EDITSUMMARY%' => $article->mComment,
 			'%TITLE%' => $title,
@@ -430,7 +429,7 @@ class Lister {
 
 			$row = str_replace(
 				[ '%IMAGE%', '%PAGE%' ],
-				[ $this->parseImageUrlWithPath( $val ), $article->mTitle->getPrefixedText() ],
+				[ $this->lazyParseImageUrlWithPath( $row, $val ), $article->mTitle->getPrefixedText() ],
 				$row
 			);
 
@@ -476,10 +475,11 @@ class Lister {
 			}
 		}
 
+		$result = substr( $format, $n + 1 );
 		$result = str_replace(
 			[ '%%', '%PAGE%', '%IMAGE%' ],
-			[ $arg, $article->mTitle->getPrefixedText(), $this->parseImageUrlWithPath( $arg ) ],
-			substr( $format, $n + 1 )
+			[ $arg, $article->mTitle->getPrefixedText(), $this->lazyParseImageUrlWithPath( $result, $arg ) ],
+			$result
 		);
 
 		$result = $this->cutAt( $maxLength, $result );
@@ -505,9 +505,13 @@ class Lister {
 	}
 
 	/**
-	 * Prepends an image name with its hash path.
+	 * Prepends an image name with its hash path, only if needed.
 	 */
-	private function parseImageUrlWithPath( Article|string $article ): string {
+	private function lazyParseImageUrlWithPath( string $tag, Article|string $article ): string {
+		if ( !str_contains( $tag, '%IMAGE%' ) ) {
+			return '';
+		}
+
 		$repoGroup = MediaWikiServices::getInstance()->getRepoGroup();
 		if ( $article instanceof Article ) {
 			if ( $article->mNamespace === NS_FILE ) {
