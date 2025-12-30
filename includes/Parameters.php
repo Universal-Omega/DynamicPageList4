@@ -884,7 +884,7 @@ class Parameters extends ParametersData {
 		if ( !$this->isRegexValid( [ $replaceInTitle[0] ], forDb: false ) ) {
 			return false;
 		}
-		
+
 		if ( isset( $replaceInTitle[1] ) ) {
 			$replaceInTitle[1] = $this->stripHtmlTags( $replaceInTitle[1] );
 		}
