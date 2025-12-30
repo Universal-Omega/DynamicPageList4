@@ -52,7 +52,7 @@
 				"alwaysCacheResults": false,
 				"categoryStyleListCutoff": 6,
 				"functionalRichness": 3,
-				"maxCategoryCount": 4,
+				"maxCategoryCount": 8,
 				"maxQueryTime": 10000,
 				"maxResultCount": 500,
 				"minCategoryCount": 0,
