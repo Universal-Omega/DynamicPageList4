@@ -24,7 +24,6 @@ use function html_entity_decode;
 use function in_array;
 use function is_array;
 use function is_numeric;
-use function is_string;
 use function ltrim;
 use function method_exists;
 use function min;
@@ -875,20 +874,20 @@ class Parameters extends ParametersData {
 	 * Clean and test 'replaceintitle' parameter.
 	 */
 	private function _replaceintitle( string $option ): bool {
-		// We offer a possibility to replace some part of the title
+		// We offer a possibility to replace some part of the title.
+		// Supports both regex and string replacement.
 		$replaceInTitle = explode( ',', $option, 2 );
-		if ( count( $replaceInTitle ) !== 2 || !is_string( $replaceInTitle[0] ) ) {
+		if ( count( $replaceInTitle ) !== 2 ) {
 			return false;
 		}
 
-		if ( !$this->isRegexValid( [ $replaceInTitle[0] ], forDb: false ) ) {
-			return false;
+		$replaceInTitle[1] = $this->stripHtmlTags( $replaceInTitle[1] );
+		if ( $this->isRegexValid( [ $replaceInTitle[0] ], forDb: false ) ) {
+			$this->setParameter( 'replaceintitleregex', $replaceInTitle );
+			return true;
 		}
 
-		if ( isset( $replaceInTitle[1] ) ) {
-			$replaceInTitle[1] = $this->stripHtmlTags( $replaceInTitle[1] );
-		}
-
+		$replaceInTitle[0] = $this->stripHtmlTags( $replaceInTitle[0] );
 		$this->setParameter( 'replaceintitle', $replaceInTitle );
 		return true;
 	}
