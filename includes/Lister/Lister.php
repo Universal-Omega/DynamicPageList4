@@ -338,9 +338,14 @@ class Lister {
 
 		$title = $article->mTitle->getText();
 		$replaceInTitle = $this->parameters->getParameter( 'replaceintitle' ) ?? [];
+		$replaceInTitleRegex = $this->parameters->getParameter( 'replaceintitleregex' ) ?? [];
 
-		if ( count( $replaceInTitle ) === 2 ) {
-			$title = preg_replace( $replaceInTitle[0], $replaceInTitle[1], $title );
+		if ( $replaceInTitleRegex !== [] ) {
+			$title = preg_replace( $replaceInTitleRegex[0], $replaceInTitleRegex[1], $title ) ?? $title;
+		}
+
+		if ( $replaceInTitle !== [] ) {
+			$title = str_replace( $replaceInTitle[0], $replaceInTitle[1], $title );
 		}
 
 		if ( $this->titleMaxLength > 0 && strlen( $title ) > $this->titleMaxLength ) {
