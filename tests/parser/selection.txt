@@ -105,3 +105,73 @@ format=,%TITLE%,;,
 <p>Banana;Grape;Mango;Orange;
 </p>
 !! end
+
+!! test
+replaceintitle: simple string replacement
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+replaceintitle = Apple,Green Apple
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Apricot;Banana;Grape;Green Apple;Mango;Orange;Pear;Plum;
+</p>
+!! end
+
+!! test
+replaceintitle: multiple string replacements
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+replaceintitle = Apple,Red Apple|Banana,Yellow Banana
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Apricot;Grape;Mango;Orange;Pear;Plum;Red Apple;Yellow Banana;
+</p>
+!! end
+
+!! test
+replaceintitle: regex replacement prefix
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+replaceintitle = /^A(.*)$/i,Fruit-$1
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Banana;Fruit-pple;Fruit-pricot;Grape;Mango;Orange;Pear;Plum;
+</p>
+!! end
+
+!! test
+replaceintitle: regex replacement for ending character
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+replaceintitle = /(e)$/i,-$1
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Appl-e;Apricot;Banana;Grape-;Mango;Orang-e;Pear;Plum;
+</p>
+!! end
+
+!! test
+replaceintitle: invalid regex falls back to literal string (no match)
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+replaceintitle = /(Apple,Green Apple
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Apple;Apricot;Banana;Grape;Mango;Orange;Pear;Plum;
+</p>
+!! end
