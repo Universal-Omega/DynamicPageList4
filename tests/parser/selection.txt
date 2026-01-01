@@ -51,6 +51,34 @@ Plum
 !! endarticle
 
 !! test
+titlematch: include specific pages
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+titlematch=Apple|Apricot¦Banana
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Apple;Apricot;Banana;
+</p>
+!! end
+
+!! test
+titlematch: include using SQL wildcard patterns
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+titlematch = A%|P%
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Apple;Apricot;Pear;Plum;
+</p>
+!! end
+
+!! test
 nottitlematch: exclude specific pages
 !! wikitext
 <dpl>
