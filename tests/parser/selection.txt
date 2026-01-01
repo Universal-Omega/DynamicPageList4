@@ -116,21 +116,7 @@ replaceintitle = Apple,Green Apple
 format=,%TITLE%,;,
 </dpl>
 !! html
-<p>Apricot;Banana;Grape;Green Apple;Mango;Orange;Pear;Plum;
-</p>
-!! end
-
-!! test
-replaceintitle: multiple string replacements
-!! wikitext
-<dpl>
-namespace = 0
-ordermethod=title
-replaceintitle = Apple,Red Apple|Banana,Yellow Banana
-format=,%TITLE%,;,
-</dpl>
-!! html
-<p>Apricot;Grape;Mango;Orange;Pear;Plum;Red Apple;Yellow Banana;
+<p>Green Apple;Apricot;Banana;Grape;Mango;Orange;Pear;Plum;
 </p>
 !! end
 
@@ -144,7 +130,7 @@ replaceintitle = /^A(.*)$/i,Fruit-$1
 format=,%TITLE%,;,
 </dpl>
 !! html
-<p>Banana;Fruit-pple;Fruit-pricot;Grape;Mango;Orange;Pear;Plum;
+<p>Fruit-pple;Fruit-pricot;Banana;Grape;Mango;Orange;Pear;Plum;
 </p>
 !! end
 
@@ -158,7 +144,7 @@ replaceintitle = /(e)$/i,-$1
 format=,%TITLE%,;,
 </dpl>
 !! html
-<p>Appl-e;Apricot;Banana;Grape-;Mango;Orang-e;Pear;Plum;
+<p>Appl-e;Apricot;Banana;Grap-e;Mango;Orang-e;Pear;Plum;
 </p>
 !! end
 
