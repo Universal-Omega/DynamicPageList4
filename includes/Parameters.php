@@ -887,7 +887,6 @@ class Parameters extends ParametersData {
 			return true;
 		}
 
-		$replaceInTitle[0] = $this->stripHtmlTags( $replaceInTitle[0] );
 		$this->setParameter( 'replaceintitle', $replaceInTitle );
 		return true;
 	}
