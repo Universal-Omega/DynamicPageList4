@@ -82,7 +82,7 @@ class Parameters extends ParametersData {
 		}
 
 		// Validate allowed values
-		if ( isset( $parameterData['values'] ) ) {
+		if ( $parameterData['values'] ?? false ) {
 			if ( !in_array( strtolower( $option ), $parameterData['values'], true ) ) {
 				return false;
 			}
@@ -171,7 +171,7 @@ class Parameters extends ParametersData {
 		}
 
 		// Regex pattern
-		if ( isset( $parameterData['pattern'] ) ) {
+		if ( $parameterData['pattern'] ?? false ) {
 			if ( !preg_match( $parameterData['pattern'], $option, $matches ) ) {
 				return false;
 			}
