@@ -161,3 +161,31 @@ format=,%TITLE%,;,
 <p>Apple;Apricot;Banana;Grape;Mango;Orange;Pear;Plum;
 </p>
 !! end
+
+!! test
+replaceintitle: no replacement given
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+replaceintitle = Apple
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Apple;Apricot;Banana;Grape;Mango;Orange;Pear;Plum;
+</p>
+!! end
+
+!! test
+replaceintitle: no replacement given (regex)
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+replaceintitle = /^A.*/
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Apple;Apricot;Banana;Grape;Mango;Orange;Pear;Plum;
+</p>
+!! end
