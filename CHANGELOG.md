@@ -47,6 +47,7 @@
 
 ## New Features
 * Added new configuration option to support overriding the parameter defaults, `$wgDplSettings['overrideParameterDefaults']`.
+* Added support for string replacements in `replaceintitle`. This previously only supported regex replacements, now it will fallback to string replacements if there is no valid regex.
 * Added support for display titles:
   * New format option: `%DISPLAYTITLE%` (falls back to `%TITLE%` if no display title is set; available only when using the `title` parameter).
   * New order method: `ordermethod=displaytitle` (automatically falls back to sorting by `title` when no display title exists).
