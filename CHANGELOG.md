@@ -4,9 +4,6 @@
   * Has better performance and security
   * More maintainable
   * Fixes many bugs with queries
-* `namespace` and `notnamespace` now accepts more options:
-  * Case-insensitive `main` and `(main)` are now accepted for the main namespace.
-  * Namespace IDs (rather than just namespace names) work for all namespaces.
 * `openreferences` is fixed so it actually gives the openreferences conflict error rather than a query error for `openreferences = missing`.
 * `ordermethod = pagesel` gives a new error message rather than a query error when not using any of the supported options with it.
 * Fixed some instances of `column reference "page_title" is ambiguous`.
@@ -51,6 +48,9 @@
 * Added support for display titles:
   * New format option: `%DISPLAYTITLE%` (falls back to `%TITLE%` if no display title is set; available only when using the `title` parameter).
   * New order method: `ordermethod=displaytitle` (automatically falls back to sorting by `title` when no display title exists).
+* `namespace` and `notnamespace` now accepts more options:
+  * Case-insensitive `main` and `(main)` are now accepted for the main namespace.
+  * Namespace IDs (rather than just namespace names) work for all namespaces.
 * Support for a wide range of relative timestamps (e.g., "last week", "in 2 hours", "1 month ago").
   Previously only a few relative timestamps where supported, now anything supported by PHPs `strtotime` is supported.
 - **Gallery Mode Enhancements:**  
