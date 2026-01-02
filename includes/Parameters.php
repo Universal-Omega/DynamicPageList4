@@ -42,6 +42,7 @@ use function wfMessage;
 use const FILTER_NULL_ON_FAILURE;
 use const FILTER_VALIDATE_BOOLEAN;
 use const INF;
+use const NS_MAIN;
 
 class Parameters extends ParametersData {
 
@@ -550,12 +551,13 @@ class Parameters extends ParametersData {
 		foreach ( explode( '|', $option ) as $parameter ) {
 			$parameter = trim( $parameter );
 			$parameter = str_replace( ' ', '_', $parameter );
+			$namespaceId = $contLang->getNsIndex( $parameter );
+
 			$lowerParam = strtolower( $parameter );
-			if ( $lowerParam === 'main' || $lowerParam === '(main)' ) {
-				$parameter = '';
+			if ( $namespaceId === false && $lowerParam === 'main' ) {
+				$namespaceId = NS_MAIN;
 			}
 
-			$namespaceId = $contLang->getNsIndex( $parameter );
 			if ( $namespaceId === false && is_numeric( $parameter ) &&
 				in_array( (int)$parameter, $contLang->getNamespaceIds(), true )
 			) {
@@ -589,12 +591,13 @@ class Parameters extends ParametersData {
 		foreach ( explode( '|', $option ) as $parameter ) {
 			$parameter = trim( $parameter );
 			$parameter = str_replace( ' ', '_', $parameter );
+			$namespaceId = $contLang->getNsIndex( $parameter );
+
 			$lowerParam = strtolower( $parameter );
-			if ( $lowerParam === 'main' || $lowerParam === '(main)' ) {
-				$parameter = '';
+			if ( $namespaceId === false && $lowerParam === 'main' ) {
+				$namespaceId = NS_MAIN;
 			}
 
-			$namespaceId = $contLang->getNsIndex( $parameter );
 			if ( $namespaceId === false && is_numeric( $parameter ) &&
 				in_array( (int)$parameter, $contLang->getNamespaceIds(), true )
 			) {
