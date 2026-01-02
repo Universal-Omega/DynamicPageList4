@@ -13,7 +13,6 @@ use MediaWiki\Revision\RevisionRecord;
 use MediaWiki\Title\Title;
 use MediaWiki\User\ActorStore;
 use stdClass;
-use function count;
 use function defined;
 use function explode;
 use function gmdate;
@@ -99,13 +98,22 @@ class Article {
 		$titleText = $parameters->getParameter( 'shownamespace' ) === true ?
 			$title->getPrefixedText() : $title->getText();
 
-		$replaceInTitle = $parameters->getParameter( 'replaceintitle' ) ?? [];
-		if ( count( $replaceInTitle ) === 2 ) {
+		$replaceInTitleRegex = $parameters->getParameter( 'replaceintitleregex' ) ?? [];
+		if ( $replaceInTitleRegex !== [] ) {
 			$titleText = preg_replace(
+				$replaceInTitleRegex[0],
+				$replaceInTitleRegex[1],
+				$titleText
+			) ?? $titleText;
+		}
+
+		$replaceInTitle = $parameters->getParameter( 'replaceintitle' ) ?? [];
+		if ( $replaceInTitle !== [] ) {
+			$titleText = str_replace(
 				$replaceInTitle[0],
 				$replaceInTitle[1],
 				$titleText
-			) ?? $titleText;
+			);
 		}
 
 		// Chop off title if longer than the 'titlemaxlength' parameter.

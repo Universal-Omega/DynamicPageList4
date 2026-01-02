@@ -118,7 +118,25 @@ class ArticleTest extends MediaWikiIntegrationTestCase {
 		$title->method( 'getFullText' )->willReturn( 'Test_Page_Name' );
 
 		$parameters = $this->createMockParameters( [
-			'replaceintitle' => [ '/Test_/', 'Demo ' ],
+			'replaceintitle' => [ 'Test_', 'Demo ' ],
+		] );
+
+		$article = Article::newFromRow( $row, $parameters, $title, NS_MAIN, 'Test_Page_Name' );
+		$this->assertStringContainsString( 'Demo Page_Name', $article->mLink );
+	}
+
+	/**
+	 * Test title replacement with replaceintitleregex parameter
+	 */
+	public function testNewFromRowWithReplaceInTitleRegex(): void {
+		$row = $this->createMockRow( [ 'page_id' => 123 ] );
+
+		$title = $this->createMock( Title::class );
+		$title->method( 'getText' )->willReturn( 'Test_Page_Name' );
+		$title->method( 'getFullText' )->willReturn( 'Test_Page_Name' );
+
+		$parameters = $this->createMockParameters( [
+			'replaceintitleregex' => [ '/Test_/', 'Demo ' ],
 		] );
 
 		$article = Article::newFromRow( $row, $parameters, $title, NS_MAIN, 'Test_Page_Name' );
