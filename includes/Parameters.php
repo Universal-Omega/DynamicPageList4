@@ -42,6 +42,7 @@ use function wfMessage;
 use const FILTER_NULL_ON_FAILURE;
 use const FILTER_VALIDATE_BOOLEAN;
 use const INF;
+use const NS_MAIN;
 
 class Parameters extends ParametersData {
 
@@ -554,7 +555,7 @@ class Parameters extends ParametersData {
 
 			$lowerParam = strtolower( $parameter );
 			if ( $namespaceId === false && ( $lowerParam === 'main' || $lowerParam === '(main)' ) ) {
-				$namespaceId = 0;
+				$namespaceId = NS_MAIN;
 			}
 
 			if ( $namespaceId === false && is_numeric( $parameter ) &&
@@ -594,7 +595,7 @@ class Parameters extends ParametersData {
 
 			$lowerParam = strtolower( $parameter );
 			if ( $namespaceId === false && ( $lowerParam === 'main' || $lowerParam === '(main)' ) ) {
-				$namespaceId = 0;
+				$namespaceId = NS_MAIN;
 			}
 
 			if ( $namespaceId === false && is_numeric( $parameter ) &&
