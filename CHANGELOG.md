@@ -81,6 +81,16 @@ Previously, using `&` in a category name would incorrectly be interpreted as a l
 
 ----
 
+Previously, underscores (`_`) in LIKE-style patterns (like in `titlematch` and `nottitlematch`) were implicitly treated as single-character wildcards. This made it impossible to reliably match literal underscores (which also represent spaces), and caused patterns to match more broadly than intended.
+
+This behavior has been fixed:
+
+* A single-character wildcard must now be written explicitly as `[_]`.
+* Each `[_]` represents exactly one character (for example, `[_][_][_]` matches three characters).
+* A bare `_` is now treated as a literal underscore and will no longer act as a wildcard.
+
+----
+
 The template transclusion (`Extension DPL`) has been replaced with a proper tracking category, `Pages using DynamicPageList4`. All the references and usages of `Extension DPL` has been removed, including the `CreateTemplate` maintenance script. There is now a new maintenance script, `DeleteTemplate` to delete the old template. It will auto run when updated using `update.php`.
 
 ----
