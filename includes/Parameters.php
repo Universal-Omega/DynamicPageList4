@@ -554,7 +554,7 @@ class Parameters extends ParametersData {
 			$namespaceId = $contLang->getNsIndex( $parameter );
 
 			$lowerParam = strtolower( $parameter );
-			if ( $namespaceId === false && ( $lowerParam === 'main' || $lowerParam === '(main)' ) ) {
+			if ( $namespaceId === false && $lowerParam === 'main' ) {
 				$namespaceId = NS_MAIN;
 			}
 
@@ -594,7 +594,7 @@ class Parameters extends ParametersData {
 			$namespaceId = $contLang->getNsIndex( $parameter );
 
 			$lowerParam = strtolower( $parameter );
-			if ( $namespaceId === false && ( $lowerParam === 'main' || $lowerParam === '(main)' ) ) {
+			if ( $namespaceId === false && $lowerParam === 'main' ) {
 				$namespaceId = NS_MAIN;
 			}
 
