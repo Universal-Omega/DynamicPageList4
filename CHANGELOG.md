@@ -48,7 +48,7 @@
 * Added support for display titles:
   * New format option: `%DISPLAYTITLE%` (falls back to `%TITLE%` if no display title is set; available only when using the `title` parameter).
   * New order method: `ordermethod=displaytitle` (automatically falls back to sorting by `title` when no display title exists).
-* `namespace` and `notnamespace` now accepts more options:
+* `namespace` and `notnamespace` now accepts more options (only if they do not conflict with other existing namespace names):
   * Case-insensitive `main` and `(main)` are now accepted for the main namespace.
   * Namespace IDs (rather than just namespace names) work for all namespaces.
 * Support for a wide range of relative timestamps (e.g., "last week", "in 2 hours", "1 month ago").
