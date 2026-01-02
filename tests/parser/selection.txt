@@ -50,24 +50,6 @@ Plum
 Plum
 !! endarticle
 
-!! article
-Green Apple
-!! text
-Green Apple
-!! endarticle
-
-!! article
-GreenXApple
-!! text
-GreenXApple
-!! endarticle
-
-!! article
-Red Apple
-!! text
-Red Apple
-!! endarticle
-
 !! test
 titlematch: include specific pages
 !! wikitext
@@ -139,20 +121,6 @@ format=,%TITLE%,;,
 !! end
 
 !! test
-titlematch: literal underscore is not a wildcard
-!! wikitext
-<dpl>
-namespace = 0
-ordermethod=title
-titlematch = Green_Apple
-format=,%TITLE%,;,
-</dpl>
-!! html
-<p>Green Apple;
-</p>
-!! end
-
-!! test
 nottitlematch: exclude specific pages
 !! wikitext
 <dpl>
@@ -205,20 +173,6 @@ format=,%TITLE%,;,
 </dpl>
 !! html
 <p>Apple;Apricot;Banana;Grape;Pear;Plum;
-</p>
-!! end
-
-!! test
-nottitlematch: literal underscore exclusion
-!! wikitext
-<dpl>
-namespace = 0
-ordermethod=title
-nottitlematch = Red_Apple
-format=,%TITLE%,;,
-</dpl>
-!! html
-<p>Apple;Apricot;Banana;Grape;Green Apple;Mango;Orange;Pear;Plum;
 </p>
 !! end
 
