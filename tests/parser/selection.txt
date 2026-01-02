@@ -57,6 +57,12 @@ Green Apple
 !! endarticle
 
 !! article
+GreenXApple
+!! text
+GreenXApple
+!! endarticle
+
+!! article
 Red Apple
 !! text
 Red Apple
