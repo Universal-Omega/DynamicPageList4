@@ -79,12 +79,12 @@ format=,%TITLE%,;,
 !! end
 
 !! test
-titlematch: single-character wildcard (_)
+titlematch: single-character wildcard ([_])
 !! wikitext
 <dpl>
 namespace = 0
 ordermethod=title
-titlematch = P___
+titlematch = P[_][_][_]
 format=,%TITLE%,;,
 </dpl>
 !! html
@@ -98,7 +98,7 @@ titlematch: single-character wildcard with fixed prefix
 <dpl>
 namespace = 0
 ordermethod=title
-titlematch = G____
+titlematch = G[_][_][_][_]
 format=,%TITLE%,;,
 </dpl>
 !! html
@@ -107,12 +107,12 @@ format=,%TITLE%,;,
 !! end
 
 !! test
-titlematch: mixed % and _ wildcard
+titlematch: mixed % and [_] wildcard
 !! wikitext
 <dpl>
 namespace = 0
 ordermethod=title
-titlematch = _p%e
+titlematch = [_]p%e
 format=,%TITLE%,;,
 </dpl>
 !! html
@@ -149,12 +149,12 @@ format=,%TITLE%,;,
 !! end
 
 !! test
-nottitlematch: single-character wildcard (_)
+nottitlematch: single-character wildcard ([_])
 !! wikitext
 <dpl>
 namespace = 0
 ordermethod=title
-nottitlematch = _range
+nottitlematch = [_]range
 format=,%TITLE%,;,
 </dpl>
 !! html
@@ -163,12 +163,12 @@ format=,%TITLE%,;,
 !! end
 
 !! test
-nottitlematch: mixed % and _ wildcard
+nottitlematch: mixed % and [_] wildcard
 !! wikitext
 <dpl>
 namespace = 0
 ordermethod=title
-nottitlematch = %a_g%
+nottitlematch = %a[_]g%
 format=,%TITLE%,;,
 </dpl>
 !! html
