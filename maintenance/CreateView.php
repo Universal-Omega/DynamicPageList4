@@ -33,7 +33,7 @@ class CreateView extends LoggedUpdateMaintenance {
 	 *
 	 * @return string
 	 */
-	protected function updateSkippedMessage(): string {
+	public function updateSkippedMessage(): string {
 		return 'VIEW already created.';
 	}
 

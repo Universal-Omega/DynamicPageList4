@@ -34,7 +34,7 @@ class CreateTemplate extends LoggedUpdateMaintenance {
 	 *
 	 * @return string
 	 */
-	protected function updateSkippedMessage(): string {
+	public function updateSkippedMessage(): string {
 		return 'Template already created.';
 	}
 
