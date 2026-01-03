@@ -337,20 +337,6 @@ class Lister {
 		}
 
 		$title = $article->mTitle->getText();
-		$replaceInTitle = $this->parameters->getParameter( 'replaceintitle' ) ?? [];
-		$replaceInTitleRegex = $this->parameters->getParameter( 'replaceintitleregex' ) ?? [];
-
-		if ( $replaceInTitleRegex !== [] ) {
-			$title = preg_replace( $replaceInTitleRegex[0], $replaceInTitleRegex[1], $title ) ?? $title;
-		}
-
-		if ( $replaceInTitle !== [] ) {
-			$title = str_replace( $replaceInTitle[0], $replaceInTitle[1], $title );
-		}
-
-		if ( $this->titleMaxLength > 0 && strlen( $title ) > $this->titleMaxLength ) {
-			$title = substr( $title, 0, $this->titleMaxLength ) . wfMessage( 'ellipsis' )->escaped();
-		}
 
 		$tag = strtr( $tag, [
 			'%PAGE%' => $pageName,
@@ -359,8 +345,8 @@ class Lister {
 			'%IMAGE%' => $this->lazyParseImageUrlWithPath( $tag, $article ),
 			'%EXTERNALLINK%' => $article->mExternalLink,
 			'%EDITSUMMARY%' => $article->mComment,
-			'%TITLE%' => $title,
-			'%DISPLAYTITLE%' => $article->mDisplayTitle ?: $title,
+			'%TITLE%' => $this->replaceTagTitle( $title ),
+			'%DISPLAYTITLE%' => $this->replaceTagTitle( $article->mDisplayTitle ?: $title ),
 			'%COUNT%' => (string)$article->mCounter,
 			'%COUNTFS%' => (string)floor( log( $article->mCounter ) * 0.7 ),
 			'%COUNTFS2%' => (string)floor( sqrt( log( $article->mCounter ) ) ),
@@ -443,6 +429,25 @@ class Lister {
 
 			$firstCall = false;
 		}
+	}
+
+	private function replaceTagTitle( string $title ): string {
+		$replaceInTitle = $this->parameters->getParameter( 'replaceintitle' ) ?? [];
+		$replaceInTitleRegex = $this->parameters->getParameter( 'replaceintitleregex' ) ?? [];
+
+		if ( $replaceInTitleRegex !== [] ) {
+			$title = preg_replace( $replaceInTitleRegex[0], $replaceInTitleRegex[1], $title ) ?? $title;
+		}
+
+		if ( $replaceInTitle !== [] ) {
+			$title = str_replace( $replaceInTitle[0], $replaceInTitle[1], $title );
+		}
+
+		if ( $this->titleMaxLength > 0 && strlen( $title ) > $this->titleMaxLength ) {
+			$title = substr( $title, 0, $this->titleMaxLength ) . wfMessage( 'ellipsis' )->escaped();
+		}
+
+		return $title;
 	}
 
 	/**
