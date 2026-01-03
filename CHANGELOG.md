@@ -53,21 +53,21 @@
   * Namespace IDs (rather than just namespace names) work for all namespaces.
 * Support for a wide range of relative timestamps (e.g., "last week", "in 2 hours", "1 month ago").
   Previously only a few relative timestamps where supported, now anything supported by PHPs `strtotime` is supported.
-- **Gallery Mode Enhancements:**  
-  - Properly supports retrieving **PageImages** when using `mode=gallery` on non-file namespace pages, if the **PageImages** extension is installed. 
-  - Now pulls directly from the **PageImages** extension instead of relying on `page_props`, allowing access to both `page_image` and `page_image_free`.
-  - Added support for `mode=gallery` when using **Intersection compatibility mode** (i.e., `<DynamicPageList>` tags).
-  - Improves support for `%IMAGE%`:  
+* **Gallery Mode Enhancements:**  
+  * Properly supports retrieving **PageImages** when using `mode=gallery` on non-file namespace pages, if the **PageImages** extension is installed. 
+  * Now pulls directly from the **PageImages** extension instead of relying on `page_props`, allowing access to both `page_image` and `page_image_free`.
+  * Added support for `mode=gallery` when using **Intersection compatibility mode** (i.e., `<DynamicPageList>` tags).
+  * Improves support for `%IMAGE%`:  
     It no longer relies on stock `/images/` directories and instead dynamically resolves images based on whatever file backend is in use.
-  - Introduces a new parameter: `gallerymode`.  
+  * Introduces two new parameters: `imagewidth` and `imageheight`, to control the size of images within galleries.
+  * Introduces another new parameter: `gallerymode`.  
     This sets the `mode=` attribute in the generated `<gallery>` tag. Defaults to **`traditional`**, but supports all standard modes:
-    - `traditional`
-    - `nolines`
-    - `packed`
-    - `packed-hover`
-    - `packed-overlay`
-    - `slideshow`
-  - Introduce two other new parameters: `imagewidth` and `imageheight`, to control the size of images within galleries.
+    * `traditional`
+    * `nolines`
+    * `packed`
+    * `packed-hover`
+    * `packed-overlay`
+    * `slideshow`
  
   For more on supported gallery modes, see:  
 https://www.mediawiki.org/wiki/Help:Images#Gallery_syntax
@@ -88,6 +88,8 @@ This behavior has been fixed:
 * A single-character wildcard must now be written explicitly as `[_]`.
 * Each `[_]` represents exactly one character (for example, `[_][_][_]` matches three characters).
 * A bare `_` is now treated as a literal underscore and will no longer act as a wildcard.
+
+**NOTE:** We do it with brackets, because brackets are disallowed title characters, so they won't cause issues in the future with some edge-cases since no title can actually contain them. For similar reasons in the future, the same or similar method may be needed for `%` in order to allow better matching of literal `%` in titles, but that is a change that will break much more uses so will be done differently, perhaps keeping existing behavior but adding some other substitution to match literal `%`. For now, matching literal `%` remains unsupported or unreliable.
 
 ----
 
