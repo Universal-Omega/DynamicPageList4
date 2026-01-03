@@ -1,3 +1,7 @@
+# Version 4.0.1
+## UNRELEASED
+**This release has not yet begun, but the changes it will make, include dropping MediaWiki 1.43 and 1.44 support and supporting MediaWiki 1.45's categorylinks migration.**
+
 # Version 4.0.0
 **The extension was nearly completely rewritten, as such it has been rebranded as DynamicPageList4 as well. There could also be other changes not mentioned here as well, but major changes should be mentioned here.**
 * Converted all queries to use MediaWiki's QueryBuilder
