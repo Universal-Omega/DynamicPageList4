@@ -189,3 +189,45 @@ format=,%TITLE%,;,
 <p>Apple;Apricot;Banana;Grape;Mango;Orange;Pear;Plum;
 </p>
 !! end
+
+!! test
+titlemaxlength: truncate long titles
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+titlemaxlength = 5
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Apple;Apric...;Banan...;Grape;Mango;Orang...;Pear;Plum;
+</p>
+!! end
+
+!! test
+titlemaxlength: truncate with small limit
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+titlemaxlength = 3
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>App...;Apr...;Ban...;Gra...;Man...;Ora...;Pea...;Plu...;
+</p>
+!! end
+
+!! test
+titlemaxlength: exact length not truncated
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+titlemaxlength = 4
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Appl...;Apri...;Bana...;Grap...;Mang...;Oran...;Pear;Plum;
+</p>
+!! end
