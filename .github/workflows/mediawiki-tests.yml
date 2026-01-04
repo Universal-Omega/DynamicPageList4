@@ -13,12 +13,47 @@ jobs:
     strategy:
       matrix:
         include:
-          # Latest MediaWiki LTS - PHP 8.2 (phan)
-          - mw: 'REL1_43'
+          # Legacy MediaWiki stable - PHP 8.2 (phpunit)
+          - mw: 'REL1_44'
             php: 8.2
             php-docker: 82
             experimental: false
-            stage: phan
+            stage: phpunit
+
+          # Latest MediaWiki stable - PHP 8.2 (phpunit)
+          - mw: 'REL1_45'
+            php: 8.2
+            php-docker: 82
+            experimental: false
+            stage: phpunit
+
+          # MediaWiki master - PHP 8.2 (phpunit)
+          - mw: 'master'
+            php: 8.2
+            php-docker: 82
+            experimental: true
+            stage: phpunit
+
+          # Legacy MediaWiki stable - PHP 8.2 (composer-test)
+          - mw: 'REL1_44'
+            php: 8.2
+            php-docker: 82
+            experimental: false
+            stage: composer-test
+
+          # Latest MediaWiki stable - PHP 8.2 (composer-test)
+          - mw: 'REL1_45'
+            php: 8.2
+            php-docker: 82
+            experimental: false
+            stage: composer-test
+
+          # MediaWiki master - PHP 8.2 (composer-test)
+          - mw: 'master'
+            php: 8.2
+            php-docker: 82
+            experimental: true
+            stage: composer-test
 
           # Legacy MediaWiki stable - PHP 8.2 (phan)
           - mw: 'REL1_44'
@@ -34,68 +69,33 @@ jobs:
             experimental: true
             stage: phan
 
-          # Latest MediaWiki master - PHP 8.2 (phan)
+          # MediaWiki master - PHP 8.2 (phan)
           - mw: 'master'
             php: 8.2
             php-docker: 82
             experimental: true
             stage: phan
 
-          # Latest MediaWiki master - PHP 8.2 (coverage)
-          - mw: 'master'
-            php: 8.2
-            php-docker: 82
-            experimental: true
-            stage: coverage
-
-          # Latest MediaWiki LTS - PHP 8.2 (phpunit)
-          - mw: 'REL1_43'
-            php: 8.2
-            php-docker: 82
-            experimental: false
-            stage: phpunit
-            
-          # Legacy MediaWiki stable - PHP 8.2 (phpunit)
-          - mw: 'REL1_44'
-            php: 8.2
-            php-docker: 82
-            experimental: false
-            stage: phpunit
-
-          # Latest MediaWiki stable - PHP 8.2 (phpunit)
-          - mw: 'REL1_45'
-            php: 8.2
-            php-docker: 82
-            experimental: true
-            stage: phpunit
-
-          # Latest MediaWiki master - PHP 8.2 (phpunit)
-          - mw: 'master'
-            php: 8.2
-            php-docker: 82
-            experimental: true
-            stage: phpunit
-
-          # Latest MediaWiki master - PHP 8.2 (selenium)
+          # MediaWiki master - PHP 8.2 (selenium)
           - mw: 'master'
             php: 8.2
             php-docker: 82
             experimental: true
             stage: selenium
 
-          # Latest MediaWiki master - PHP 8.2 (qunit)
+          # MediaWiki master - PHP 8.2 (qunit)
           - mw: 'master'
             php: 8.2
             php-docker: 82
             experimental: true
             stage: qunit
 
-          # Latest MediaWiki stable - PHP 8.2 (composer-test)
-          - mw: 'REL1_45'
+          # MediaWiki master - PHP 8.2 (coverage)
+          - mw: 'master'
             php: 8.2
             php-docker: 82
-            experimental: false
-            stage: composer-test
+            experimental: true
+            stage: coverage
 
     runs-on: ubuntu-latest
 
