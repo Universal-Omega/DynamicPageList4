@@ -101,7 +101,7 @@ class Main implements ParserFirstCallInitHook {
 
 		$reset = [];
 		$eliminate = [];
-		$text = $parse->parse( $input, $parser, $reset, $eliminate, true );
+		$text = $parse->parse( $input, $parser, $reset, $eliminate, true, $frame );
 		$parserOutput = $parser->getOutput();
 
 		// we can remove the templates by save/restore

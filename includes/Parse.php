@@ -15,6 +15,7 @@ use MediaWiki\Html\Html;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Parser\Parser;
 use MediaWiki\Parser\ParserOutputLinkTypes;
+use MediaWiki\Parser\PPFrame;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Request\WebRequest;
 use MediaWiki\Title\Title;
@@ -90,7 +91,8 @@ class Parse {
 		Parser $parser,
 		array &$reset,
 		array &$eliminate,
-		bool $isParserTag
+		bool $isParserTag,
+		?PPFrame $frame = null
 	): string {
 		$dplStartTime = microtime( true );
 
@@ -99,8 +101,7 @@ class Parse {
 		$title = Title::castFromPageReference( $parser->getPage() );
 
 		// Check that we are not in an infinite transclusion loop
-		// @phan-suppress-next-line PhanDeprecatedProperty
-		if ( isset( $parser->mTemplatePath[$title->getPrefixedText()] ) ) {
+		if ( $frame && !$frame->loopCheck( $title ) ) {
 			$this->logger->addMessage( Constants::WARN_TRANSCLUSIONLOOP, $title->getPrefixedText() );
 			return $this->getFullOutput( totalResults: 0, skipHeaderFooter: true );
 		}
