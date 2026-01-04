@@ -498,7 +498,7 @@ class DPLQueryIntegrationTest extends DPLIntegrationTestCase {
 			'DPLTestArticleOtherCategoryWithInfobox',
 			'DPLUncategorizedPage',
 			'DPLTestOpenReferences',
-		], $results, true );
+		], $results, false );
 	}
 
 	public function testFindPagesWithOpenReferencesLinkedFromPage(): void {

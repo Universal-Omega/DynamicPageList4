@@ -20,26 +20,23 @@ use const NS_MAIN;
 
 abstract class DPLIntegrationTestCase extends MediaWikiIntegrationTestCase {
 
-	private readonly Status $importStreamSource;
-
-	protected function setUp(): void {
-		parent::setUp();
-
-		$file = dirname( __DIR__ ) . '/seed-data.xml';
-		$this->importStreamSource = ImportStreamSource::newFromFile( $file );
-
-		if ( !$this->importStreamSource->isGood() ) {
-			$this->fail( "Import source for $file failed." );
-		}
-	}
-
-	private function doImport(): void {
+	/**
+	 * Import seed data once for all tests in this class.
+	 * This is much faster than importing on every test.
+	 */
+	public function addDBDataOnce(): void {
 		$file = dirname( __DIR__ ) . '/seed-data.xml';
 		$this->seedTestUsers( $file );
 
+		$importStreamSource = ImportStreamSource::newFromFile( $file );
+
+		if ( !$importStreamSource->isGood() ) {
+			$this->fail( "Import source for $file failed." );
+		}
+
 		$services = $this->getServiceContainer();
 		$importer = $services->getWikiImporterFactory()->getWikiImporter(
-			$this->importStreamSource->value,
+			$importStreamSource->value,
 			$this->getTestSysop()->getAuthority()
 		);
 
@@ -122,8 +119,6 @@ abstract class DPLIntegrationTestCase extends MediaWikiIntegrationTestCase {
 	 * Build and execute a DPL invocation using the given parameters and return the HTML output.
 	 */
 	protected function runDPLQuery( array $params ): string {
-		$this->doImport();
-
 		$invocation = '<dpl>';
 
 		foreach ( $params as $paramName => $values ) {
