@@ -1,0 +1,303 @@
+!! options
+version=2
+!! end
+
+!! article
+Apple
+!! text
+Apple
+!! endarticle
+
+!! article
+Apricot
+!! text
+Apricot
+!! endarticle
+
+!! article
+Banana
+!! text
+Banana
+!! endarticle
+
+!! article
+Grape
+!! text
+Grape
+!! endarticle
+
+!! article
+Mango
+!! text
+Mango
+!! endarticle
+
+!! article
+Orange
+!! text
+Orange
+!! endarticle
+
+!! article
+Pear
+!! text
+Pear
+!! endarticle
+
+!! article
+Plum
+!! text
+Plum
+!! endarticle
+
+!! test
+titlematch: include specific pages
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+titlematch=Apple|Apricot¦Banana
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Apple;Apricot;Banana;
+</p>
+!! end
+
+!! test
+titlematch: include using SQL wildcard patterns
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+titlematch = A%|P%
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Apple;Apricot;Pear;Plum;
+</p>
+!! end
+
+!! test
+titlematch: single-character wildcard ([_])
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+titlematch = P[_][_][_]
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Pear;Plum;
+</p>
+!! end
+
+!! test
+titlematch: single-character wildcard with fixed prefix
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+titlematch = G[_][_][_][_]
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Grape;
+</p>
+!! end
+
+!! test
+titlematch: mixed % and [_] wildcard
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+titlematch = [_]p%e
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Apple;
+</p>
+!! end
+
+!! test
+nottitlematch: exclude specific pages
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+nottitlematch=Apple|Apricot¦Banana
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Grape;Mango;Orange;Pear;Plum;
+</p>
+!! end
+
+!! test
+nottitlematch: exclude using SQL wildcard patterns
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+nottitlematch = A%|P%
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Banana;Grape;Mango;Orange;
+</p>
+!! end
+
+!! test
+nottitlematch: single-character wildcard ([_])
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+nottitlematch = [_]range
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Apple;Apricot;Banana;Grape;Mango;Pear;Plum;
+</p>
+!! end
+
+!! test
+nottitlematch: mixed % and [_] wildcard
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+nottitlematch = %a[_]g%
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Apple;Apricot;Banana;Grape;Pear;Plum;
+</p>
+!! end
+
+!! test
+replaceintitle: simple string replacement
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+replaceintitle = Apple,Green Apple
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Green Apple;Apricot;Banana;Grape;Mango;Orange;Pear;Plum;
+</p>
+!! end
+
+!! test
+replaceintitle: regex replacement prefix
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+replaceintitle = /^A(.*)$/i,Fruit-$1
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Fruit-pple;Fruit-pricot;Banana;Grape;Mango;Orange;Pear;Plum;
+</p>
+!! end
+
+!! test
+replaceintitle: regex replacement for ending character
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+replaceintitle = /(e)$/i,-$1
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Appl-e;Apricot;Banana;Grap-e;Mango;Orang-e;Pear;Plum;
+</p>
+!! end
+
+!! test
+replaceintitle: invalid regex falls back to literal string (no match)
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+replaceintitle = /(Apple,Green Apple
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Apple;Apricot;Banana;Grape;Mango;Orange;Pear;Plum;
+</p>
+!! end
+
+!! test
+replaceintitle: no replacement given
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+replaceintitle = Apple
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Apple;Apricot;Banana;Grape;Mango;Orange;Pear;Plum;
+</p>
+!! end
+
+!! test
+replaceintitle: no replacement given (regex)
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+replaceintitle = /^A.*/
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Apple;Apricot;Banana;Grape;Mango;Orange;Pear;Plum;
+</p>
+!! end
+
+!! test
+titlemaxlength: truncate long titles
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+titlemaxlength = 5
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Apple;Apric...;Banan...;Grape;Mango;Orang...;Pear;Plum;
+</p>
+!! end
+
+!! test
+titlemaxlength: truncate with small limit
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+titlemaxlength = 3
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>App...;Apr...;Ban...;Gra...;Man...;Ora...;Pea...;Plu...;
+</p>
+!! end
+
+!! test
+titlemaxlength: exact length not truncated
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+titlemaxlength = 4
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Appl...;Apri...;Bana...;Grap...;Mang...;Oran...;Pear;Plum;
+</p>
+!! end
