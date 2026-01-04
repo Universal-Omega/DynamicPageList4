@@ -465,12 +465,19 @@ class Query {
 	 * @return non-empty-array<string|LikeMatch>
 	 */
 	private function splitLikePattern( string $subject ): array {
-		$segments = preg_split( '/(%)/', $subject, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY );
+		// We use underscores in brackets so that it isn't a legal title character,
+		// which may cause confusing behavior in some edge cases where you enter
+		// underscore thinking it is for spaces, like it is elsewhere.
+		$segments = preg_split( '/(%|\[_\])/', $subject, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY );
 		$parts = array_map(
-			fn ( string $segment ): string|LikeMatch =>
-				$segment === '%' ? $this->dbr->anyString() : $segment,
+			fn ( string $segment ): string|LikeMatch => match ( $segment ) {
+				'%' => $this->dbr->anyString(),
+				'[_]' => $this->dbr->anyChar(),
+				default => $segment,
+			},
 			$segments
 		);
+
 		return $parts ?: [ '' ];
 	}
 

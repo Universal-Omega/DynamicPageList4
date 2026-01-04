@@ -79,6 +79,48 @@ format=,%TITLE%,;,
 !! end
 
 !! test
+titlematch: single-character wildcard ([_])
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+titlematch = P[_][_][_]
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Pear;Plum;
+</p>
+!! end
+
+!! test
+titlematch: single-character wildcard with fixed prefix
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+titlematch = G[_][_][_][_]
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Grape;
+</p>
+!! end
+
+!! test
+titlematch: mixed % and [_] wildcard
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+titlematch = [_]p%e
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Apple;
+</p>
+!! end
+
+!! test
 nottitlematch: exclude specific pages
 !! wikitext
 <dpl>
@@ -103,6 +145,34 @@ format=,%TITLE%,;,
 </dpl>
 !! html
 <p>Banana;Grape;Mango;Orange;
+</p>
+!! end
+
+!! test
+nottitlematch: single-character wildcard ([_])
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+nottitlematch = [_]range
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Apple;Apricot;Banana;Grape;Mango;Pear;Plum;
+</p>
+!! end
+
+!! test
+nottitlematch: mixed % and [_] wildcard
+!! wikitext
+<dpl>
+namespace = 0
+ordermethod=title
+nottitlematch = %a[_]g%
+format=,%TITLE%,;,
+</dpl>
+!! html
+<p>Apple;Apricot;Banana;Grape;Pear;Plum;
 </p>
 !! end
 
