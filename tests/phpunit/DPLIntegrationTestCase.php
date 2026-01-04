@@ -9,7 +9,6 @@ use DOMXPath;
 use ImportStreamSource;
 use MediaWiki\Context\RequestContext;
 use MediaWiki\Parser\ParserOptions;
-use MediaWiki\Status\Status;
 use MediaWiki\User\User;
 use MediaWiki\User\UserFactory;
 use MediaWikiIntegrationTestCase;
