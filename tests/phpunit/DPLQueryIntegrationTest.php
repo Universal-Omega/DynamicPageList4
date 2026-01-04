@@ -513,7 +513,7 @@ class DPLQueryIntegrationTest extends DPLIntegrationTestCase {
 			'DPLTestArticle 2',
 			'DPLTestArticle 3',
 			'RedLink',
-		], $results, true );
+		], $results, false );
 	}
 
 	public function testFindPagesLinkingToAndFromPage(): void {

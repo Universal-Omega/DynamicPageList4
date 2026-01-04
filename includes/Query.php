@@ -875,13 +875,21 @@ class Query {
 					$expr = $this->buildRegexpExpression( "$ltAlias.lt_title", $category );
 				}
 
-				$this->queryBuilder->leftJoin( 'categorylinks', $tableAlias, "p.page_id = $tableAlias.cl_from" );
-				$this->queryBuilder->leftJoin( 'linktarget', $ltAlias, [
-					"$tableAlias.cl_target_id = $ltAlias.lt_id",
-					"$ltAlias.lt_namespace" => NS_CATEGORY,
-					$expr ?? $this->dbr->expr( "$ltAlias.lt_title", $operatorType, $category ),
-				] );
-				$this->queryBuilder->where( [ "$ltAlias.lt_title" => null ] );
+				$subquery = $this->queryBuilder->newSubquery()
+					->select( '1' )
+					->from( 'categorylinks', $tableAlias )
+					->join( 'linktarget', $ltAlias, [
+						"$tableAlias.cl_target_id = $ltAlias.lt_id",
+						"$ltAlias.lt_namespace" => NS_CATEGORY,
+					] )
+					->where( [
+						"$tableAlias.cl_from = p.page_id",
+						$expr ?? $this->dbr->expr( "$ltAlias.lt_title", $operatorType, $category ),
+					] )
+					->caller( __METHOD__ )
+					->getSQL();
+
+				$this->queryBuilder->where( "NOT EXISTS ($subquery)" );
 			}
 		}
 	}
