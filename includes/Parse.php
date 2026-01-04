@@ -371,7 +371,7 @@ class Parse {
 
 			if ( $this->parameters->getParameter( 'goal' ) === 'categories' ) {
 				$pageNamespace = NS_CATEGORY;
-				$pageTitle = $row->cl_to;
+				$pageTitle = $row->lt_title;
 			} elseif ( $this->parameters->getParameter( 'openreferences' ) ) {
 				$imageContainer = $this->parameters->getParameter( 'imagecontainer' ) ?? [];
 				if ( $imageContainer !== [] ) {

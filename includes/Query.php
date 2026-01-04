@@ -209,10 +209,14 @@ class Query {
 
 				$query = $this->dbr->newSelectQueryBuilder()
 					->table( 'categorylinks', 'clgoal' )
-					->select( 'clgoal.cl_to' )
+					->join( 'linktarget', 'ltgoal', [
+						'clgoal.cl_target_id = ltgoal.lt_id',
+						'ltgoal.lt_namespace' => NS_CATEGORY,
+					] )
+					->select( 'ltgoal.lt_title' )
 					->where( [ 'clgoal.cl_from' => $pageIds ] )
 					->caller( $qname )
-					->orderBy( 'clgoal.cl_to', $this->direction )
+					->orderBy( 'ltgoal.lt_title', $this->direction )
 					->getSQL();
 			} else {
 				$this->queryBuilder->caller( $qname );
@@ -363,9 +367,13 @@ class Query {
 				->select( 'page_title' )
 				->from( 'page' )
 				->join( 'categorylinks', 'cl', 'page_id = cl.cl_from' )
+				->join( 'linktarget', 'lt', [
+					'cl.cl_target_id = lt.lt_id',
+					'lt.lt_namespace' => NS_CATEGORY,
+				] )
 				->where( [
 					'page_namespace' => NS_CATEGORY,
-					'cl.cl_to' => str_replace( ' ', '_', $categoryName ),
+					'lt.lt_title' => str_replace( ' ', '_', $categoryName ),
 				] )
 				->caller( __METHOD__ )
 				->distinct()
@@ -542,35 +550,43 @@ class Query {
 	private function _addcategories( bool $option ): void {
 		$this->queryBuilder->table( 'categorylinks', 'cl_gc' );
 		$this->queryBuilder->leftJoin( 'categorylinks', 'cl_gc', 'p.page_id = cl_gc.cl_from' );
+		$this->queryBuilder->leftJoin( 'linktarget', 'lt_gc', [
+			'cl_gc.cl_target_id = lt_gc.lt_id',
+			'lt_gc.lt_namespace' => NS_CATEGORY,
+		] );
 		$this->queryBuilder->groupBy( 'p.page_id' );
 
 		$dbType = $this->dbr->getType();
 		if ( $dbType === 'mysql' ) {
 			$this->queryBuilder->select( [
-				'cats' => "GROUP_CONCAT(DISTINCT cl_gc.cl_to ORDER BY cl_gc.cl_to ASC SEPARATOR ' | ')",
+				'cats' => "GROUP_CONCAT(DISTINCT lt_gc.lt_title ORDER BY lt_gc.lt_title ASC SEPARATOR ' | ')",
 			] );
 			return;
 		}
 
 		if ( $dbType === 'postgres' ) {
 			$this->queryBuilder->select( [
-				'cats' => "STRING_AGG(cl_gc.cl_to, ' | ' ORDER BY cl_gc.cl_to ASC)",
+				'cats' => "STRING_AGG(lt_gc.lt_title, ' | ' ORDER BY lt_gc.lt_title ASC)",
 			] );
 			return;
 		}
 
 		if ( $dbType === 'sqlite' ) {
 			$subquery = $this->queryBuilder->newSubquery()
-				->select( 'cl_to' )
+				->select( 'lt_title' )
 				->from( 'categorylinks' )
+				->join( 'linktarget', 'lt', [
+					'cl_target_id = lt.lt_id',
+					'lt.lt_namespace' => NS_CATEGORY,
+				] )
 				->where( 'cl_from = p.page_id' )
 				->distinct()
-				->orderBy( 'cl_to', SelectQueryBuilder::SORT_ASC )
+				->orderBy( 'lt_title', SelectQueryBuilder::SORT_ASC )
 				->caller( __METHOD__ )
 				->getSQL();
 
 			$this->queryBuilder->select( [
-				'cats' => "(SELECT GROUP_CONCAT(cl_to, ' | ') FROM ($subquery))",
+				'cats' => "(SELECT GROUP_CONCAT(lt_title, ' | ') FROM ($subquery))",
 			] );
 			return;
 		}
@@ -728,8 +744,12 @@ class Query {
 			->select( 'p2.page_title' )
 			->from( 'page', 'p2' )
 			->join( 'categorylinks', 'clstc', 'clstc.cl_from = p2.page_id' )
+			->join( 'linktarget', 'lt_stc', [
+				'clstc.cl_target_id = lt_stc.lt_id',
+				'lt_stc.lt_namespace' => NS_CATEGORY,
+			] )
 			->where( [
-				'clstc.cl_to' => $option,
+				'lt_stc.lt_title' => $option,
 				'p2.page_namespace' => NS_MAIN,
 			] )
 			->caller( __METHOD__ )
@@ -783,6 +803,7 @@ class Query {
 						foreach ( $categories as $category ) {
 							$i++;
 							$tableAlias = "cl{$i}";
+							$ltAlias = "lt{$i}";
 							$this->queryBuilder->table( $tableName, $tableAlias );
 							$category = str_replace( ' ', '_', $category );
 							if ( $comparisonType === IExpression::LIKE ) {
@@ -790,15 +811,15 @@ class Query {
 							}
 
 							if ( $comparisonType === 'REGEXP' ) {
-								$expr = $this->buildRegexpExpression( "$tableAlias.cl_to", $category );
+								$expr = $this->buildRegexpExpression( "$ltAlias.lt_title", $category );
 							}
 
-							$condition = $this->dbr->makeList( [
-								"p.page_id = $tableAlias.cl_from",
-								$expr ?? $this->dbr->expr( "$tableAlias.cl_to", $comparisonType, $category ),
-							], IDatabase::LIST_AND );
-
-							$this->queryBuilder->join( $tableName, $tableAlias, $condition );
+							$this->queryBuilder->join( $tableName, $tableAlias, "p.page_id = $tableAlias.cl_from" );
+							$this->queryBuilder->join( 'linktarget', $ltAlias, [
+								"$tableAlias.cl_target_id = $ltAlias.lt_id",
+								"$ltAlias.lt_namespace" => NS_CATEGORY,
+								$expr ?? $this->dbr->expr( "$ltAlias.lt_title", $comparisonType, $category ),
+							] );
 						}
 						continue;
 					}
@@ -806,6 +827,7 @@ class Query {
 					if ( $operatorType === 'OR' ) {
 						$i++;
 						$tableAlias = "cl{$i}";
+						$ltAlias = "lt{$i}";
 						$this->queryBuilder->table( $tableName, $tableAlias );
 
 						$ors = [];
@@ -815,18 +837,18 @@ class Query {
 								$category = new LikeValue( ...$this->splitLikePattern( $category ) );
 							}
 							if ( $comparisonType === 'REGEXP' ) {
-								$ors[] = $this->buildRegexpExpression( "$tableAlias.cl_to", $category );
+								$ors[] = $this->buildRegexpExpression( "$ltAlias.lt_title", $category );
 								continue;
 							}
-							$ors[] = $this->dbr->expr( "$tableAlias.cl_to", $comparisonType, $category );
+							$ors[] = $this->dbr->expr( "$ltAlias.lt_title", $comparisonType, $category );
 						}
 
-						$condition = $this->dbr->makeList( [
-							"p.page_id = $tableAlias.cl_from",
+						$this->queryBuilder->join( $tableName, $tableAlias, "p.page_id = $tableAlias.cl_from" );
+						$this->queryBuilder->join( 'linktarget', $ltAlias, [
+							"$tableAlias.cl_target_id = $ltAlias.lt_id",
+							"$ltAlias.lt_namespace" => NS_CATEGORY,
 							$this->dbr->makeList( $ors, IDatabase::LIST_OR ),
-						], IDatabase::LIST_AND );
-
-						$this->queryBuilder->join( $tableName, $tableAlias, $condition );
+						] );
 					}
 				}
 			}
@@ -842,6 +864,7 @@ class Query {
 			foreach ( $categories as $category ) {
 				$i++;
 				$tableAlias = "ecl{$i}";
+				$ltAlias = "elt{$i}";
 				$this->queryBuilder->table( 'categorylinks', $tableAlias );
 				$category = str_replace( ' ', '_', $category );
 				if ( $operatorType === IExpression::LIKE ) {
@@ -849,16 +872,16 @@ class Query {
 				}
 
 				if ( $operatorType === 'REGEXP' ) {
-					$expr = $this->buildRegexpExpression( "$tableAlias.cl_to", $category );
+					$expr = $this->buildRegexpExpression( "$ltAlias.lt_title", $category );
 				}
 
-				$condition = $this->dbr->makeList( [
-					"p.page_id = $tableAlias.cl_from",
-					$expr ?? $this->dbr->expr( "$tableAlias.cl_to", $operatorType, $category ),
-				], IDatabase::LIST_AND );
-
-				$this->queryBuilder->leftJoin( 'categorylinks', $tableAlias, $condition );
-				$this->queryBuilder->where( [ "$tableAlias.cl_to" => null ] );
+				$this->queryBuilder->leftJoin( 'categorylinks', $tableAlias, "p.page_id = $tableAlias.cl_from" );
+				$this->queryBuilder->leftJoin( 'linktarget', $ltAlias, [
+					"$tableAlias.cl_target_id = $ltAlias.lt_id",
+					"$ltAlias.lt_namespace" => NS_CATEGORY,
+					$expr ?? $this->dbr->expr( "$ltAlias.lt_title", $operatorType, $category ),
+				] );
+				$this->queryBuilder->where( [ "$ltAlias.lt_title" => null ] );
 			}
 		}
 	}
@@ -1596,8 +1619,8 @@ class Query {
 		foreach ( $option as $orderMethod ) {
 			switch ( $orderMethod ) {
 				case 'category':
-					$this->addOrderBy( 'cl_head.cl_to' );
-					$this->queryBuilder->select( 'cl_head.cl_to' );
+					$this->addOrderBy( 'lt_head.lt_title' );
+					$this->queryBuilder->select( 'lt_head.lt_title' );
 
 					$catHeadings = $this->parameters->getParameter( 'catheadings' ) ?? [];
 					$catNotHeadings = $this->parameters->getParameter( 'catnotheadings' ) ?? [];
@@ -1614,13 +1637,17 @@ class Query {
 					$this->queryBuilder->leftJoin( $clTableName, $clTableAlias,
 						'p.page_id = cl_head.cl_from'
 					);
+					$this->queryBuilder->leftJoin( 'linktarget', 'lt_head', [
+						'cl_head.cl_target_id = lt_head.lt_id',
+						'lt_head.lt_namespace' => NS_CATEGORY,
+					] );
 
 					if ( $catHeadings !== [] ) {
 						if ( !empty( $catHeadings['AND'] ) ) {
 							$this->queryBuilder->where(
 								$this->dbr->makeList( array_map(
 									fn ( string $cat ): Expression =>
-										$this->dbr->expr( 'cl_head.cl_to', '=', $cat ),
+										$this->dbr->expr( 'lt_head.lt_title', '=', $cat ),
 									$catHeadings['AND']
 								), IDatabase::LIST_AND )
 							);
@@ -1630,7 +1657,7 @@ class Query {
 							$this->queryBuilder->where(
 								$this->dbr->makeList( array_map(
 									fn ( string $cat ): Expression =>
-										$this->dbr->expr( 'cl_head.cl_to', '=', $cat ),
+										$this->dbr->expr( 'lt_head.lt_title', '=', $cat ),
 									$catHeadings['OR']
 								), IDatabase::LIST_OR )
 							);
@@ -1642,7 +1669,7 @@ class Query {
 							$this->queryBuilder->andWhere(
 								$this->dbr->makeList( array_map(
 									fn ( string $cat ): Expression =>
-										$this->dbr->expr( 'cl_head.cl_to', '!=', $cat ),
+										$this->dbr->expr( 'lt_head.lt_title', '!=', $cat ),
 									$catNotHeadings['AND']
 								), IDatabase::LIST_AND )
 							);
@@ -1652,7 +1679,7 @@ class Query {
 							$this->queryBuilder->andWhere(
 								$this->dbr->makeList( array_map(
 									fn ( string $cat ): Expression =>
-										$this->dbr->expr( 'cl_head.cl_to', '!=', $cat ),
+										$this->dbr->expr( 'lt_head.lt_title', '!=', $cat ),
 									$catNotHeadings['OR']
 								), IDatabase::LIST_OR )
 							);
