@@ -857,7 +857,9 @@ class Query {
 								$this->queryBuilder->where( $expr );
 								unset( $expr );
 							} else {
-								$this->queryBuilder->where( $this->dbr->expr( $catTitleField, $comparisonType, $category ) );
+								$this->queryBuilder->where(
+									$this->dbr->expr( $catTitleField, $comparisonType, $category )
+								);
 							}
 						}
 						continue;
@@ -2346,7 +2348,9 @@ class Query {
 	 * @param string $ltAlias The linktarget table alias to use
 	 * @param string $joinType The type of join (JOIN or LEFT JOIN)
 	 */
-	private function addLinktargetJoinIfNeeded( SelectQueryBuilder $builder, string $clAlias, string $ltAlias, string $joinType = 'JOIN' ): void {
+	private function addLinktargetJoinIfNeeded(
+		SelectQueryBuilder $builder, string $clAlias, string $ltAlias, string $joinType = 'JOIN'
+	): void {
 		$queryInfo = $this->linksMigration->getQueryInfo( 'categorylinks' );
 
 		if ( in_array( 'linktarget', $queryInfo['tables'] ) ) {
