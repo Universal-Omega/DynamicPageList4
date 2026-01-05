@@ -38,13 +38,13 @@
 	"dpl_log_24": "Fel: <code>$wgDplSettings['runFromProtectedPagesOnly']</code> har angetts men sidan \"$1\" är inte redigeringsskyddad.",
 	"dpl_log_25": "Fel: $1",
 	"dpl_articlecount": "Det finns {{PLURAL:$1|en artikel|$1 artiklar}} i den här rubriken.",
-	"dpl_query_error": "Tillägget DynamicPageList3 (version $1) producerade ett SQL-uttalande som ledde till ett databasfel.<br/>Orsaken kan vara ett internt fel i DynamicPageList3 eller ett fel som du gjort; särskilt när du använder parametrar som \"categoryregexp\" eller \"titleregexp\". Användningen av icke-giriga <code>*?</code>-matchande mönster stöds inte.<br/>Felmeddelandet var:<br/><code>$2</code>",
-	"dpl-tag-tracking-category": "Sidor som använder DynamicPageList3-parser-tagg",
-	"dpl-intersection-tracking-category": "Sidor som använder DynamicPageList3-insection-parser-tagg",
-	"dpl-parserfunc-tracking-category": "Sidor som använder DynamicPageList3-parser-funktion",
-	"dplnum-parserfunc-tracking-category": "Sidor som använder DynamicPageList3-dplnum-parser-funktion",
-	"dplvar-parserfunc-tracking-category": "Sidor som använder DynamicPageList3-dplvar-parser-funktion",
-	"dplreplace-parserfunc-tracking-category": "Sidor som använder DynamicPageList3-dplreplace-parser-funktion",
-	"dplchapter-parserfunc-tracking-category": "Sidor som använder DynamicPageList3-dplchapter-parser-funktion",
-	"dplmatrix-parserfunc-tracking-category": "Sidor som använder DynamicPageList3-dplmatrix-parser-funktion"
+	"dpl_query_error": "Tillägget DynamicPageList4 (version $1) producerade ett SQL-uttalande som ledde till ett databasfel.<br/>Orsaken kan vara ett internt fel i DynamicPageList4 eller ett fel som du gjort; särskilt när du använder parametrar som \"categoryregexp\" eller \"titleregexp\". Användningen av icke-giriga <code>*?</code>-matchande mönster stöds inte.<br/>Felmeddelandet var:<br/><code>$2</code>",
+	"dpl-tag-tracking-category": "Sidor som använder DynamicPageList4-parser-tagg",
+	"dpl-intersection-tracking-category": "Sidor som använder DynamicPageList4-insection-parser-tagg",
+	"dpl-parserfunc-tracking-category": "Sidor som använder DynamicPageList4-parser-funktion",
+	"dplnum-parserfunc-tracking-category": "Sidor som använder DynamicPageList4-dplnum-parser-funktion",
+	"dplvar-parserfunc-tracking-category": "Sidor som använder DynamicPageList4-dplvar-parser-funktion",
+	"dplreplace-parserfunc-tracking-category": "Sidor som använder DynamicPageList4-dplreplace-parser-funktion",
+	"dplchapter-parserfunc-tracking-category": "Sidor som använder DynamicPageList4-dplchapter-parser-funktion",
+	"dplmatrix-parserfunc-tracking-category": "Sidor som använder DynamicPageList4-dplmatrix-parser-funktion"
 }

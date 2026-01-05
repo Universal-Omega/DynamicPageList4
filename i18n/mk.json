@@ -37,13 +37,13 @@
 	"dpl_log_24": "Грешка: <code>$wgDplSettings['runFromProtectedPagesOnly']</code> е зададено, но страницата „$1“ не е заштитена од уредување.",
 	"dpl_log_25": "Грешка: $1",
 	"dpl_articlecount": "Во ова заглавие има {{PLURAL:$1|една статија|$1 статии}}.",
-	"dpl_query_error": "Додатокот DynamicPageList3 (верзија $1) даде SQL-исказ кој доведе до грешка во базата.<br/>Причината може да биде внатрешна грешка на DynamicPageList3, или пак грешка која се ја направиле вие; особено кога користите параметри како „categoryregexp“ или „titleregexp“. Не е поддржана употреба на неизискателни шеми на совпаѓање<code>*?</code>.<br/>Грешката ја даде пораката:<br/><code>$2</code>",
-	"dpl-tag-tracking-category": "Страници што ја користат расчленувачката ознака DynamicPageList3",
-	"dpl-intersection-tracking-category": "Страници што ја користат расчленувачката ознака DynamicPageList3 Intersection",
-	"dpl-parserfunc-tracking-category": "Страници што ја користат расчленувачката функција DynamicPageList3",
-	"dplnum-parserfunc-tracking-category": "Страници што ја користат расчленувачката функција DynamicPageList3 dplnum",
-	"dplvar-parserfunc-tracking-category": "Страници што ја користат расчленувачката ознака DynamicPageList3 dplvar",
-	"dplreplace-parserfunc-tracking-category": "Страници што ја користат расчленувачката ознака DynamicPageList3 dplreplace",
-	"dplchapter-parserfunc-tracking-category": "Страници што ја користат расчленувачката ознака DynamicPageList3 dplchapter",
-	"dplmatrix-parserfunc-tracking-category": "Страници што ја користат расчленувачката ознака DynamicPageList3 dplmatrix"
+	"dpl_query_error": "Додатокот DynamicPageList4 (верзија $1) даде SQL-исказ кој доведе до грешка во базата.<br/>Причината може да биде внатрешна грешка на DynamicPageList4, или пак грешка која се ја направиле вие; особено кога користите параметри како „categoryregexp“ или „titleregexp“. Не е поддржана употреба на неизискателни шеми на совпаѓање<code>*?</code>.<br/>Грешката ја даде пораката:<br/><code>$2</code>",
+	"dpl-tag-tracking-category": "Страници што ја користат расчленувачката ознака DynamicPageList4",
+	"dpl-intersection-tracking-category": "Страници што ја користат расчленувачката ознака DynamicPageList4 Intersection",
+	"dpl-parserfunc-tracking-category": "Страници што ја користат расчленувачката функција DynamicPageList4",
+	"dplnum-parserfunc-tracking-category": "Страници што ја користат расчленувачката функција DynamicPageList4 dplnum",
+	"dplvar-parserfunc-tracking-category": "Страници што ја користат расчленувачката ознака DynamicPageList4 dplvar",
+	"dplreplace-parserfunc-tracking-category": "Страници што ја користат расчленувачката ознака DynamicPageList4 dplreplace",
+	"dplchapter-parserfunc-tracking-category": "Страници што ја користат расчленувачката ознака DynamicPageList4 dplchapter",
+	"dplmatrix-parserfunc-tracking-category": "Страници што ја користат расчленувачката ознака DynamicPageList4 dplmatrix"
 }

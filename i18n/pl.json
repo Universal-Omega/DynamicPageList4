@@ -40,13 +40,13 @@
 	"dpl_log_24": "Błąd: Zmienna <code>$wgDplSettings['runFromProtectedPagesOnly']</code> jest ustawiona, ale strona „$1” nie jest zabezpieczona.",
 	"dpl_log_25": "Błąd: $1",
 	"dpl_articlecount": "W tym nagłówku {{PLURAL:$1|znajduje się jeden artykuł|znajdują się $1 artykuły|znajduje się $1 artykułów}}.",
-	"dpl_query_error": "Rozszerzenie DynamicPageList3 (wersja $1) wyprodukowało wyrażenie SQL, które doprowadziło do błędu bazy danych.<br />Powodem może być wewnętrzny błąd DynamicPageList3 lub problem spowodowany przez Ciebie; szczególnie podczas używania takich parametrów jak „categoryregexp” lub „titleregexp”. Używanie wzorców dopasowywania takich jak <code>*?</code> nie jest wspierane.<br />Komunikat o błędzie:<br/><code>$2</code>",
-	"dpl-tag-tracking-category": "Strony używające znacznika parsera DynamicPageList3",
-	"dpl-intersection-tracking-category": "Strony używające znacznika parsera DynamicPageList3 Intersection",
-	"dpl-parserfunc-tracking-category": "Strony używające funkcji parsera DynamicPageList3",
-	"dplnum-parserfunc-tracking-category": "Strony używające funkcji parsera DynamicPageList3 dplnum",
-	"dplvar-parserfunc-tracking-category": "Strony używające funkcji parsera DynamicPageList3 dplvar",
-	"dplreplace-parserfunc-tracking-category": "Strony używające funkcji parsera DynamicPageList3 dplreplace",
-	"dplchapter-parserfunc-tracking-category": "Strony używające funkcji parsera DynamicPageList3 dplchapter",
-	"dplmatrix-parserfunc-tracking-category": "Strony używające funkcji parsera DynamicPageList3 dplmatrix"
+	"dpl_query_error": "Rozszerzenie DynamicPageList4 (wersja $1) wyprodukowało wyrażenie SQL, które doprowadziło do błędu bazy danych.<br />Powodem może być wewnętrzny błąd DynamicPageList4 lub problem spowodowany przez Ciebie; szczególnie podczas używania takich parametrów jak „categoryregexp” lub „titleregexp”. Używanie wzorców dopasowywania takich jak <code>*?</code> nie jest wspierane.<br />Komunikat o błędzie:<br/><code>$2</code>",
+	"dpl-tag-tracking-category": "Strony używające znacznika parsera DynamicPageList4",
+	"dpl-intersection-tracking-category": "Strony używające znacznika parsera DynamicPageList4 Intersection",
+	"dpl-parserfunc-tracking-category": "Strony używające funkcji parsera DynamicPageList4",
+	"dplnum-parserfunc-tracking-category": "Strony używające funkcji parsera DynamicPageList4 dplnum",
+	"dplvar-parserfunc-tracking-category": "Strony używające funkcji parsera DynamicPageList4 dplvar",
+	"dplreplace-parserfunc-tracking-category": "Strony używające funkcji parsera DynamicPageList4 dplreplace",
+	"dplchapter-parserfunc-tracking-category": "Strony używające funkcji parsera DynamicPageList4 dplchapter",
+	"dplmatrix-parserfunc-tracking-category": "Strony używające funkcji parsera DynamicPageList4 dplmatrix"
 }

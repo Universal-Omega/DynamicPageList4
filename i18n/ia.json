@@ -38,12 +38,12 @@
 	"dpl_log_25": "Error: $1",
 	"dpl_articlecount": "Il ha $1 articulo{{PLURAL:$1||s}} in iste capite.",
 	"dpl_query_error": "Le extension DynamicPageList4 (version $1) ha producite un declaration SQL que ha causate un error del base de datos.<br/>Le ration pote esser un error interne de DynamicPageList4 o un error que tu ha facite; particularmente quando se usa parametros como 'categoryregexp' o 'titleregexp'. Le uso de patronos de correspondentia <code>*?</code> non avide non es supportate. <br/>Le message de error esseva:<br/><code>$2</code>",
-	"dpl-tag-tracking-category": "Paginas que usa le etiquetta del analysator syntactic DynamicPageList3",
-	"dpl-intersection-tracking-category": "Paginas que usa le etiquetta del analysator syntactic DynamicPageList3 Intersection",
-	"dpl-parserfunc-tracking-category": "Paginas que usa le function del analysator syntactic DynamicPageList3",
-	"dplnum-parserfunc-tracking-category": "Paginas que usa le function del analysator syntactic DynamicPageList3 dplnum",
-	"dplvar-parserfunc-tracking-category": "Paginas que usa le function del analysator syntactic DynamicPageList3 dplvar",
-	"dplreplace-parserfunc-tracking-category": "Paginas que usa le function del analysator syntactic DynamicPageList3 dplreplace",
-	"dplchapter-parserfunc-tracking-category": "Paginas que usa le function del analysator syntactic DynamicPageList3 dplchapter",
-	"dplmatrix-parserfunc-tracking-category": "Paginas que usa le function del analysator syntactic DynamicPageList3 dplmatrix"
+	"dpl-tag-tracking-category": "Paginas que usa le etiquetta del analysator syntactic DynamicPageList4",
+	"dpl-intersection-tracking-category": "Paginas que usa le etiquetta del analysator syntactic DynamicPageList4 Intersection",
+	"dpl-parserfunc-tracking-category": "Paginas que usa le function del analysator syntactic DynamicPageList4",
+	"dplnum-parserfunc-tracking-category": "Paginas que usa le function del analysator syntactic DynamicPageList4 dplnum",
+	"dplvar-parserfunc-tracking-category": "Paginas que usa le function del analysator syntactic DynamicPageList4 dplvar",
+	"dplreplace-parserfunc-tracking-category": "Paginas que usa le function del analysator syntactic DynamicPageList4 dplreplace",
+	"dplchapter-parserfunc-tracking-category": "Paginas que usa le function del analysator syntactic DynamicPageList4 dplchapter",
+	"dplmatrix-parserfunc-tracking-category": "Paginas que usa le function del analysator syntactic DynamicPageList4 dplmatrix"
 }
