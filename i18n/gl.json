@@ -37,8 +37,6 @@
 	"dpl_log_24": "Erro: <code>$wgDplSettings['runFromProtectedPagesOnly']</code> está definido, pero a páxina «$1» non está protexida fronte á edición.",
 	"dpl_log_25": "Erro: $1",
 	"dpl_articlecount": "Hai {{PLURAL:$1|un artigo|$1 artigos}} nesta cabeceira.",
-	"action-dpl_param_update_rules": "usar o parámetro «updaterules»",
-	"action-dpl_param_delete_rules": "usar o parámetro «deleterules»",
 	"dpl_query_error": "A extensión DynamicPageList3 (versión $1) produciu unha sentenza SQL que provocou un erro na base de datos.<br/>O motivo pode ser un erro interno de DynamicPageList3 ou un erro que cometiches ti, especialmente ao usares parámetros como «categoryregexp» ou «titleregexp». Non se admite o uso de patróns de coincidencia <code>*?</code> que non sexan avariciosos.<br/>A mensaxe de erro é:<br/><code>$2</code>",
 	"dpl-tag-tracking-category": "Páxinas que usan a etiqueta do analizador DynamicPageList3",
 	"dpl-intersection-tracking-category": "Páxinas que usan a etiqueta do analizador de interseccións de DynamicPageList3",
@@ -47,7 +45,5 @@
 	"dplvar-parserfunc-tracking-category": "Páxinas que usan a función analizadora «dplvar» de DynamicPageList3",
 	"dplreplace-parserfunc-tracking-category": "Páxinas que usan a función analizadora «dplreplace» de DynamicPageList3",
 	"dplchapter-parserfunc-tracking-category": "Páxinas que usan a función analizadora «dplchapter» de DynamicPageList3",
-	"dplmatrix-parserfunc-tracking-category": "Páxinas que usan a función analizadora «dplmatrix» de DynamicPageList3",
-	"right-dpl_param_delete_rules": "Eliminación masiva de páxinas mediante DynamicPageList3",
-	"right-dpl_param_update_rules": "Actualización masiva de páxinas mediante DynamicPageList3"
+	"dplmatrix-parserfunc-tracking-category": "Páxinas que usan a función analizadora «dplmatrix» de DynamicPageList3"
 }

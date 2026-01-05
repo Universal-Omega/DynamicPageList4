@@ -37,7 +37,5 @@
 	"dplvar-parserfunc-tracking-category": "DynamicPageList3のdplvarパーサー関数を使用しているページ",
 	"dplreplace-parserfunc-tracking-category": "DynamicPageList3のdplreplaceパーサー関数を使用しているページ",
 	"dplchapter-parserfunc-tracking-category": "DynamicPageList3のdplchapterパーサー関数を使用しているページ",
-	"dplmatrix-parserfunc-tracking-category": "DynamicPageList3のdplmatrixパーサー関数を使用しているページ",
-	"right-dpl_param_delete_rules": "DynamicPageList3を使用したページを一括削除",
-	"right-dpl_param_update_rules": "DynamicPageList3を使用したページを一括更新"
+	"dplmatrix-parserfunc-tracking-category": "DynamicPageList3のdplmatrixパーサー関数を使用しているページ"
 }

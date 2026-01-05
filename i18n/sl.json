@@ -37,8 +37,6 @@
 	"dpl_log_24": "Napaka: <code>$wgDplSettings['runFromProtectedPagesOnly']</code> je nastavljen, vendar stran »$1« ni zaščitena pred urejanjem.",
 	"dpl_log_25": "Napaka: $1",
 	"dpl_articlecount": "V tej rubriki {{PLURAL:$1|je en članek|sta $1 članka|so $1 članki|je $1 člankov}}.",
-	"action-dpl_param_update_rules": "za uporabo parametra »updaterules«",
-	"action-dpl_param_delete_rules": "za uporabo parametra »deleterules«",
 	"dpl_query_error": "Razširitev DynamicPageList3 (različica $1) je ustvarila stavek SQL, ki je povzročil napako podatkovne zbirke.<br/>Razlog je lahko notranja napaka DynamicPageList3 ali napaka, ki ste jo naredili vi; zlasti pri uporabi parametrov, kot sta »categoryregexp« ali »titleregexp«. Uporaba nepožrešnih vzorcev ujemanja *? ni podprta.<br/>Sporočilo o napaki je bilo:<br/><code>$2</code>",
 	"dpl-tag-tracking-category": "Strani z razčlembno značko DynamicPageList3",
 	"dpl-intersection-tracking-category": "Strani z razčlembno značko DynamicPageList3 Intersection",
@@ -47,7 +45,5 @@
 	"dplvar-parserfunc-tracking-category": "Strani, ki uporabljajo funkcijo razčlenjevalnika DynamicPageList3 dplvar",
 	"dplreplace-parserfunc-tracking-category": "Strani, ki uporabljajo funkcijo razčlenjevalnika DynamicPageList3 dplreplace",
 	"dplchapter-parserfunc-tracking-category": "Strani, ki uporabljajo funkcijo razčlenjevalnika »dplvar« razširitve DynamicPageList3",
-	"dplmatrix-parserfunc-tracking-category": "Strani, ki uporabljajo funkcijo razčlenjevalnika DynamicPageList3 dplmatrix",
-	"right-dpl_param_delete_rules": "Množično brisanje strani z uporabo DynamicPageList3",
-	"right-dpl_param_update_rules": "Množično posodabljanje strani z uporabo DynamicPageList3"
+	"dplmatrix-parserfunc-tracking-category": "Strani, ki uporabljajo funkcijo razčlenjevalnika DynamicPageList3 dplmatrix"
 }

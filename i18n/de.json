@@ -43,8 +43,6 @@
 	"dpl_log_24": "Fehler: <code>$wgDplSettings['runFromProtectedPagesOnly']</code> ist gesetzt, aber die Seite „$1“ ist nicht vor Bearbeitungen geschützt.",
 	"dpl_log_25": "Fehler: $1",
 	"dpl_articlecount": "Diese Gruppe enthält {{PLURAL:$1|einen|$1}} Artikel.",
-	"action-dpl_param_update_rules": "um den Parameter „updaterules“ zu nutzen",
-	"action-dpl_param_delete_rules": "um den Parameter „deleterules“ zu nutzen",
 	"dpl_query_error": "Die Erweiterung DynamicPageList3 (Version $1) erzeugte eine SQL-Anweisung, die zu einem Datenbankfehler führte.<br/> Die Ursache kann ein interner Fehler von DynamicPageList3 oder ein Fehler Ihrerseits sein, insbesondere bei der Verwendung von Parametern wie 'categoryregexp' oder 'titleregexp'. Die Verwendung von nicht-gierigen Mustern wie <code>*?</code> wird nicht unterstützt.<br/> Die Fehlermeldung war:<br/><code>$2</code>",
 	"dpl-tag-tracking-category": "Seiten, die DynamicPageList3 parser tag nutzen",
 	"dpl-intersection-tracking-category": "Seiten, die DynamicPageList3 Intersection parser tag nutzen",
@@ -53,7 +51,5 @@
 	"dplvar-parserfunc-tracking-category": "Seiten, die DynamicPageList3 dplvar parser function nutzen",
 	"dplreplace-parserfunc-tracking-category": "Seiten, die DynamicPageList3 dplreplace parser function nutzen",
 	"dplchapter-parserfunc-tracking-category": "Seiten, die DynamicPageList3 dplchapter parser function nutzen",
-	"dplmatrix-parserfunc-tracking-category": "Seiten, die DynamicPageList3 dplmatrix parser function nutzen",
-	"right-dpl_param_delete_rules": "Massenlöschungen von Seiten, die DynamicPageList3 nutzen",
-	"right-dpl_param_update_rules": "Massenänderungen von Seiten, die DynamicPageList3 nutzen"
+	"dplmatrix-parserfunc-tracking-category": "Seiten, die DynamicPageList3 dplmatrix parser function nutzen"
 }

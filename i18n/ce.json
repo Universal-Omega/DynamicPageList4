@@ -38,8 +38,6 @@
 	"dpl_log_24": "ГӀалат: <code>$wgDplSettings['runFromProtectedPagesOnly']</code> дӀахӀоттийна, амма '$1' агӀо хийцарх ларйина йац.",
 	"dpl_log_25": "ГӀалат: $1",
 	"dpl_articlecount": "{{PLURAL:$1|цхьа йаззам бу|$1 йаззам бу}} хӀокху корта чохь.",
-	"action-dpl_param_update_rules": "лелайе «updaterules» параметр",
-	"action-dpl_param_delete_rules": "лелайе «deleterules» параметр",
 	"dpl_query_error": "DynamicPageList3 шордаро (верси $1) SQL дӀахьедар дина, цо кхачийна База гӀалаташ.<br/>Бахьана хила тарло DynamicPageList3 чоьхьара гӀалаташ йа ахь дина гӀалаташ; къаьсттина «categoryregexp» йа «titleregexp» санна йолу параметраш лелош. Комаьрша йоцу <code>*?</code> нийса йогӀучу кепаш лелор ловш дац.<br/>ГӀалатах хаам бар:<br/><code>$2</code>",
 	"dpl-tag-tracking-category": "DynamicPageList3 парсеран тег лелош йолу агӀонаш",
 	"dpl-intersection-tracking-category": "DynamicPageList3 дӀасакъастаран парсеран тег лелош йолу агӀонаш",
@@ -48,7 +46,5 @@
 	"dplvar-parserfunc-tracking-category": "DynamicPageList3 dplvar парсеран функци лелош йолу агӀонаш",
 	"dplreplace-parserfunc-tracking-category": "DynamicPageList3 dplreplace парсеран функци лелош йолу агӀонаш",
 	"dplchapter-parserfunc-tracking-category": "DynamicPageList3 dplchapter парсеран функци лелош йолу агӀонаш",
-	"dplmatrix-parserfunc-tracking-category": "DynamicPageList3 dplmatrix парсеран функци лелош йолу агӀонаш",
-	"right-dpl_param_delete_rules": "DynamicPageList3 лелош дукха а агӀонаш дӀайахар",
-	"right-dpl_param_update_rules": "DynamicPageList3 лелош дуккха а агӀонаш карлайахар"
+	"dplmatrix-parserfunc-tracking-category": "DynamicPageList3 dplmatrix парсеран функци лелош йолу агӀонаш"
 }

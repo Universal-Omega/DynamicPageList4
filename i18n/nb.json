@@ -37,8 +37,6 @@
 	"dpl_log_24": "Feil: <code>$wgDplSettings['runFromProtectedPagesOnly']</code> er satt, men siden «$1» er ikke beskyttet.",
 	"dpl_log_25": "Feil: $1",
 	"dpl_articlecount": "Det er {{PLURAL:$1|én artikkel|$1 artikler}} i denne overskriften.",
-	"action-dpl_param_update_rules": "for å bruke parameteren «updaterules»",
-	"action-dpl_param_delete_rules": "for å bruke parameteren «deleterules»",
 	"dpl_query_error": "Utvidelsen DynamicPageList3 (versjon $1) produserte en SQL-setning som førte til en databasefeil.<br />Årsaken kan være en intern feil i DynamicPageList3 eller en feil du har gjort, spesielt ved bruk av parametre som «categoryregexp» eller «titleregexp». Bruk av ikke-grådige mønstre som <code>*?</code> støttes ikke.<br />Feilmeldingen var:<br/><code>$2</code>",
 	"dpl-tag-tracking-category": "Sider som bruker DynamicPageList3-parsertagg",
 	"dpl-intersection-tracking-category": "Sider som bruker DynamicPageList3s intersection-parsertagg",
@@ -47,7 +45,5 @@
 	"dplvar-parserfunc-tracking-category": "Sider som bruker DynamicPageList3s dplvar-parserfunksjon",
 	"dplreplace-parserfunc-tracking-category": "Sider som bruker DynamicPageList3s dplreplace-parserfunksjon",
 	"dplchapter-parserfunc-tracking-category": "Sider som bruker DynamicPageList3s dplchapter-parserfunksjon",
-	"dplmatrix-parserfunc-tracking-category": "Sider som bruker DynamicPageList3s dplmatrix-parserfunksjon",
-	"right-dpl_param_delete_rules": "Masseslette sider ved hjelp av DynamicPageList3",
-	"right-dpl_param_update_rules": "Masseoppdatere sider ved hjelp av DynamicPageList3"
+	"dplmatrix-parserfunc-tracking-category": "Sider som bruker DynamicPageList3s dplmatrix-parserfunksjon"
 }
