@@ -9,13 +9,13 @@ This extension is invoked with the parser function `{{#dpl: .... }}` or parser t
 Complex look ups can result in computationally expensive database queries. However, by default all output is cached for a period of one hour to reduce the need to rerun the query every page load. The [Other Parameters](https://dpl4.wikitide.org/wiki/Other_parameters#cacheperiod) manual page contains information on parameters that can be used to disable the cache and allow instant updates.
 
 * Manual and Complete Documentation: [Documentation](https://dpl4.wikitide.org)
-* Source Code: [Source code at GitHub](https://github.com/Universal-Omega/DynamicPageList3)
-* Bugs and Feature Requests: [Issues at GitHub](https://github.com/Universal-Omega/DynamicPageList3/issues)
+* Source Code: [Source code at GitHub](https://github.com/Universal-Omega/DynamicPageList4)
+* Bugs and Feature Requests: [Issues at GitHub](https://github.com/Universal-Omega/DynamicPageList4/issues)
 * Licensing: DynamicPageList4 is released under [GNU General Public License, version 3](https://opensource.org/licenses/GPL-3.0).
 
 
 ## Installation
-Please see the [releases page](https://github.com/Universal-Omega/DynamicPageList3/releases) for the latest releases.
+Please see the [releases page](https://github.com/Universal-Omega/DynamicPageList4/releases) for the latest releases.
 
 ## Configuration
 These are DPL4's configuration settings and along with their default values. To change them make sure they are defined before including the extension on the wiki. More configuration information is available on the **[MediaWiki extension page](https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:DynamicPageList4#Configuration)**.
