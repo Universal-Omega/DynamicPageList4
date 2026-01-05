@@ -685,13 +685,13 @@ class Parameters extends ParametersData {
 	 */
 	private function _distinct( string $option ): bool {
 		if ( $option === 'strict' ) {
-			$this->setParameter( 'distinctresultset', 'strict' );
+			$this->setParameter( 'distinct', 'strict' );
 			return true;
 		}
 
 		$option = $this->filterBoolean( $option );
 		if ( $option !== null ) {
-			$this->setParameter( 'distinctresultset', $option );
+			$this->setParameter( 'distinct', $option );
 			return true;
 		}
 
