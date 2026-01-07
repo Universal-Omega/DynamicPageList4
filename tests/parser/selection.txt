@@ -54,10 +54,10 @@ Plum
 titlematch: include specific pages
 !! wikitext
 <dpl>
-namespace = 0
-ordermethod=title
-titlematch=Apple|Apricot¦Banana
-format=,%TITLE%,;,
+namespace = main
+ordermethod = title
+titlematch = Apple|Apricot¦Banana
+format = ,%TITLE%,;,
 </dpl>
 !! html
 <p>Apple;Apricot;Banana;
@@ -68,10 +68,10 @@ format=,%TITLE%,;,
 titlematch: include using SQL wildcard patterns
 !! wikitext
 <dpl>
-namespace = 0
-ordermethod=title
+namespace = main
+ordermethod = title
 titlematch = A%|P%
-format=,%TITLE%,;,
+format = ,%TITLE%,;,
 </dpl>
 !! html
 <p>Apple;Apricot;Pear;Plum;
@@ -82,10 +82,10 @@ format=,%TITLE%,;,
 titlematch: single-character wildcard ([_])
 !! wikitext
 <dpl>
-namespace = 0
-ordermethod=title
+namespace = main
+ordermethod = title
 titlematch = P[_][_][_]
-format=,%TITLE%,;,
+format = ,%TITLE%,;,
 </dpl>
 !! html
 <p>Pear;Plum;
@@ -96,10 +96,10 @@ format=,%TITLE%,;,
 titlematch: single-character wildcard with fixed prefix
 !! wikitext
 <dpl>
-namespace = 0
-ordermethod=title
+namespace = main
+ordermethod = title
 titlematch = G[_][_][_][_]
-format=,%TITLE%,;,
+format = ,%TITLE%,;,
 </dpl>
 !! html
 <p>Grape;
@@ -110,10 +110,10 @@ format=,%TITLE%,;,
 titlematch: mixed % and [_] wildcard
 !! wikitext
 <dpl>
-namespace = 0
-ordermethod=title
+namespace = main
+ordermethod = title
 titlematch = [_]p%e
-format=,%TITLE%,;,
+format = ,%TITLE%,;,
 </dpl>
 !! html
 <p>Apple;
@@ -124,10 +124,10 @@ format=,%TITLE%,;,
 nottitlematch: exclude specific pages
 !! wikitext
 <dpl>
-namespace = 0
-ordermethod=title
-nottitlematch=Apple|Apricot¦Banana
-format=,%TITLE%,;,
+namespace = main
+ordermethod = title
+nottitlematch = Apple|Apricot¦Banana
+format = ,%TITLE%,;,
 </dpl>
 !! html
 <p>Grape;Mango;Orange;Pear;Plum;
@@ -138,10 +138,10 @@ format=,%TITLE%,;,
 nottitlematch: exclude using SQL wildcard patterns
 !! wikitext
 <dpl>
-namespace = 0
-ordermethod=title
+namespace = main
+ordermethod = title
 nottitlematch = A%|P%
-format=,%TITLE%,;,
+format = ,%TITLE%,;,
 </dpl>
 !! html
 <p>Banana;Grape;Mango;Orange;
@@ -152,10 +152,10 @@ format=,%TITLE%,;,
 nottitlematch: single-character wildcard ([_])
 !! wikitext
 <dpl>
-namespace = 0
-ordermethod=title
+namespace = main
+ordermethod = title
 nottitlematch = [_]range
-format=,%TITLE%,;,
+format = ,%TITLE%,;,
 </dpl>
 !! html
 <p>Apple;Apricot;Banana;Grape;Mango;Pear;Plum;
@@ -166,10 +166,10 @@ format=,%TITLE%,;,
 nottitlematch: mixed % and [_] wildcard
 !! wikitext
 <dpl>
-namespace = 0
-ordermethod=title
+namespace = main
+ordermethod = title
 nottitlematch = %a[_]g%
-format=,%TITLE%,;,
+format = ,%TITLE%,;,
 </dpl>
 !! html
 <p>Apple;Apricot;Banana;Grape;Pear;Plum;
@@ -180,10 +180,10 @@ format=,%TITLE%,;,
 replaceintitle: simple string replacement
 !! wikitext
 <dpl>
-namespace = 0
-ordermethod=title
+namespace = main
+ordermethod = title
 replaceintitle = Apple,Green Apple
-format=,%TITLE%,;,
+format = ,%TITLE%,;,
 </dpl>
 !! html
 <p>Green Apple;Apricot;Banana;Grape;Mango;Orange;Pear;Plum;
@@ -194,10 +194,10 @@ format=,%TITLE%,;,
 replaceintitle: regex replacement prefix
 !! wikitext
 <dpl>
-namespace = 0
-ordermethod=title
+namespace = main
+ordermethod = title
 replaceintitle = /^A(.*)$/i,Fruit-$1
-format=,%TITLE%,;,
+format = ,%TITLE%,;,
 </dpl>
 !! html
 <p>Fruit-pple;Fruit-pricot;Banana;Grape;Mango;Orange;Pear;Plum;
@@ -208,10 +208,10 @@ format=,%TITLE%,;,
 replaceintitle: regex replacement for ending character
 !! wikitext
 <dpl>
-namespace = 0
-ordermethod=title
+namespace = main
+ordermethod = title
 replaceintitle = /(e)$/i,-$1
-format=,%TITLE%,;,
+format = ,%TITLE%,;,
 </dpl>
 !! html
 <p>Appl-e;Apricot;Banana;Grap-e;Mango;Orang-e;Pear;Plum;
@@ -222,10 +222,10 @@ format=,%TITLE%,;,
 replaceintitle: invalid regex falls back to literal string (no match)
 !! wikitext
 <dpl>
-namespace = 0
-ordermethod=title
+namespace = main
+ordermethod = title
 replaceintitle = /(Apple,Green Apple
-format=,%TITLE%,;,
+format = ,%TITLE%,;,
 </dpl>
 !! html
 <p>Apple;Apricot;Banana;Grape;Mango;Orange;Pear;Plum;
@@ -236,10 +236,10 @@ format=,%TITLE%,;,
 replaceintitle: no replacement given
 !! wikitext
 <dpl>
-namespace = 0
-ordermethod=title
+namespace = main
+ordermethod = title
 replaceintitle = Apple
-format=,%TITLE%,;,
+format = ,%TITLE%,;,
 </dpl>
 !! html
 <p>Apple;Apricot;Banana;Grape;Mango;Orange;Pear;Plum;
@@ -250,10 +250,10 @@ format=,%TITLE%,;,
 replaceintitle: no replacement given (regex)
 !! wikitext
 <dpl>
-namespace = 0
-ordermethod=title
+namespace = main
+ordermethod = title
 replaceintitle = /^A.*/
-format=,%TITLE%,;,
+format = ,%TITLE%,;,
 </dpl>
 !! html
 <p>Apple;Apricot;Banana;Grape;Mango;Orange;Pear;Plum;
@@ -264,10 +264,10 @@ format=,%TITLE%,;,
 titlemaxlength: truncate long titles
 !! wikitext
 <dpl>
-namespace = 0
-ordermethod=title
+namespace = main
+ordermethod = title
 titlemaxlength = 5
-format=,%TITLE%,;,
+format = ,%TITLE%,;,
 </dpl>
 !! html
 <p>Apple;Apric...;Banan...;Grape;Mango;Orang...;Pear;Plum;
@@ -278,10 +278,10 @@ format=,%TITLE%,;,
 titlemaxlength: truncate with small limit
 !! wikitext
 <dpl>
-namespace = 0
-ordermethod=title
+namespace = main
+ordermethod = title
 titlemaxlength = 3
-format=,%TITLE%,;,
+format = ,%TITLE%,;,
 </dpl>
 !! html
 <p>App...;Apr...;Ban...;Gra...;Man...;Ora...;Pea...;Plu...;
@@ -292,10 +292,10 @@ format=,%TITLE%,;,
 titlemaxlength: exact length not truncated
 !! wikitext
 <dpl>
-namespace = 0
-ordermethod=title
+namespace = main
+ordermethod = title
 titlemaxlength = 4
-format=,%TITLE%,;,
+format = ,%TITLE%,;,
 </dpl>
 !! html
 <p>Appl...;Apri...;Bana...;Grap...;Mang...;Oran...;Pear;Plum;
