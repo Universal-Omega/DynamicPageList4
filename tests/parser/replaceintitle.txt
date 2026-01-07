@@ -1,0 +1,135 @@
+!! options
+version=2
+!! end
+
+!! article
+Apple
+!! text
+Apple
+!! endarticle
+
+!! article
+Apricot
+!! text
+Apricot
+!! endarticle
+
+!! article
+Banana
+!! text
+Banana
+!! endarticle
+
+!! article
+Grape
+!! text
+Grape
+!! endarticle
+
+!! article
+Mango
+!! text
+Mango
+!! endarticle
+
+!! article
+Orange
+!! text
+Orange
+!! endarticle
+
+!! article
+Pear
+!! text
+Pear
+!! endarticle
+
+!! article
+Plum
+!! text
+Plum
+!! endarticle
+
+!! test
+replaceintitle: simple string replacement
+!! wikitext
+<dpl>
+namespace = main
+ordermethod = title
+replaceintitle = Apple,Green Apple
+format = ,%TITLE%,;,
+</dpl>
+!! html
+<p>Green Apple;Apricot;Banana;Grape;Mango;Orange;Pear;Plum;
+</p>
+!! end
+
+!! test
+replaceintitle: regex replacement prefix
+!! wikitext
+<dpl>
+namespace = main
+ordermethod = title
+replaceintitle = /^A(.*)$/i,Fruit-$1
+format = ,%TITLE%,;,
+</dpl>
+!! html
+<p>Fruit-pple;Fruit-pricot;Banana;Grape;Mango;Orange;Pear;Plum;
+</p>
+!! end
+
+!! test
+replaceintitle: regex replacement for ending character
+!! wikitext
+<dpl>
+namespace = main
+ordermethod = title
+replaceintitle = /(e)$/i,-$1
+format = ,%TITLE%,;,
+</dpl>
+!! html
+<p>Appl-e;Apricot;Banana;Grap-e;Mango;Orang-e;Pear;Plum;
+</p>
+!! end
+
+!! test
+replaceintitle: invalid regex falls back to literal string (no match)
+!! wikitext
+<dpl>
+namespace = main
+ordermethod = title
+replaceintitle = /(Apple,Green Apple
+format = ,%TITLE%,;,
+</dpl>
+!! html
+<p>Apple;Apricot;Banana;Grape;Mango;Orange;Pear;Plum;
+</p>
+!! end
+
+!! test
+replaceintitle: no replacement given
+!! wikitext
+<dpl>
+namespace = main
+ordermethod = title
+replaceintitle = Apple
+format = ,%TITLE%,;,
+</dpl>
+!! html
+<p>Apple;Apricot;Banana;Grape;Mango;Orange;Pear;Plum;
+</p>
+!! end
+
+!! test
+replaceintitle: no replacement given (regex)
+!! wikitext
+<dpl>
+namespace = main
+ordermethod = title
+replaceintitle = /^A.*/
+format = ,%TITLE%,;,
+</dpl>
+!! html
+<p>Apple;Apricot;Banana;Grape;Mango;Orange;Pear;Plum;
+</p>
+!! end
