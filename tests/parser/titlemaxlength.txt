@@ -1,0 +1,93 @@
+!! options
+version=2
+!! end
+
+!! article
+Apple
+!! text
+Apple
+!! endarticle
+
+!! article
+Apricot
+!! text
+Apricot
+!! endarticle
+
+!! article
+Banana
+!! text
+Banana
+!! endarticle
+
+!! article
+Grape
+!! text
+Grape
+!! endarticle
+
+!! article
+Mango
+!! text
+Mango
+!! endarticle
+
+!! article
+Orange
+!! text
+Orange
+!! endarticle
+
+!! article
+Pear
+!! text
+Pear
+!! endarticle
+
+!! article
+Plum
+!! text
+Plum
+!! endarticle
+
+!! test
+titlemaxlength: truncate long titles
+!! wikitext
+<dpl>
+namespace = main
+ordermethod = title
+titlemaxlength = 5
+format = ,%TITLE%,;,
+</dpl>
+!! html
+<p>Apple;Apric...;Banan...;Grape;Mango;Orang...;Pear;Plum;
+</p>
+!! end
+
+!! test
+titlemaxlength: truncate with small limit
+!! wikitext
+<dpl>
+namespace = main
+ordermethod = title
+titlemaxlength = 3
+format = ,%TITLE%,;,
+</dpl>
+!! html
+<p>App...;Apr...;Ban...;Gra...;Man...;Ora...;Pea...;Plu...;
+</p>
+!! end
+
+!! test
+titlemaxlength: exact length not truncated
+!! wikitext
+<dpl>
+namespace = main
+ordermethod = title
+titlemaxlength = 4
+format = ,%TITLE%,;,
+</dpl>
+!! html
+<p>Appl...;Apri...;Bana...;Grap...;Mang...;Oran...;Pear;Plum;
+</p>
+!! end
