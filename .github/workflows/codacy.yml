@@ -60,3 +60,4 @@ jobs:
         continue-on-error: true
         with:
           sarif_file: results.sarif
+          category: codacy-security-scan
