@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Amire80",
+			"McDutchie",
 			"Purodha",
 			"Universal Omega"
 		]
@@ -41,13 +42,13 @@
 	"dpl_articlecount": "Used to show count of article inside this heading",
 	"dpl_query_error": "Used as query error message",
 	"dpl-template-deleted": "Used as the reason for deleting the template that was formerly used for content inclusion but is no longer used.",
-	"dpl-tracking-category": "'Pages using DynamicPageList4' tracking category",
-	"dpl-tag-tracking-category": "'Pages using DynamicPageList4 parser tag' tracking category",
-	"dpl-intersection-tracking-category": "'Pages using DynamicPageList4 Intersection parser tag' tracking category",
-	"dpl-parserfunc-tracking-category": "'Pages using DynamicPageList4 parser function' tracking category",
-	"dplnum-parserfunc-tracking-category": "'Pages using DynamicPageList4 dplnum parser function' tracking category",
-	"dplvar-parserfunc-tracking-category": "'Pages using DynamicPageList4 dplvar parser function' tracking category",
-	"dplreplace-parserfunc-tracking-category": "'Pages using DynamicPageList4 dplreplace parser function' tracking category",
-	"dplchapter-parserfunc-tracking-category": "'Pages using DynamicPageList4 dplchapter parser function' tracking category",
-	"dplmatrix-parserfunc-tracking-category": "'Pages using DynamicPageList4 dplmatrix parser function' tracking category"
+	"dpl-tracking-category": "{{Tracking category name}}",
+	"dpl-tag-tracking-category": "{{Tracking category name}}",
+	"dpl-intersection-tracking-category": "{{Tracking category name}}",
+	"dpl-parserfunc-tracking-category": "{{Tracking category name}}",
+	"dplnum-parserfunc-tracking-category": "{{Tracking category name}}",
+	"dplvar-parserfunc-tracking-category": "{{Tracking category name}}",
+	"dplreplace-parserfunc-tracking-category": "{{Tracking category name}}",
+	"dplchapter-parserfunc-tracking-category": "{{Tracking category name}}",
+	"dplmatrix-parserfunc-tracking-category": "{{Tracking category name}}"
 }

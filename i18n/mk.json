@@ -38,6 +38,8 @@
 	"dpl_log_25": "Грешка: $1",
 	"dpl_articlecount": "Во ова заглавие има {{PLURAL:$1|една статија|$1 статии}}.",
 	"dpl_query_error": "Додатокот DynamicPageList4 (верзија $1) даде SQL-исказ кој доведе до грешка во базата.<br/>Причината може да биде внатрешна грешка на DynamicPageList4, или пак грешка која се ја направиле вие; особено кога користите параметри како „categoryregexp“ или „titleregexp“. Не е поддржана употреба на неизискателни шеми на совпаѓање<code>*?</code>.<br/>Грешката ја даде пораката:<br/><code>$2</code>",
+	"dpl-template-deleted": "Отстранување на застарена предлошка за вклучување на содржини (повеќе не се користи почнувајќи од DynamicPageList4)",
+	"dpl-tracking-category": "Страници што користат DynamicPageList4",
 	"dpl-tag-tracking-category": "Страници што ја користат расчленувачката ознака DynamicPageList4",
 	"dpl-intersection-tracking-category": "Страници што ја користат расчленувачката ознака DynamicPageList4 Intersection",
 	"dpl-parserfunc-tracking-category": "Страници што ја користат расчленувачката функција DynamicPageList4",

@@ -41,6 +41,8 @@
 	"dpl_log_25": "错误：$1",
 	"dpl_articlecount": "本标题下{{PLURAL:$1|有$1个条目}}。",
 	"dpl_query_error": "DynamicPageList4扩展（版本为$1）产生了导致数据库错误的SQL语句。<br/>该错误可能是DynamicPageList4内部产生，也可能是您的误操作，尤其是使用类似于“categoryregexp”“titleregexp”等参数导致的。不支持使用非贪婪的（<code>*?</code>）匹配规则。<br/>错误消息：<br/><code>$2</code>",
+	"dpl-template-deleted": "移除过时的内容包含模板（从DynamicPageList4开始不再使用）。",
+	"dpl-tracking-category": "使用DynamicPageList4的页面",
 	"dpl-tag-tracking-category": "使用DynamicPageList4解析器标签的页面",
 	"dpl-intersection-tracking-category": "使用DynamicPageList4 Intersection解析器标签的页面",
 	"dpl-parserfunc-tracking-category": "使用DynamicPageList4解析器函数的页面",

@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Eihel",
+			"JLTRY",
 			"MacOS Weed",
 			"Verdy p"
 		]
@@ -40,6 +41,8 @@
 	"dpl_log_25": "Erreur : $1",
 	"dpl_articlecount": "Il y a {{PLURAL:$1|un article|$1 articles}} dans cette rubrique.",
 	"dpl_query_error": "L’extension DynamicPageList4 (version $1) a produit une instruction SQL ayant entraîné une erreur de la base de données.<br />La raison peut être une erreur interne de DynamicPageList4 ou une erreur que vous avez commise ; en particulier lors de l’utilisation de paramètres tels que « categoryregexp » ou « titleregexp ». L’utilisation de modèles de correspondance non gourmands avec <code>*?</code> n’est pas prise en charge.<br />Le message d’erreur était :<br/><code>$2</code>",
+	"dpl-template-deleted": "Suppression du modèle d'inclusion de contenu obsolète (n'est plus utilisé à partir de DynamicPageList4).",
+	"dpl-tracking-category": "Pages utilisant DynamicPageList4",
 	"dpl-tag-tracking-category": "Pages utilisant la balise d’analyseur DynamicPageList4",
 	"dpl-intersection-tracking-category": "Pages utilisant la balise d’analyseur d’Intersection de DynamicPageList4",
 	"dpl-parserfunc-tracking-category": "Pages utilisant la fonction d’analyseur DynamicPageList4",
