@@ -19,10 +19,6 @@ use const NS_MAIN;
 
 abstract class DPLIntegrationTestCase extends MediaWikiIntegrationTestCase {
 
-	/**
-	 * Import seed data once for all tests in this class.
-	 * This is much faster than importing on every test.
-	 */
 	public function addDBDataOnce(): void {
 		$file = dirname( __DIR__ ) . '/seed-data.xml';
 		$this->seedTestUsers( $file );
