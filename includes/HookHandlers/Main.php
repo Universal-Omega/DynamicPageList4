@@ -181,7 +181,6 @@ class Main implements ParserFirstCallInitHook {
 		$dplresult = $parse->parse( $input, $parser, $reset, $eliminate, false, null );
 
 		return [
-			// @phan-suppress-next-line PhanPluginMixedKeyNoKey
 			$parser->getPreprocessor()->preprocessToObj( $dplresult, 1 ),
 			'isLocalObj' => true,
 			'title' => $parser->getPage(),
