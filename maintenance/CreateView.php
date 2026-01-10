@@ -8,6 +8,7 @@ use MediaWiki\Maintenance\LoggedUpdateMaintenance;
 use Wikimedia\Rdbms\DBQueryError;
 use Wikimedia\Rdbms\IMaintainableDatabase;
 use const DB_PRIMARY;
+use const NS_CATEGORY;
 
 class CreateView extends LoggedUpdateMaintenance {
 

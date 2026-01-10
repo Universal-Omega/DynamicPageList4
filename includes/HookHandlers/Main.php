@@ -178,7 +178,7 @@ class Main implements ParserFirstCallInitHook {
 
 		$parse = new Parse();
 		$reset = $eliminate = [];
-		$dplresult = $parse->parse( $input, $parser, $reset, $eliminate, false );
+		$dplresult = $parse->parse( $input, $parser, $reset, $eliminate, false, null );
 
 		return [
 			// @phan-suppress-next-line PhanPluginMixedKeyNoKey

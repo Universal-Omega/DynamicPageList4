@@ -217,7 +217,7 @@ class Query {
 				$queryBuilder = $this->dbr->newSelectQueryBuilder()
 					->table( 'categorylinks', 'clgoal' );
 
-				if ( in_array( 'linktarget', $queryInfo['tables'] ) ) {
+				if ( in_array( 'linktarget', $queryInfo['tables'], true ) ) {
 					// MW 1.45+: Use linktarget
 					$queryBuilder->join( 'linktarget', 'ltgoal', [
 						'clgoal.cl_target_id = ltgoal.lt_id',
@@ -565,7 +565,7 @@ class Query {
 	 */
 	private function _addcategories( bool $option ): void {
 		$this->queryBuilder->table( 'categorylinks', 'cl_gc' );
-		$catTitleField = $this->addCategoryLinksJoin( 'cl_gc', 'p.page_id = cl_gc.cl_from', 'LEFT JOIN' );
+		$catTitleField = $this->addCategoryLinksJoin( 'cl_gc', 'p.page_id = cl_gc.cl_from' );
 		$this->queryBuilder->groupBy( 'p.page_id' );
 
 		$dbType = $this->dbr->getType();
@@ -586,7 +586,7 @@ class Query {
 		if ( $dbType === 'sqlite' ) {
 			// For SQLite subquery, we need to determine the field based on migration status
 			$queryInfo = $this->linksMigration->getQueryInfo( 'categorylinks' );
-			$isReadNew = in_array( 'linktarget', $queryInfo['tables'] );
+			$isReadNew = in_array( 'linktarget', $queryInfo['tables'], true );
 
 			if ( $isReadNew ) {
 				// MW 1.45+: Use linktarget
@@ -780,9 +780,10 @@ class Query {
 			->from( 'page', 'p2' )
 			->join( 'categorylinks', 'clstc', 'clstc.cl_from = p2.page_id' );
 
-		$this->addLinktargetJoinIfNeeded( $subquery, 'clstc', 'lt_stc', 'JOIN' );
+		$this->addLinktargetJoinIfNeeded( $subquery, 'clstc', 'lt_stc' );
 
-		$subquery->where( [
+		$subquery
+			->where( [
 				$catTitleField => $option,
 				'p2.page_namespace' => NS_MAIN,
 			] )
@@ -850,7 +851,7 @@ class Query {
 							}
 
 							$this->queryBuilder->join( $tableName, $tableAlias, "p.page_id = $tableAlias.cl_from" );
-							$this->addLinktargetJoinIfNeeded( $this->queryBuilder, $tableAlias, $ltAlias, 'JOIN' );
+							$this->addLinktargetJoinIfNeeded( $this->queryBuilder, $tableAlias, $ltAlias );
 
 							// Add WHERE condition for the category
 							if ( isset( $expr ) ) {
@@ -886,7 +887,7 @@ class Query {
 						}
 
 						$this->queryBuilder->join( $tableName, $tableAlias, "p.page_id = $tableAlias.cl_from" );
-						$this->addLinktargetJoinIfNeeded( $this->queryBuilder, $tableAlias, $ltAlias, 'JOIN' );
+						$this->addLinktargetJoinIfNeeded( $this->queryBuilder, $tableAlias, $ltAlias );
 						$this->queryBuilder->where( $this->dbr->makeList( $ors, IDatabase::LIST_OR ) );
 					}
 				}
@@ -919,7 +920,7 @@ class Query {
 					->select( '1' )
 					->from( 'categorylinks', $tableAlias );
 
-				$this->addLinktargetJoinIfNeeded( $subqueryBuilder, $tableAlias, $ltAlias, 'JOIN' );
+				$this->addLinktargetJoinIfNeeded( $subqueryBuilder, $tableAlias, $ltAlias );
 
 				$subquery = $subqueryBuilder->where( [
 						"$tableAlias.cl_from = p.page_id",
@@ -2272,50 +2273,33 @@ class Query {
 	 * This handles both MW 1.44 (with cl_to) and MW 1.45+ (with linktarget table).
 	 *
 	 * @param string $clAlias Alias for the categorylinks table
-	 * @param string|array $joinConds Join conditions (will be merged with migration joins)
-	 * @param string $joinType Type of join (JOIN, LEFT JOIN, etc.)
+	 * @param string $joinConds Join conditions (will be merged with migration joins)
 	 * @return string The alias for the category title field to use in queries
 	 */
-	private function addCategoryLinksJoin( string $clAlias, $joinConds, string $joinType = 'JOIN' ): string {
+	private function addCategoryLinksJoin( string $clAlias, string $joinConds ): string {
 		$queryInfo = $this->linksMigration->getQueryInfo( 'categorylinks', 'linktarget', $joinType );
 		$titleFields = $this->linksMigration->getTitleFields( 'categorylinks' );
 
 		// In read-new mode, we get linktarget table; in read-old mode, we don't
-		if ( in_array( 'linktarget', $queryInfo['tables'] ) ) {
+		if ( in_array( 'linktarget', $queryInfo['tables'], true ) ) {
 			// MW 1.45+: Using linktarget table
 			$ltAlias = $clAlias . '_lt';
 
 			// Add categorylinks table with custom alias
-			if ( $joinType === 'JOIN' ) {
-				$this->queryBuilder->join( 'categorylinks', $clAlias, $joinConds );
-			} else {
-				$this->queryBuilder->leftJoin( 'categorylinks', $clAlias, $joinConds );
-			}
+			$this->queryBuilder->leftJoin( 'categorylinks', $clAlias, $joinConds );
 
 			// Add linktarget join
-			if ( $joinType === 'JOIN' ) {
-				$this->queryBuilder->join( 'linktarget', $ltAlias, [
-					"$clAlias.cl_target_id = $ltAlias.lt_id",
-					"$ltAlias.lt_namespace" => NS_CATEGORY,
-				] );
-			} else {
-				$this->queryBuilder->leftJoin( 'linktarget', $ltAlias, [
-					"$clAlias.cl_target_id = $ltAlias.lt_id",
-					"$ltAlias.lt_namespace" => NS_CATEGORY,
-				] );
-			}
+			$this->queryBuilder->leftJoin( 'linktarget', $ltAlias, [
+				"$clAlias.cl_target_id = $ltAlias.lt_id",
+				"$ltAlias.lt_namespace" => NS_CATEGORY,
+			] );
 
 			return "$ltAlias.lt_title";
-		} else {
-			// MW 1.44: Using cl_to directly
-			if ( $joinType === 'JOIN' ) {
-				$this->queryBuilder->join( 'categorylinks', $clAlias, $joinConds );
-			} else {
-				$this->queryBuilder->leftJoin( 'categorylinks', $clAlias, $joinConds );
-			}
-
-			return "$clAlias.cl_to";
 		}
+
+		// MW 1.44: Using cl_to directly
+		$this->queryBuilder->leftJoin( 'categorylinks', $clAlias, $joinConds );
+		return "$clAlias.cl_to";
 	}
 
 	/**
@@ -2327,16 +2311,15 @@ class Query {
 	 */
 	private function getCategoryTitleField( string $alias ): string {
 		$queryInfo = $this->linksMigration->getQueryInfo( 'categorylinks' );
-
-		if ( in_array( 'linktarget', $queryInfo['tables'] ) ) {
+		if ( in_array( 'linktarget', $queryInfo['tables'], true ) ) {
 			// MW 1.45+: Using linktarget
 			return "$alias.lt_title";
-		} else {
-			// MW 1.44: Using cl_to
-			// Extract the base alias (remove _lt suffix if present)
-			$baseAlias = str_replace( '_lt', '', $alias );
-			return "$baseAlias.cl_to";
 		}
+
+		// MW 1.44: Using cl_to
+		// Extract the base alias (remove _lt suffix if present)
+		$baseAlias = str_replace( '_lt', '', $alias );
+		return "$baseAlias.cl_to";
 	}
 
 	/**
@@ -2346,26 +2329,19 @@ class Query {
 	 * @param SelectQueryBuilder $builder The query builder to add joins to
 	 * @param string $clAlias The categorylinks table alias
 	 * @param string $ltAlias The linktarget table alias to use
-	 * @param string $joinType The type of join (JOIN or LEFT JOIN)
 	 */
 	private function addLinktargetJoinIfNeeded(
-		SelectQueryBuilder $builder, string $clAlias, string $ltAlias, string $joinType = 'JOIN'
+		SelectQueryBuilder $builder,
+		string $clAlias,
+		string $ltAlias
 	): void {
 		$queryInfo = $this->linksMigration->getQueryInfo( 'categorylinks' );
-
-		if ( in_array( 'linktarget', $queryInfo['tables'] ) ) {
+		if ( in_array( 'linktarget', $queryInfo['tables'], true ) ) {
 			// MW 1.45+: Add linktarget join
-			if ( $joinType === 'LEFT JOIN' ) {
-				$builder->leftJoin( 'linktarget', $ltAlias, [
-					"$clAlias.cl_target_id = $ltAlias.lt_id",
-					"$ltAlias.lt_namespace" => NS_CATEGORY,
-				] );
-			} else {
-				$builder->join( 'linktarget', $ltAlias, [
-					"$clAlias.cl_target_id = $ltAlias.lt_id",
-					"$ltAlias.lt_namespace" => NS_CATEGORY,
-				] );
-			}
+			$builder->join( 'linktarget', $ltAlias, [
+				"$clAlias.cl_target_id = $ltAlias.lt_id",
+				"$ltAlias.lt_namespace" => NS_CATEGORY,
+			] );
 		}
 		// MW 1.44: No linktarget join needed, cl_to is used directly
 	}
@@ -2378,13 +2354,15 @@ class Query {
 	 * @param string $ltAlias The linktarget alias
 	 * @return string The field reference to use (e.g., "lt1.lt_title" or "cl1.cl_to")
 	 */
-	private function getCategoryTitleFieldForAlias( string $clAlias, string $ltAlias ): string {
+	private function getCategoryTitleFieldForAlias(
+		string $clAlias,
+		string $ltAlias
+	): string {
 		$queryInfo = $this->linksMigration->getQueryInfo( 'categorylinks' );
-
-		if ( in_array( 'linktarget', $queryInfo['tables'] ) ) {
+		if ( in_array( 'linktarget', $queryInfo['tables'], true ) ) {
 			return "$ltAlias.lt_title";
-		} else {
-			return "$clAlias.cl_to";
 		}
+
+		return "$clAlias.cl_to";
 	}
 }

@@ -92,7 +92,7 @@ class Parse {
 		array &$reset,
 		array &$eliminate,
 		bool $isParserTag,
-		?PPFrame $frame = null
+		?PPFrame $frame
 	): string {
 		$dplStartTime = microtime( true );
 
