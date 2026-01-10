@@ -101,7 +101,7 @@ class Main implements ParserFirstCallInitHook {
 
 		$reset = [];
 		$eliminate = [];
-		$text = $parse->parse( $input, $parser, $reset, $eliminate, true );
+		$text = $parse->parse( $input, $parser, $reset, $eliminate, true, $frame );
 		$parserOutput = $parser->getOutput();
 
 		// we can remove the templates by save/restore
@@ -178,10 +178,9 @@ class Main implements ParserFirstCallInitHook {
 
 		$parse = new Parse();
 		$reset = $eliminate = [];
-		$dplresult = $parse->parse( $input, $parser, $reset, $eliminate, false );
+		$dplresult = $parse->parse( $input, $parser, $reset, $eliminate, false, null );
 
 		return [
-			// @phan-suppress-next-line PhanPluginMixedKeyNoKey
 			$parser->getPreprocessor()->preprocessToObj( $dplresult, 1 ),
 			'isLocalObj' => true,
 			'title' => $parser->getPage(),
@@ -267,7 +266,6 @@ class Main implements ParserFirstCallInitHook {
 		}
 
 		// Validate that the regex is valid
-		// @phan-suppress-next-line SecurityCheck-ReDoS
 		if ( !StringUtils::isValidPCRERegex( $pat ) ) {
 			return '';
 		}
