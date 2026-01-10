@@ -267,7 +267,6 @@ class Main implements ParserFirstCallInitHook {
 		}
 
 		// Validate that the regex is valid
-		// @phan-suppress-next-line SecurityCheck-ReDoS
 		if ( !StringUtils::isValidPCRERegex( $pat ) ) {
 			return '';
 		}
