@@ -227,7 +227,7 @@ class Query {
 				} else {
 					// MW 1.44: Use cl_to
 					$queryBuilder->select( 'clgoal.cl_to' )
-					->orderBy( 'clgoal.cl_to', $this->direction );
+						->orderBy( 'clgoal.cl_to', $this->direction );
 				}
 
 				$query = $queryBuilder->where( [ 'clgoal.cl_from' => $pageIds ] )
@@ -773,15 +773,14 @@ class Query {
 	 */
 	private function _articlecategory( string $option ): void {
 		$catTitleField = $this->getCategoryTitleFieldForAlias( 'clstc', 'lt_stc' );
-
-		$subquery = $this->queryBuilder->newSubquery()
+		$builder = $this->queryBuilder->newSubquery()
 			->select( 'p2.page_title' )
 			->from( 'page', 'p2' )
 			->join( 'categorylinks', 'clstc', 'clstc.cl_from = p2.page_id' );
 
-		$this->addLinktargetJoinIfNeeded( $subquery, 'clstc', 'lt_stc' );
+		$this->addLinktargetJoinIfNeeded( $builder, 'clstc', 'lt_stc' );
 
-		$subquery
+		$subquery = $builder
 			->where( [
 				$catTitleField => $option,
 				'p2.page_namespace' => NS_MAIN,
