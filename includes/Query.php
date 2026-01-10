@@ -2277,7 +2277,7 @@ class Query {
 	 * @return string The alias for the category title field to use in queries
 	 */
 	private function addCategoryLinksJoin( string $clAlias, string $joinConds ): string {
-		$queryInfo = $this->linksMigration->getQueryInfo( 'categorylinks', 'linktarget', $joinType );
+		$queryInfo = $this->linksMigration->getQueryInfo( 'categorylinks', 'linktarget', 'LEFT JOIN' );
 		$titleFields = $this->linksMigration->getTitleFields( 'categorylinks' );
 
 		// In read-new mode, we get linktarget table; in read-old mode, we don't
@@ -2354,10 +2354,7 @@ class Query {
 	 * @param string $ltAlias The linktarget alias
 	 * @return string The field reference to use (e.g., "lt1.lt_title" or "cl1.cl_to")
 	 */
-	private function getCategoryTitleFieldForAlias(
-		string $clAlias,
-		string $ltAlias
-	): string {
+	private function getCategoryTitleFieldForAlias( string $clAlias, string $ltAlias ): string {
 		$queryInfo = $this->linksMigration->getQueryInfo( 'categorylinks' );
 		if ( in_array( 'linktarget', $queryInfo['tables'], true ) ) {
 			return "$ltAlias.lt_title";
