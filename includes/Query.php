@@ -213,7 +213,6 @@ class Query {
 
 				// Build query with LinksMigration support
 				$queryInfo = $this->linksMigration->getQueryInfo( 'categorylinks' );
-				$titleFields = $this->linksMigration->getTitleFields( 'categorylinks' );
 				$queryBuilder = $this->dbr->newSelectQueryBuilder()
 					->table( 'categorylinks', 'clgoal' );
 
@@ -2278,8 +2277,6 @@ class Query {
 	 */
 	private function addCategoryLinksJoin( string $clAlias, string $joinConds ): string {
 		$queryInfo = $this->linksMigration->getQueryInfo( 'categorylinks', 'linktarget', 'LEFT JOIN' );
-		$titleFields = $this->linksMigration->getTitleFields( 'categorylinks' );
-
 		// In read-new mode, we get linktarget table; in read-old mode, we don't
 		if ( in_array( 'linktarget', $queryInfo['tables'], true ) ) {
 			// MW 1.45+: Using linktarget table
