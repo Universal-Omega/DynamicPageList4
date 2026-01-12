@@ -40,6 +40,8 @@
 	"dpl_log_25": "Fout: $1",
 	"dpl_articlecount": "Er {{PLURAL:$1|is één pagina|er zijn $1 pagina's}} in deze kop.",
 	"dpl_query_error": "De uitbreiding DynamicPageList4 (versie $1) heeft een SQL-instructie gemaakt die heeft geleid tot een databasefout.<br/>De reden kan een interne fout van DynamicPageList4 zijn of een fout die u hebt gemaakt, vooral bij het gebruik van parameters zoals ‘categoryregexp’ of ‘titleregexp’. Het gebruik van niet-gretige zoekpatronen met <code>*?</code> wordt niet ondersteund.<br/>De foutmelding is:<br/><code>$2</code>",
+	"dpl-template-deleted": "Verwijdering van het verouderde sjabloon voor het opnemen van inhoud (dit wordt vanaf DynamicPageList4 niet meer gebruikt).",
+	"dpl-tracking-category": "Pagina’s die DynamicPageList4 gebruiken",
 	"dpl-tag-tracking-category": "Pagina's die het DynamicPageList4 parserlabel gebruiken",
 	"dpl-intersection-tracking-category": "Pagina's die het DynamicPageList4 Intersection parserlabel gebruiken",
 	"dpl-parserfunc-tracking-category": "Pagina's die de parserfunctie DynamicPageList4 gebruiken",
