@@ -49,7 +49,7 @@ use function str_replace;
 use function str_starts_with;
 use function strtotime;
 use function substr;
-use function var_dump;
+// use function var_dump;
 use function wfMessage;
 use const NS_CATEGORY;
 use const NS_FILE;
@@ -220,7 +220,7 @@ class Query {
 				$query = $this->queryBuilder->getSQL();
 			}
 
-			var_dump( $query );
+			// var_dump( $query );
 
 			if ( Utils::getDebugLevel() >= 4 && $this->config->get( MainConfigNames::DebugDumpSql ) ) {
 				$this->sqlQuery = $query;
