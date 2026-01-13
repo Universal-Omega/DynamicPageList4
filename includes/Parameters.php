@@ -383,9 +383,7 @@ class Parameters extends ParametersData {
 			}
 
 			if ( $parameter === '_none_' ) {
-				$this->setParameter( 'includeuncat', true );
-				$categories[] = '';
-				// $categories[$operator][] = '';
+				$categories[$operator][] = '';
 				continue;
 			}
 
