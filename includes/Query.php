@@ -830,14 +830,31 @@ class Query {
 						continue;
 					}
 
-					$tableName = in_array( '', $categories, true ) ? 'dpl_clview' : 'categorylinks';
+					if ( in_array( '', $categories, true ) ) {
+						$i++;
+						$tableAlias = "cl{$i}";
+						$ltAlias = "lt{$i}";
+
+						$builder = $this->queryBuilder->newSubquery()
+							->select( '1' )
+							->from( 'categorylinks', $tableAlias );
+						
+						$this->addLinktargetJoinIfNeeded( $builder, $tableAlias, $ltAlias );
+
+						$subquery = $builder->where( [ "$tableAlias.cl_from = p.page_id" ] )
+							->caller( __METHOD__ )
+							->getSQL();
+
+						$this->queryBuilder->where( "NOT EXISTS ($subquery)" );
+						continue;
+					}
 
 					if ( $operatorType === 'AND' ) {
 						foreach ( $categories as $category ) {
 							$i++;
 							$tableAlias = "cl{$i}";
 							$ltAlias = "lt{$i}";
-							$this->queryBuilder->table( $tableName, $tableAlias );
+							$this->queryBuilder->table( 'categorylinks', $tableAlias );
 							$category = str_replace( ' ', '_', $category );
 							if ( $comparisonType === IExpression::LIKE ) {
 								$category = new LikeValue( ...$this->splitLikePattern( $category ) );
@@ -848,7 +865,7 @@ class Query {
 								$expr = $this->buildRegexpExpression( $catTitleField, $category );
 							}
 
-							$this->queryBuilder->join( $tableName, $tableAlias, "p.page_id = $tableAlias.cl_from" );
+							$this->queryBuilder->join( 'categorylinks', $tableAlias, "p.page_id = $tableAlias.cl_from" );
 							$this->addLinktargetJoinIfNeeded( $this->queryBuilder, $tableAlias, $ltAlias );
 
 							// Add WHERE condition for the category
@@ -868,7 +885,7 @@ class Query {
 						$i++;
 						$tableAlias = "cl{$i}";
 						$ltAlias = "lt{$i}";
-						$this->queryBuilder->table( $tableName, $tableAlias );
+						$this->queryBuilder->table( 'categorylinks', $tableAlias );
 
 						$catTitleField = $this->getCategoryTitleFieldForAlias( $tableAlias, $ltAlias );
 						$ors = [];
@@ -884,7 +901,7 @@ class Query {
 							$ors[] = $this->dbr->expr( $catTitleField, $comparisonType, $category );
 						}
 
-						$this->queryBuilder->join( $tableName, $tableAlias, "p.page_id = $tableAlias.cl_from" );
+						$this->queryBuilder->join( 'categorylinks', $tableAlias, "p.page_id = $tableAlias.cl_from" );
 						$this->addLinktargetJoinIfNeeded( $this->queryBuilder, $tableAlias, $ltAlias );
 						$this->queryBuilder->where( $this->dbr->makeList( $ors, IDatabase::LIST_OR ) );
 					}
