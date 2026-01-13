@@ -8,6 +8,7 @@ use MediaWiki\Maintenance\LoggedUpdateMaintenance;
 use Wikimedia\Rdbms\DBQueryError;
 use Wikimedia\Rdbms\IMaintainableDatabase;
 use const DB_PRIMARY;
+use const NS_CATEGORY;
 
 class CreateView extends LoggedUpdateMaintenance {
 
@@ -57,12 +58,17 @@ class CreateView extends LoggedUpdateMaintenance {
 	private function createView( IMaintainableDatabase $dbw ): bool {
 		$selectSQL = $dbw->newSelectQueryBuilder()
 			->select( [
-				'cl_to' => "COALESCE(cl.cl_to, '')",
 				'cl_from' => 'COALESCE(cl.cl_from, page.page_id)',
 				'cl_sortkey' => 'cl.cl_sortkey',
+				'cl_target_id' => 'cl.cl_target_id',
+				'lt_title' => "COALESCE(lt.lt_title, '')",
 			] )
 			->from( 'page', 'page' )
 			->leftJoin( 'categorylinks', 'cl', 'page.page_id = cl.cl_from' )
+			->leftJoin( 'linktarget', 'lt', [
+				'cl.cl_target_id = lt.lt_id',
+				'lt.lt_namespace' => NS_CATEGORY,
+			] )
 			->caller( __METHOD__ )
 			->getSQL();
 
