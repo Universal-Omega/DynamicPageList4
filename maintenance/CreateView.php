@@ -67,7 +67,7 @@ class CreateView extends LoggedUpdateMaintenance {
 			->getSQL();
 
 		try {
-			$viewName = $dbw->tableName( 'dpl_clview' );
+			$viewName = $dbw->tableName( $dbw->tablePrefix() . 'dpl_clview' );
 			$dbw->query( "CREATE VIEW $viewName AS $selectSQL;", __METHOD__ );
 			$this->output( "Created VIEW $viewName.\n" );
 			return true;
