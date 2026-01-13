@@ -106,6 +106,17 @@ class DPLQueryIntegrationTest extends DPLIntegrationTestCase {
 		);
 	}
 
+	public function testFindPagesInNoCategory(): void {
+		$this->assertArrayEquals(
+			[ 'DPLTestArticleNoCategory' ],
+			$this->getDPLQueryResults( [
+				'category' => '_none_',
+				'uses' => 'Template:DPLInfobox',
+			], '%PAGE%' ),
+			true
+		);
+	}
+
 	public function testFindPagesInCategoryNotUsingTemplate(): void {
 		$this->assertArrayEquals(
 			[ 'DPLTestArticleMultipleCategories' ],
