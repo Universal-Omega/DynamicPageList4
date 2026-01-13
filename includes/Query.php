@@ -802,7 +802,7 @@ class Query {
 
 							$condition = $this->dbr->makeList( [
 								"p.page_id = $tableAlias.cl_from",
-								$expr ?? $this->dbr->expr( "$tableAlias.cl_to", $comparisonType, $category ),
+								$expr ?? $this->dbr->expr( "$tableAlias.cl_to", $comparisonType, $category ?: null ),
 							], IDatabase::LIST_AND );
 
 							$this->queryBuilder->join( $tableName, $tableAlias, $condition );
@@ -825,7 +825,7 @@ class Query {
 								$ors[] = $this->buildRegexpExpression( "$tableAlias.cl_to", $category );
 								continue;
 							}
-							$ors[] = $this->dbr->expr( "$tableAlias.cl_to", $comparisonType, $category );
+							$ors[] = $this->dbr->expr( "$tableAlias.cl_to", $comparisonType, $category ?: null );
 						}
 
 						$condition = $this->dbr->makeList( [
