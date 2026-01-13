@@ -29,6 +29,7 @@ class DPLQueryIntegrationTest extends DPLIntegrationTestCase {
 			$this->getDPLQueryResults( [
 				'category' => '_none_',
 				'ordermethod' => 'category',
+				'debug' => 5,
 			], '%PAGE%' ),
 			true
 		);
