@@ -770,7 +770,7 @@ class Query {
 	 * Set SQL for 'category' parameter. This includes 'category', 'categorymatch', and 'categoryregexp'.
 	 */
 	private function _category( array $option ): void {
-		$i = 0
+		$i = 0;
 		var_dump( $option );
 		foreach ( $option as $comparisonType => $operatorTypes ) {
 			foreach ( $operatorTypes as $operatorType => $categoryGroups ) {
