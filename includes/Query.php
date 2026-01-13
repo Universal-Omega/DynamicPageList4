@@ -1702,7 +1702,7 @@ class Query {
 							->getSQL();
 
 						$this->queryBuilder->where( "NOT EXISTS ($subquery)" );
-						continue;
+						break;
 					}
 
 					$this->queryBuilder->table( 'categorylinks', 'cl_head' );
