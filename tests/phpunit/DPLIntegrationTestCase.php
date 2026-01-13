@@ -24,7 +24,6 @@ abstract class DPLIntegrationTestCase extends MediaWikiIntegrationTestCase {
 		$this->seedTestUsers( $file );
 
 		$importStreamSource = ImportStreamSource::newFromFile( $file );
-
 		if ( !$importStreamSource->isGood() ) {
 			$this->fail( "Import source for $file failed." );
 		}
