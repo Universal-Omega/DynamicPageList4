@@ -781,6 +781,7 @@ class Query {
 					}
 
 					$tableName = in_array( '', $categories, true ) ? 'dpl_clview' : 'categorylinks';
+					var_dump( $tableName );
 
 					if ( $operatorType === 'AND' ) {
 						foreach ( $categories as $category ) {
