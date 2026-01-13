@@ -781,6 +781,7 @@ class Query {
 					}
 
 					$tableName = in_array( '', $categories, true ) ? 'dpl_clview' : 'categorylinks';
+					$tableName = $this->dbr->tableName( $tableName );
 					var_dump( $tableName );
 
 					if ( $operatorType === 'AND' ) {
