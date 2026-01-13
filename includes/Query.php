@@ -838,7 +838,7 @@ class Query {
 						$builder = $this->queryBuilder->newSubquery()
 							->select( '1' )
 							->from( 'categorylinks', $tableAlias );
-						
+
 						$this->addLinktargetJoinIfNeeded( $builder, $tableAlias, $ltAlias );
 
 						$subquery = $builder->where( [ "$tableAlias.cl_from = p.page_id" ] )
