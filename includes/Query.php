@@ -49,7 +49,7 @@ use function str_replace;
 use function str_starts_with;
 use function strtotime;
 use function substr;
-use function var_dump;
+// use function var_dump;
 use function wfMessage;
 use const NS_CATEGORY;
 use const NS_FILE;
@@ -771,18 +771,18 @@ class Query {
 	 */
 	private function _category( array $option ): void {
 		$i = 0;
-		var_dump( $option );
+		// var_dump( $option );
 		foreach ( $option as $comparisonType => $operatorTypes ) {
 			foreach ( $operatorTypes as $operatorType => $categoryGroups ) {
 				foreach ( $categoryGroups as $categories ) {
-					var_dump( $categories );
+					// var_dump( $categories );
 					if ( !is_array( $categories ) ) {
 						continue;
 					}
 
 					$tableName = in_array( '', $categories, true ) ? 'dpl_clview' : 'categorylinks';
-					$tableName = $this->dbr->tableName( $tableName );
-					var_dump( $tableName );
+					// $tableName = $this->dbr->tableName( $tableName );
+					// var_dump( $tableName );
 
 					if ( $operatorType === 'AND' ) {
 						foreach ( $categories as $category ) {
