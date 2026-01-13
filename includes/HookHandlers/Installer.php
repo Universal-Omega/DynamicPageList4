@@ -4,7 +4,7 @@ declare( strict_types = 1 );
 
 namespace MediaWiki\Extension\DynamicPageList4\HookHandlers;
 
-use MediaWiki\Extension\DynamicPageList4\Maintenance\CreateView;
+use MediaWiki\Extension\DynamicPageList4\Maintenance\DropView;
 use MediaWiki\Extension\DynamicPageList4\Maintenance\DeleteTemplate;
 use MediaWiki\Installer\Hook\LoadExtensionSchemaUpdatesHook;
 
@@ -16,6 +16,7 @@ class Installer implements LoadExtensionSchemaUpdatesHook {
 	 */
 	public function onLoadExtensionSchemaUpdates( $updater ) {
 		$updater->addPostDatabaseUpdateMaintenance( CreateView::class );
+		$updater->addPostDatabaseUpdateMaintenance( DropView::class );
 		$updater->addPostDatabaseUpdateMaintenance( DeleteTemplate::class );
 	}
 }
