@@ -1,3 +1,7 @@
+# Version 4.0.2
+* Removes the use of `dpl_clview`. Running `update.php` will automatically drop the view.
+* Fixes issues with the use of `_none_` to get uncategorized pages.
+
 # Version 4.0.1
 * Drops support for MediaWiki 1.43.
 * Fixes a bug with the usage of `distinct` in queries.
