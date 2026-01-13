@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace MediaWiki\Extension\DynamicPageList4\Tests;
 
-use function var_dump;
 use const NS_MAIN;
 
 /**
@@ -29,13 +28,10 @@ class DPLQueryIntegrationTest extends DPLIntegrationTestCase {
 			[ 'DPLTestArticleNoCategory' ],
 			$this->getDPLQueryResults( [
 				'category' => '_none_',
+				'distinct' => false,
 			], '%PAGE%' ),
 			true
 		);
-		var_dump( $this->runDPLQuery( [
-			'category' => '_none_',
-			'debug' => 5,
-		] ) );
 	}
 
 	public function testFindPagesInCategoryWithOrderAndLimit(): void {
