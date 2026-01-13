@@ -865,7 +865,11 @@ class Query {
 								$expr = $this->buildRegexpExpression( $catTitleField, $category );
 							}
 
-							$this->queryBuilder->join( 'categorylinks', $tableAlias, "p.page_id = $tableAlias.cl_from" );
+							$this->queryBuilder->join(
+								'categorylinks', $tableAlias,
+								"p.page_id = $tableAlias.cl_from"
+							);
+
 							$this->addLinktargetJoinIfNeeded( $this->queryBuilder, $tableAlias, $ltAlias );
 
 							// Add WHERE condition for the category
