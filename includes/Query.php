@@ -782,7 +782,7 @@ class Query {
 						continue;
 					}
 
-					$tableName = in_array( '', $categories, true ) ? 'categorylinks' : 'categorylinks';
+					$tableName = in_array( '', $categories, true ) ? 'dpl_clview' : 'categorylinks';
 					// $tableName = $this->dbr->tableName( $tableName );
 					// var_dump( $tableName );
 
@@ -802,7 +802,7 @@ class Query {
 
 							$condition = $this->dbr->makeList( [
 								"p.page_id = $tableAlias.cl_from",
-								$expr ?? $this->dbr->expr( "$tableAlias.cl_to", $comparisonType, $category ?: null ),
+								$expr ?? $this->dbr->expr( "$tableAlias.cl_to", $comparisonType, $category ),
 							], IDatabase::LIST_AND );
 
 							$this->queryBuilder->join( $tableName, $tableAlias, $condition );
@@ -825,7 +825,7 @@ class Query {
 								$ors[] = $this->buildRegexpExpression( "$tableAlias.cl_to", $category );
 								continue;
 							}
-							$ors[] = $this->dbr->expr( "$tableAlias.cl_to", $comparisonType, $category ?: null );
+							$ors[] = $this->dbr->expr( "$tableAlias.cl_to", $comparisonType, $category );
 						}
 
 						$condition = $this->dbr->makeList( [
