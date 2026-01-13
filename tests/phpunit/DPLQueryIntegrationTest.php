@@ -25,10 +25,10 @@ class DPLQueryIntegrationTest extends DPLIntegrationTestCase {
 
 	public function testFindPagesInNoneCategory(): void {
 		$this->assertArrayEquals(
-			[ 'Template:DPLInfobox', 'DPLTestArticleNoCategory' ],
+			[ 'DPLTestArticleNoCategory' ],
 			$this->getDPLQueryResults( [
+				'namespace' => NS_MAIN,
 				'category' => '_none_',
-				'distinct' => 'no',
 			], '%PAGE%' ),
 			true
 		);
