@@ -782,7 +782,7 @@ class Query {
 						continue;
 					}
 
-					$tableName = in_array( '', $categories, true ) ? 'dpl_clview' : 'categorylinks';
+					$tableName = in_array( '', $categories, true ) ? 'categorylinks' : 'categorylinks';
 					// $tableName = $this->dbr->tableName( $tableName );
 					// var_dump( $tableName );
 
