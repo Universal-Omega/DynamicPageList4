@@ -6,7 +6,8 @@ namespace MediaWiki\Extension\DynamicPageList4\Maintenance;
 
 use MediaWiki\Maintenance\LoggedUpdateMaintenance;
 use Wikimedia\Rdbms\DBQueryError;
-use Wikimedia\Rdbms\IDatabase;
+use Wikimedia\Rdbms\IMaintainableDatabase;
+use const DB_PRIMARY;
 
 class CreateView extends LoggedUpdateMaintenance {
 
@@ -28,7 +29,7 @@ class CreateView extends LoggedUpdateMaintenance {
 	}
 
 	protected function doDBUpdates(): bool {
-		$dbw = $this->getPrimaryDB();
+		$dbw = $this->getDB( DB_PRIMARY );
 		$recreate = $this->hasOption( 'recreate' );
 
 		if ( $recreate || !$dbw->tableExists( 'dpl_clview', __METHOD__ ) ) {
@@ -43,7 +44,7 @@ class CreateView extends LoggedUpdateMaintenance {
 		return true;
 	}
 
-	private function dropView( IDatabase $dbw ): void {
+	private function dropView( IMaintainableDatabase $dbw ): void {
 		try {
 			$viewName = $dbw->tableName( 'dpl_clview' );
 			$dbw->query( "DROP VIEW IF EXISTS $viewName;", __METHOD__ );
@@ -53,7 +54,7 @@ class CreateView extends LoggedUpdateMaintenance {
 		}
 	}
 
-	private function createView( IDatabase $dbw ): bool {
+	private function createView( IMaintainableDatabase $dbw ): bool {
 		$selectSQL = $dbw->newSelectQueryBuilder()
 			->select( [
 				'cl_to' => "COALESCE(cl.cl_to, '')",
