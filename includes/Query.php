@@ -865,8 +865,7 @@ class Query {
 								$expr = $this->buildRegexpExpression( $catTitleField, $category );
 							}
 
-							$this->queryBuilder->join(
-								'categorylinks', $tableAlias,
+							$this->queryBuilder->join( 'categorylinks', $tableAlias,
 								"p.page_id = $tableAlias.cl_from"
 							);
 
@@ -1693,15 +1692,21 @@ class Query {
 					$catNotHeadings = $this->parameters->getParameter( 'catnotheadings' ) ?? [];
 
 					if ( in_array( '', $catHeadings, true ) || in_array( '', $catNotHeadings, true ) ) {
-						$clTableName = 'dpl_clview';
-						$clTableAlias = $clTableName;
-					} else {
-						$clTableName = 'categorylinks';
-						$clTableAlias = 'cl_head';
+						$builder = $this->queryBuilder->newSubquery()
+							->select( '1' )
+							->from( 'categorylinks', 'cl_head' );
+
+						$this->addLinktargetJoinIfNeeded( $builder, 'cl_head', 'lt_head' );
+						$subquery = $builder->where( 'cl_head.cl_from = p.page_id' )
+							->caller( __METHOD__ )
+							->getSQL();
+
+						$this->queryBuilder->where( "NOT EXISTS ($subquery)" );
+						continue;
 					}
 
-					$this->queryBuilder->table( $clTableName, $clTableAlias );
-					$this->queryBuilder->leftJoin( $clTableName, $clTableAlias,
+					$this->queryBuilder->table( 'categorylinks', 'cl_head' );
+					$this->queryBuilder->leftJoin( 'categorylinks', 'cl_head',
 						'p.page_id = cl_head.cl_from'
 					);
 					$this->queryBuilder->leftJoin( 'linktarget', 'lt_head', [
