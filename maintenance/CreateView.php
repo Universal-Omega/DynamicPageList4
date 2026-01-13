@@ -58,10 +58,10 @@ class CreateView extends LoggedUpdateMaintenance {
 	private function createView( IMaintainableDatabase $dbw ): bool {
 		$selectSQL = $dbw->newSelectQueryBuilder()
 			->select( [
-				'cl_to' => "COALESCE(lt.lt_title, '')",
 				'cl_from' => 'COALESCE(cl.cl_from, page.page_id)',
 				'cl_sortkey' => 'cl.cl_sortkey',
 				'cl_target_id' => 'cl.cl_target_id',
+				'lt_title' => "COALESCE(lt.lt_title, '')",
 			] )
 			->from( 'page', 'page' )
 			->leftJoin( 'categorylinks', 'cl', 'page.page_id = cl.cl_from' )
