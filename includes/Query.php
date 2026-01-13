@@ -49,6 +49,7 @@ use function str_replace;
 use function str_starts_with;
 use function strtotime;
 use function substr;
+use function var_dump;
 use function wfMessage;
 use const NS_CATEGORY;
 use const NS_FILE;
@@ -769,10 +770,12 @@ class Query {
 	 * Set SQL for 'category' parameter. This includes 'category', 'categorymatch', and 'categoryregexp'.
 	 */
 	private function _category( array $option ): void {
-		$i = 0;
+		$i = 0
+		var_dump( $option );
 		foreach ( $option as $comparisonType => $operatorTypes ) {
 			foreach ( $operatorTypes as $operatorType => $categoryGroups ) {
 				foreach ( $categoryGroups as $categories ) {
+					var_dump( $categories );
 					if ( !is_array( $categories ) ) {
 						continue;
 					}
