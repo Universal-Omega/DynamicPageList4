@@ -13,7 +13,7 @@ class DropView extends LoggedUpdateMaintenance {
 	public function __construct() {
 		parent::__construct();
 
-		$this->addDescription( 'Drop the DPL4 VIEW if it exists.' );
+		$this->addDescription( 'Drop the now-unused DPL4 VIEW if it exists.' );
 		$this->requireExtension( 'DynamicPageList4' );
 	}
 
