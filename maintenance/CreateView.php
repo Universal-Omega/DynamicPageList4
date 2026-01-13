@@ -4,7 +4,6 @@ declare( strict_types = 1 );
 
 namespace MediaWiki\Extension\DynamicPageList4\Maintenance;
 
-use MediaWiki\MainConfigNames;
 use MediaWiki\Maintenance\LoggedUpdateMaintenance;
 use Wikimedia\Rdbms\DBQueryError;
 use Wikimedia\Rdbms\IDatabase;
@@ -66,9 +65,8 @@ class CreateView extends LoggedUpdateMaintenance {
 			->caller( __METHOD__ )
 			->getSQL();
 
-		try {
-			$prefix = $this->getConfig()->get( MainConfigNames::DBprefix );
-			$viewName = $dbw->tableName( $prefix . 'dpl_clview' );
+		try 
+			$viewName = $dbw->tableName( 'unittest_dpl_clview' );
 			$dbw->query( "CREATE VIEW $viewName AS $selectSQL;", __METHOD__ );
 			$this->output( "Created VIEW $viewName.\n" );
 			return true;
