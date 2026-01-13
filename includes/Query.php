@@ -1007,9 +1007,9 @@ class Query {
 	/**
 	 * Set SQL for 'hiddencategories' parameter.
 	 *
-	 * @param mixed $option @phan-unused-param
+	 * @param string $option @phan-unused-param
 	 */
-	private function _hiddencategories( mixed $option ): never {
+	private function _hiddencategories( string $option ): never {
 		// @TODO: Unfinished functionality! Never implemented by original author.
 		throw new QueryException( 'hiddencategories has not been added to DynamicPageList4 yet.' );
 	}

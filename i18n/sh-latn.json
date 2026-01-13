@@ -15,9 +15,5 @@
 	"dpl_log_17": "Upozorenje: Add* parametri ('adduser', 'addeditdate', itd.)' i 'includepage' nemaju učinka uz 'mode=category'. U ovom načinu rada može se vidjeti samo imenski prostor/naslov stranice.",
 	"dpl_log_24": "Greška: <code>$wgDplSettings['runFromProtectedPagesOnly']</code> je podešena, ali stranica '$1' nije zaštićena za uređivanje.",
 	"dpl_log_25": "Greška: $1",
-	"dpl_articlecount": "{{PLURAL:$1|Jedan članak je|$1 članaka su}} u ovom naslovu.",
-	"action-dpl_param_update_rules": "koristiti parametar 'updaterules'",
-	"action-dpl_param_delete_rules": "koristiti parametar 'deleterules'",
-	"right-dpl_param_delete_rules": "Masovno brisanje stranica pomoću DynamicPageList3",
-	"right-dpl_param_update_rules": "Masovna podnova stranica pomoću DynamicPageList3"
+	"dpl_articlecount": "{{PLURAL:$1|Jedan članak je|$1 članaka su}} u ovom naslovu."
 }

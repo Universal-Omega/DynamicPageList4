@@ -62,20 +62,6 @@ jobs:
             experimental: true
             stage: phpunit
 
-          # Latest MediaWiki master - PHP 8.2 (selenium)
-          - mw: 'master'
-            php: 8.2
-            php-docker: 82
-            experimental: true
-            stage: selenium
-
-          # Latest MediaWiki master - PHP 8.2 (qunit)
-          - mw: 'master'
-            php: 8.2
-            php-docker: 82
-            experimental: true
-            stage: qunit
-
           # Latest MediaWiki stable - PHP 8.2 (composer-test)
           - mw: 'REL1_45'
             php: 8.2
