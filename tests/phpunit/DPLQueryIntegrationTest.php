@@ -23,6 +23,16 @@ class DPLQueryIntegrationTest extends DPLIntegrationTestCase {
 		);
 	}
 
+	public function testFindPagesInNoneCategory(): void {
+		$this->assertArrayEquals(
+			[ 'DPLTestArticleNoCategory' ],
+			$this->getDPLQueryResults( [
+				'category' => '_none_',
+			], '%PAGE%' ),
+			true
+		);
+	}
+
 	public function testFindPagesInCategoryWithOrderAndLimit(): void {
 		$this->assertArrayEquals(
 			[ 'DPLTestArticleMultipleCategories', 'DPLTestArticle 3' ],
