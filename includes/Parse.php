@@ -146,10 +146,6 @@ class Parse {
 		}
 
 		$cleanParameters = Parameters::sortByPriority( $cleanParameters );
-
-		// To check if pseudo-category of Uncategorized pages is included
-		$this->parameters->setParameter( 'includeuncat', false );
-
 		foreach ( $cleanParameters as $parameter => $options ) {
 			foreach ( $options as $option ) {
 				// Parameter functions return true or false. The full parameter data will be
