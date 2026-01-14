@@ -172,6 +172,10 @@ class Main implements ParserFirstCallInitHook {
 			return str_replace( '§', '<', '§pre>§nowiki>' . $input . '§/nowiki>§/pre>' );
 		}
 
+		if ( $args[0] === '' ) {
+			unset( $args[0] );
+		}
+
 		$input = implode( "\n", array_map(
 			static fn ( string $arg ): string => str_replace( "\n", '', $arg ),
 			$args
