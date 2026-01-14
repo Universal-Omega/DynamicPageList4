@@ -183,7 +183,7 @@ class Main implements ParserFirstCallInitHook {
 		) {
 			$output .= '|' . $frame->expand( $arg ) . "\n";
 		}
-		$input = $output . "\n"
+		$input = $output . "\n";
 		var_dump( $input );
 
 		$parse = new Parse();
