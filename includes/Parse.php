@@ -89,10 +89,10 @@ class Parse {
 	public function parse(
 		string $input,
 		Parser $parser,
+		PPFrame $frame,
 		array &$reset,
 		array &$eliminate,
-		bool $isParserTag,
-		?PPFrame $frame
+		bool $isParserTag
 	): string {
 		$dplStartTime = microtime( true );
 
