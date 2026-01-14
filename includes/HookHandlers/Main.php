@@ -172,11 +172,19 @@ class Main implements ParserFirstCallInitHook {
 			return str_replace( '§', '<', '§pre>§nowiki>' . $input . '§/nowiki>§/pre>' );
 		}
 
-		$input = implode( "\n", array_map(
-			static fn ( string $arg ): string => str_replace( "\n", '', $frame->expand( $arg ) ),
-			$args
-		) ) . "\n";
-		var_dump( $input );
+		$output = array_shift( $args );
+		$output = $frame->expand( $output );
+
+		// get the rest of the arguments, expand each one, prefix each expansion
+		// with a pipe character, and append it to the output string.
+		for ( $arg = array_shift( $args );
+			isset( $arg );
+			$arg = array_shift( $args )
+		) {
+			$output .= '|' . $frame->expand( $arg );
+		}
+		$input = $output
+		var_dump( $output );
 
 		$parse = new Parse();
 		$reset = $eliminate = [];
