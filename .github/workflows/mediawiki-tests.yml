@@ -27,10 +27,24 @@ jobs:
             experimental: true
             stage: phan
 
+          # Latest MediaWiki stable - PHP 8.4 (phan)
+          - mw: 'REL1_45'
+            php: 8.4
+            php-docker: 84
+            experimental: true
+            stage: phan
+
           # Latest MediaWiki master - PHP 8.2 (phan)
           - mw: 'master'
             php: 8.2
             php-docker: 82
+            experimental: true
+            stage: phan
+
+          # Latest MediaWiki master - PHP 8.2 (phan)
+          - mw: 'master'
+            php: 8.4
+            php-docker: 84
             experimental: true
             stage: phan
 
@@ -55,10 +69,24 @@ jobs:
             experimental: false
             stage: phpunit
 
+          # Latest MediaWiki stable - PHP 8.4 (phpunit)
+          - mw: 'REL1_45'
+            php: 8.4
+            php-docker: 84
+            experimental: false
+            stage: phpunit
+
           # Latest MediaWiki master - PHP 8.2 (phpunit)
           - mw: 'master'
             php: 8.2
             php-docker: 82
+            experimental: true
+            stage: phpunit
+
+          # Latest MediaWiki master - PHP 8.4 (phpunit)
+          - mw: 'master'
+            php: 8.4
+            php-docker: 84
             experimental: true
             stage: phpunit
 
