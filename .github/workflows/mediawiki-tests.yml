@@ -41,7 +41,7 @@ jobs:
             experimental: true
             stage: phan
 
-          # Latest MediaWiki master - PHP 8.2 (phan)
+          # Latest MediaWiki master - PHP 8.4 (phan)
           - mw: 'master'
             php: 8.4
             php-docker: 84
