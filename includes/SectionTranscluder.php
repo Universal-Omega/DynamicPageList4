@@ -552,10 +552,16 @@ class SectionTranscluder {
 	): array {
 		$title = $article->mTitle;
 		$page = $title->getPrefixedText();
+
+		$text = '';
+		if ( !self::text( $parser, $page, $text ) ) {
+			return [ $text ];
+		}
+
 		$date = $article->myDate;
 		$user = $article->mUserLink;
 
-		$text = preg_replace( '/<!--.*?-->/s', '', $parser->fetchTemplateAndTitle( $title )[0] );
+		$text = preg_replace( '/<!--.*?-->/s', '', $text );
 		if ( $template1 !== '' && $template1[0] === '#' ) {
 			$template1 = substr( $template1, 1 );
 			$template2 = substr( $template2, 1 );
