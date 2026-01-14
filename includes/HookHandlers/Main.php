@@ -14,7 +14,7 @@ use MediaWiki\Parser\Parser;
 use MediaWiki\Parser\ParserOutputLinkTypes;
 use MediaWiki\Parser\PPFrame;
 use ReflectionProperty;
-use StringUtils;
+use Wikimedia\StringUtils\StringUtils;
 use function array_keys;
 use function array_map;
 use function explode;
