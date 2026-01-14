@@ -41,7 +41,7 @@ class Main implements ParserFirstCallInitHook {
 		// DPL4 offers the same functionality as Intersection.
 		$parser->setHook( 'DynamicPageList', [ $this, 'intersectionTag' ] );
 
-		$parser->setFunctionHook( 'dpl', [ $this, 'dplParserFunction' ] );
+		$parser->setFunctionHook( 'dpl', [ $this, 'dplParserFunction' ], Parser::SFH_OBJECT_ARGS );
 		$parser->setFunctionHook( 'dplnum', [ $this, 'dplNumParserFunction' ] );
 		$parser->setFunctionHook( 'dplvar', [ $this, 'dplVarParserFunction' ] );
 		$parser->setFunctionHook( 'dplreplace', [ $this, 'dplReplaceParserFunction' ] );
@@ -160,7 +160,8 @@ class Main implements ParserFirstCallInitHook {
 	 */
 	public function dplParserFunction(
 		Parser $parser,
-		string ...$args
+		PPFrame $frame,
+		array $args
 	): array|string {
 		Utils::setLikeIntersection( false );
 		$parser->addTrackingCategory( 'dpl-parserfunc-tracking-category' );
@@ -178,7 +179,7 @@ class Main implements ParserFirstCallInitHook {
 
 		$parse = new Parse();
 		$reset = $eliminate = [];
-		$dplresult = $parse->parse( $input, $parser, $reset, $eliminate, false, null );
+		$dplresult = $parse->parse( $input, $parser, $reset, $eliminate, false, $frame );
 
 		return [
 			$parser->getPreprocessor()->preprocessToObj( $dplresult, 1 ),
