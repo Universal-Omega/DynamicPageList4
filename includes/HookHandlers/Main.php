@@ -101,7 +101,7 @@ class Main implements ParserFirstCallInitHook {
 
 		$reset = [];
 		$eliminate = [];
-		$text = $parse->parse( $input, $parser, $reset, $eliminate, true, $frame );
+		$text = $parse->parse( $input, $parser, $frame, $reset, $eliminate, true );
 		$parserOutput = $parser->getOutput();
 
 		// we can remove the templates by save/restore
@@ -179,7 +179,7 @@ class Main implements ParserFirstCallInitHook {
 
 		$parse = new Parse();
 		$reset = $eliminate = [];
-		$dplresult = $parse->parse( $input, $parser, $reset, $eliminate, false, $frame );
+		$dplresult = $parse->parse( $input, $parser, $frame, $reset, $eliminate, false );
 
 		return [
 			$parser->getPreprocessor()->preprocessToObj( $dplresult, 1 ),
