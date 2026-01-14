@@ -176,6 +176,7 @@ class Main implements ParserFirstCallInitHook {
 			static fn ( string $arg ): string => str_replace( "\n", '', $frame->expand( $arg ) ),
 			$args
 		) ) . "\n";
+		var_dump( $input );
 
 		$parse = new Parse();
 		$reset = $eliminate = [];
