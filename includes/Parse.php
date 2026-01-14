@@ -101,7 +101,7 @@ class Parse {
 		$title = Title::castFromPageReference( $parser->getPage() );
 
 		// Check that we are not in an infinite transclusion loop
-		if ( $frame && $title && !$frame->loopCheck( $title ) ) {
+		if ( $title && !$frame->loopCheck( $title ) ) {
 			$this->logger->addMessage( Constants::WARN_TRANSCLUSIONLOOP, $title->getPrefixedText() );
 			return $this->getFullOutput( totalResults: 0, skipHeaderFooter: true );
 		}
