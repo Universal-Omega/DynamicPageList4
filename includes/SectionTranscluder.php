@@ -554,8 +554,8 @@ class SectionTranscluder {
 		$page = $title->getPrefixedText();
 
 		$text = '';
-        if ( !self::text( $parser, $page, $text ) ) {
-            return [ $text ];
+		if ( !self::text( $parser, $page, $text ) ) {
+			return [ $text ];
 		}
 
 		$date = $article->myDate;
