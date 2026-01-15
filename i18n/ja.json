@@ -30,6 +30,8 @@
 	"dpl_log_24": "エラー: <code>$wgDplSettings['runFromProtectedPagesOnly']</code> が設定されていますが、ページ「$1」は編集保護されていません。",
 	"dpl_log_25": "エラー: $1",
 	"dpl_query_error": "DynamicPageList4 拡張機能 (バージョン $1) は、データベースエラーを引き起こす SQL ステートメントを生成しました。<br/>理由は、DynamicPageList4 の内部エラーか、あなたの操作によって発生したエラーである可能性があります(特に「categoryregexp」や「titleregexp」などの引数を使用する場合、 <code>*?</code> による非貪欲なパターン一致の使用はサポートされていません)。<br/>エラーメッセージは次のとおりです:<br/><code>$2</code>",
+	"dpl-template-deleted": "古くなったコンテンツ挿入用テンプレートの削除(DynamicPageList4以降で廃止されました)。",
+	"dpl-tracking-category": "DynamicPageList4を使用しているページ",
 	"dpl-tag-tracking-category": "DynamicPageList4のパーサータグを使用しているページ",
 	"dpl-intersection-tracking-category": "DynamicPageList4のIntersectionパーサータグを使用しているページ",
 	"dpl-parserfunc-tracking-category": "DynamicPageList4のパーサー関数を使用しているページ",

@@ -38,6 +38,8 @@
 	"dpl_log_25": "Feil: $1",
 	"dpl_articlecount": "Det er {{PLURAL:$1|én artikkel|$1 artikler}} i denne overskriften.",
 	"dpl_query_error": "Utvidelsen DynamicPageList4 (versjon $1) produserte en SQL-setning som førte til en databasefeil.<br />Årsaken kan være en intern feil i DynamicPageList4 eller en feil du har gjort, spesielt ved bruk av parametre som «categoryregexp» eller «titleregexp». Bruk av ikke-grådige mønstre som <code>*?</code> støttes ikke.<br />Feilmeldingen var:<br/><code>$2</code>",
+	"dpl-template-deleted": "Fjerner avleggs innholdsinkluderingsmal (brukes ikke lenger med DynamicPageList4).",
+	"dpl-tracking-category": "Sider som bruker DynamicPageList4",
 	"dpl-tag-tracking-category": "Sider som bruker DynamicPageList4-parsertagg",
 	"dpl-intersection-tracking-category": "Sider som bruker DynamicPageList4s intersection-parsertagg",
 	"dpl-parserfunc-tracking-category": "Sider som bruker DynamicPageList4-parserfunksjon",
