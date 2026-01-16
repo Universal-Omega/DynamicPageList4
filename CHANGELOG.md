@@ -1,5 +1,5 @@
 # Version 4.0.3
-* Performance fixes caused by version 4.0.1.
+* Fixes performance issue caused by version 4.0.1.
 * Replaced class namespace deprecated in MediaWiki 1.44.
 * Fixed PHP fatal error when moving some pages under certain conditions.
 
