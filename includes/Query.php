@@ -923,7 +923,6 @@ class Query {
 				$i++;
 				$tableAlias = "ecl{$i}";
 				$ltAlias = "elt{$i}";
-				$this->queryBuilder->table( 'categorylinks', $tableAlias );
 				$category = str_replace( ' ', '_', $category );
 				if ( $operatorType === IExpression::LIKE ) {
 					$category = new LikeValue( ...$this->splitLikePattern( $category ) );
@@ -934,13 +933,13 @@ class Query {
 					$expr = $this->buildRegexpExpression( $catTitleField, $category );
 				}
 
-				$subqueryBuilder = $this->queryBuilder->newSubquery()
+				$builder = $this->queryBuilder->newSubquery()
 					->select( '1' )
 					->from( 'categorylinks', $tableAlias );
 
-				$this->addLinktargetJoinIfNeeded( $subqueryBuilder, $tableAlias, $ltAlias );
+				$this->addLinktargetJoinIfNeeded( $builder, $tableAlias, $ltAlias );
 
-				$subquery = $subqueryBuilder->where( [
+				$subquery = $builder->where( [
 						"$tableAlias.cl_from = p.page_id",
 						$expr ?? $this->dbr->expr( $catTitleField, $operatorType, $category ),
 					] )
