@@ -319,9 +319,14 @@ class Parse {
 			'DPL_pages' => $lister->getRowCount(),
 		], $parser );
 
-		$expiry = $this->parameters->getParameter( 'allowcachedresults' ) || $this->config->get( 'alwaysCacheResults' )
-			? $this->parameters->getParameter( 'cacheperiod' ) ?? 3600
-			: 0;
+		$cachePeriod = $this->parameters->getParameter( 'cacheperiod' ) ?? 3600;
+		$expiry = match ( true ) {
+			$this->config->get( 'alwaysCacheResults' ) =>
+				$cachePeriod >= 3600 ? $cachePeriod : 3600,
+			$this->parameters->getParameter( 'allowcachedresults' ) => $cachePeriod,
+			default => 0,
+		};
+
 		$parser->getOutput()->updateCacheExpiry( $expiry );
 
 		$finalOutput = $this->getFullOutput(
