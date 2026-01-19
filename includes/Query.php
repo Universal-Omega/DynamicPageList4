@@ -2324,26 +2324,6 @@ class Query {
 	}
 
 	/**
-	 * Get the category title field name for use in SELECT, WHERE, ORDER BY, etc.
-	 * This returns either 'lt_title' (MW 1.45+) or 'cl_to' (MW 1.44) depending on migration status.
-	 *
-	 * @param string $alias The alias used in addCategoryLinksJoin
-	 * @return string The field name to use for category titles
-	 */
-	private function getCategoryTitleField( string $alias ): string {
-		$queryInfo = $this->linksMigration->getQueryInfo( 'categorylinks' );
-		if ( in_array( 'linktarget', $queryInfo['tables'], true ) ) {
-			// MW 1.45+: Using linktarget
-			return "$alias.lt_title";
-		}
-
-		// MW 1.44: Using cl_to
-		// Extract the base alias (remove _lt suffix if present)
-		$baseAlias = str_replace( '_lt', '', $alias );
-		return "$baseAlias.cl_to";
-	}
-
-	/**
 	 * Add join conditions for linktarget based on LinksMigration status.
 	 * For MW 1.45+ adds linktarget join, for MW 1.44 returns empty (uses cl_to directly).
 	 *
