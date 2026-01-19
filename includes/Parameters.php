@@ -569,10 +569,14 @@ class Parameters extends ParametersData {
 					!in_array( $namespaceId, $allowedNamespaces, true )
 				)
 			) {
-				return false;
+				continue;
 			}
 
 			$data[] = $namespaceId;
+		}
+
+		if ( $data === [] ) {
+			return false;
 		}
 
 		$this->setParameter( 'namespace', array_unique( $data ) );
@@ -604,10 +608,14 @@ class Parameters extends ParametersData {
 			}
 
 			if ( $namespaceId === false ) {
-				return false;
+				continue;
 			}
 
 			$data[] = $namespaceId;
+		}
+
+		if ( $data === [] ) {
+			return false;
 		}
 
 		$this->setParameter( 'notnamespace', array_unique( $data ) );
