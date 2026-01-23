@@ -1,6 +1,6 @@
 # Version 4.0.4
 * If the `alwaysCacheResults` config is enabled, then ignore a decreased `cacheperiod`. `cacheperiod` will still work for increasing the cache but it can not be decreased. This is to prevent bypassing the config by setting a very low `cacheperiod`.
-* Fixed `namespace` and `notnamespace` to only skip invalid namespaces and not prevent any from being used if any invalid namespace is found at all.
+* Fixes `namespace` and `notnamespace` to only skip invalid namespaces and not prevent any from being used if any invalid namespace is found at all.
 
 # Version 4.0.3
 * Fixes performance issue caused by version 4.0.1.
