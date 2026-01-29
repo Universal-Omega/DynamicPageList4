@@ -41,6 +41,8 @@
 	"dpl_log_25": "Błąd: $1",
 	"dpl_articlecount": "W tym nagłówku {{PLURAL:$1|znajduje się jeden artykuł|znajdują się $1 artykuły|znajduje się $1 artykułów}}.",
 	"dpl_query_error": "Rozszerzenie DynamicPageList4 (wersja $1) wyprodukowało wyrażenie SQL, które doprowadziło do błędu bazy danych.<br />Powodem może być wewnętrzny błąd DynamicPageList4 lub problem spowodowany przez Ciebie; szczególnie podczas używania takich parametrów jak „categoryregexp” lub „titleregexp”. Używanie wzorców dopasowywania takich jak <code>*?</code> nie jest wspierane.<br />Komunikat o błędzie:<br/><code>$2</code>",
+	"dpl-template-deleted": "Usunięcie przestarzałego szablonu dołączania treści (nie jest już używany od wersji DynamicPageList4).",
+	"dpl-tracking-category": "Strony używające DynamicPageList4",
 	"dpl-tag-tracking-category": "Strony używające znacznika parsera DynamicPageList4",
 	"dpl-intersection-tracking-category": "Strony używające znacznika parsera DynamicPageList4 Intersection",
 	"dpl-parserfunc-tracking-category": "Strony używające funkcji parsera DynamicPageList4",
