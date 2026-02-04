@@ -8,7 +8,6 @@ use MediaWiki\Config\GlobalVarConfig;
 use MediaWiki\Config\HashConfig;
 use MediaWiki\Config\MultiConfig;
 use MediaWiki\Debug\MWDebug;
-use function array_key_exists;
 use function is_array;
 
 class Config extends MultiConfig {
@@ -24,7 +23,7 @@ class Config extends MultiConfig {
 			$legacySettings = $globalConfig->get( 'DplSettings' );
 		}
 
-		[ $normalizedSettings, $usedLegacy ] = self::buildSettingsFromGlobalsAndLegacy( $globalConfig, $legacySettings );
+		[ $normalizedSettings, $usedLegacy ] = self::buildConfigFromGlobalsAndLegacy( $globalConfig, $legacySettings );
 
 		if ( $usedLegacy ) {
 			MWDebug::deprecatedMsg(
@@ -44,7 +43,7 @@ class Config extends MultiConfig {
 	 *
 	 * @return array{0: array, 1: bool} [ settingsArray, usedLegacy ]
 	 */
-	private static function buildSettingsFromGlobalsAndLegacy(
+	private static function buildConfigFromGlobalsAndLegacy(
 		GlobalVarConfig $globalConfig,
 		array $legacySettings
 	): array {
@@ -70,14 +69,14 @@ class Config extends MultiConfig {
 
 		$settings = [];
 		foreach ( $map as $key => $newGlobalName ) {
-			if ( $globalConfig->has( $newGlobalName ) ) {
-				$settings[$key] = $globalConfig->get( $newGlobalName );
+			if ( isset( $legacySettings[$key] ) ) {
+				$settings[$key] = $legacySettings[$key];
+				$usedLegacy = true;
 				continue;
 			}
 
-			if ( array_key_exists( $key, $legacySettings ) ) {
-				$settings[$key] = $legacySettings[$key];
-				$usedLegacy = true;
+			if ( $globalConfig->has( $newGlobalName ) ) {
+				$settings[$key] = $globalConfig->get( $newGlobalName );
 			}
 		}
 
