@@ -856,6 +856,7 @@ class ParametersData {
 		'userdateformat' => [
 			'default' => 'Y-m-d H:i:s',
 			'strip_html' => true,
+			'preserve_case' => true,
 		],
 
 		/**
