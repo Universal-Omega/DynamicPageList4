@@ -109,7 +109,7 @@ class Parse {
 		// Check if DPL shall only be executed from protected pages.
 		$restrictionStore = MediaWikiServices::getInstance()->getRestrictionStore();
 		if (
-			$this->config->get( 'runFromProtectedPagesOnly' ) &&
+			$this->config->get( 'DPLRunFromProtectedPagesOnly' ) &&
 			$title && !$restrictionStore->isProtected( $title, 'edit' )
 		) {
 			// Ideally we would like to allow using a DPL query if the query itself is coded on a
@@ -185,7 +185,7 @@ class Parse {
 			return $this->getFullOutput( totalResults: 0, skipHeaderFooter: true );
 		}
 
-		$needsCalcRows = !$this->config->get( 'allowUnlimitedResults' ) &&
+		$needsCalcRows = !$this->config->get( 'DPLAllowUnlimitedResults' ) &&
 			$this->parameters->getParameter( 'goal' ) !== 'categories' &&
 			str_contains(
 				$this->parameters->getParameter( 'resultsheader' ) .
@@ -321,7 +321,7 @@ class Parse {
 
 		$cachePeriod = $this->parameters->getParameter( 'cacheperiod' ) ?? 3600;
 		$expiry = match ( true ) {
-			$this->config->get( 'alwaysCacheResults' ) =>
+			$this->config->get( 'DPLAlwaysCacheResults' ) =>
 				$cachePeriod >= 3600 ? $cachePeriod : 3600,
 			$this->parameters->getParameter( 'allowcachedresults' ) => $cachePeriod,
 			default => 0,
@@ -605,16 +605,16 @@ class Parse {
 
 		// Too many categories.
 		if (
-			$totalCategories > $this->config->get( 'maxCategoryCount' ) &&
-			!$this->config->get( 'allowUnlimitedCategories' )
+			$totalCategories > $this->config->get( 'DPLMaxCategoryCount' ) &&
+			!$this->config->get( 'DPLAllowUnlimitedCategories' )
 		) {
-			$this->logger->addMessage( Constants::FATAL_TOOMANYCATS, (string)$this->config->get( 'maxCategoryCount' ) );
+			$this->logger->addMessage( Constants::FATAL_TOOMANYCATS, (string)$this->config->get( 'DPLMaxCategoryCount' ) );
 			return false;
 		}
 
 		// Not enough categories.
-		if ( $totalCategories < $this->config->get( 'minCategoryCount' ) ) {
-			$this->logger->addMessage( Constants::FATAL_TOOFEWCATS, (string)$this->config->get( 'minCategoryCount' ) );
+		if ( $totalCategories < $this->config->get( 'DPLMinCategoryCount' ) ) {
+			$this->logger->addMessage( Constants::FATAL_TOOFEWCATS, (string)$this->config->get( 'DPLMinCategoryCount' ) );
 			return false;
 		}
 

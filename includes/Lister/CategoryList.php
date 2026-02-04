@@ -28,7 +28,7 @@ class CategoryList extends Lister {
 		}
 
 		$prefix = '__NOTOC____NOEDITSECTION__';
-		return $this->rowCount > $this->config->get( 'categoryStyleListCutoff' )
+		return $this->rowCount > $this->config->get( 'DPLCategoryStyleListCutoff' )
 			? $prefix . CategoryViewer::columnList( $articleLinks, $articleStartChars )
 			: $prefix . CategoryViewer::shortList( $articleLinks, $articleStartChars );
 	}

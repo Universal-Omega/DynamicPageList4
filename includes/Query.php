@@ -246,8 +246,8 @@ class Query {
 		}
 
 		// Partially taken from intersection
-		$queryCacheTime = $this->config->get( 'queryCacheTime' );
-		$maxQueryTime = $this->config->get( 'maxQueryTime' );
+		$queryCacheTime = $this->config->get( 'DPLQueryCacheTime' );
+		$maxQueryTime = $this->config->get( 'DPLMaxQueryTime' );
 
 		if ( $maxQueryTime ) {
 			$this->queryBuilder->setMaxExecutionTime( $maxQueryTime );

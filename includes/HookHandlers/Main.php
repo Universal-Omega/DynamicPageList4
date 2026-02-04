@@ -95,7 +95,7 @@ class Main implements ParserFirstCallInitHook {
 		// create list and do a recursive parse of the output
 
 		$parse = new Parse();
-		if ( $this->config->get( 'recursiveTagParse' ) ) {
+		if ( $this->config->get( 'DPLRecursiveTagParse' ) ) {
 			$input = $parser->recursiveTagParse( $input, $frame );
 		}
 
