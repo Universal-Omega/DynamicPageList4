@@ -608,13 +608,19 @@ class Parse {
 			$totalCategories > $this->config->get( 'DPLMaxCategoryCount' ) &&
 			!$this->config->get( 'DPLAllowUnlimitedCategories' )
 		) {
-			$this->logger->addMessage( Constants::FATAL_TOOMANYCATS, (string)$this->config->get( 'DPLMaxCategoryCount' ) );
+			$this->logger->addMessage( Constants::FATAL_TOOMANYCATS,
+				(string)$this->config->get( 'DPLMaxCategoryCount' )
+			);
+
 			return false;
 		}
 
 		// Not enough categories.
 		if ( $totalCategories < $this->config->get( 'DPLMinCategoryCount' ) ) {
-			$this->logger->addMessage( Constants::FATAL_TOOFEWCATS, (string)$this->config->get( 'DPLMinCategoryCount' ) );
+			$this->logger->addMessage( Constants::FATAL_TOOFEWCATS,
+				(string)$this->config->get( 'DPLMinCategoryCount' )
+			);
+
 			return false;
 		}
 
