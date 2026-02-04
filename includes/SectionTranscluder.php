@@ -835,7 +835,7 @@ class SectionTranscluder {
 		ParserOptions $options
 	): string {
 		$config = Config::getInstance();
-		if ( $config->get( 'DPLRecursivePreprocess' ) ) {
+		if ( $config->get( ConfigNames::RecursivePreprocess ) ) {
 			self::softResetParser( $parser );
 			$parser->setOutputType( Parser::OT_PREPROCESS );
 

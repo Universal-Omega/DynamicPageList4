@@ -6,6 +6,7 @@ namespace MediaWiki\Extension\DynamicPageList4\Lister;
 
 use MediaWiki\Category\CategoryViewer;
 use MediaWiki\Extension\DynamicPageList4\Article;
+use MediaWiki\Extension\DynamicPageList4\ConfigNames;
 use function count;
 
 class CategoryList extends Lister {
@@ -28,7 +29,7 @@ class CategoryList extends Lister {
 		}
 
 		$prefix = '__NOTOC____NOEDITSECTION__';
-		return $this->rowCount > $this->config->get( 'DPLCategoryStyleListCutoff' )
+		return $this->rowCount > $this->config->get( ConfigNames::CategoryStyleListCutoff )
 			? $prefix . CategoryViewer::columnList( $articleLinks, $articleStartChars )
 			: $prefix . CategoryViewer::shortList( $articleLinks, $articleStartChars );
 	}

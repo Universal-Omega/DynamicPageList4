@@ -50,21 +50,21 @@ class Config extends MultiConfig {
 		$usedLegacy = false;
 
 		$map = [
-			'allowedNamespaces' => 'DPLAllowedNamespaces',
-			'allowUnlimitedCategories' => 'DPLAllowUnlimitedCategories',
-			'allowUnlimitedResults' => 'DPLAllowUnlimitedResults',
-			'alwaysCacheResults' => 'DPLAlwaysCacheResults',
-			'categoryStyleListCutoff' => 'DPLCategoryStyleListCutoff',
-			'functionalRichness' => 'DPLFunctionalRichness',
-			'maxCategoryCount' => 'DPLMaxCategoryCount',
-			'maxQueryTime' => 'DPLMaxQueryTime',
-			'maxResultCount' => 'DPLMaxResultCount',
-			'minCategoryCount' => 'DPLMinCategoryCount',
-			'overrideParameterDefaults' => 'DPLOverrideParameterDefaults',
-			'queryCacheTime' => 'DPLQueryCacheTime',
-			'recursivePreprocess' => 'DPLRecursivePreprocess',
-			'recursiveTagParse' => 'DPLRecursiveTagParse',
-			'runFromProtectedPagesOnly' => 'DPLRunFromProtectedPagesOnly',
+			'allowedNamespaces' => ConfigNames::AllowedNamespaces,
+			'allowUnlimitedCategories' => ConfigNames::AllowUnlimitedCategories,
+			'allowUnlimitedResults' => ConfigNames::AllowUnlimitedResults,
+			'alwaysCacheResults' => ConfigNames::AlwaysCacheResults,
+			'categoryStyleListCutoff' => ConfigNames::CategoryStyleListCutoff,
+			'functionalRichness' => ConfigNames::FunctionalRichness,
+			'maxCategoryCount' => ConfigNames::MaxCategoryCount,
+			'maxQueryTime' => ConfigNames::MaxQueryTime,
+			'maxResultCount' => ConfigNames::MaxResultCount,
+			'minCategoryCount' => ConfigNames::MinCategoryCount,
+			'overrideParameterDefaults' => ConfigNames::OverrideParameterDefaults,
+			'queryCacheTime' => ConfigNames::QueryCacheTime,
+			'recursivePreprocess' => ConfigNames::RecursivePreprocess,
+			'recursiveTagParse' => ConfigNames::RecursiveTagParse,
+			'runFromProtectedPagesOnly' => ConfigNames::RunFromProtectedPagesOnly,
 		];
 
 		$settings = [];

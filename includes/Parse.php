@@ -109,7 +109,7 @@ class Parse {
 		// Check if DPL shall only be executed from protected pages.
 		$restrictionStore = MediaWikiServices::getInstance()->getRestrictionStore();
 		if (
-			$this->config->get( 'DPLRunFromProtectedPagesOnly' ) &&
+			$this->config->get( ConfigNames::RunFromProtectedPagesOnly ) &&
 			$title && !$restrictionStore->isProtected( $title, 'edit' )
 		) {
 			// Ideally we would like to allow using a DPL query if the query itself is coded on a
@@ -185,7 +185,7 @@ class Parse {
 			return $this->getFullOutput( totalResults: 0, skipHeaderFooter: true );
 		}
 
-		$needsCalcRows = !$this->config->get( 'DPLAllowUnlimitedResults' ) &&
+		$needsCalcRows = !$this->config->get( ConfigNames::AllowUnlimitedResults ) &&
 			$this->parameters->getParameter( 'goal' ) !== 'categories' &&
 			str_contains(
 				$this->parameters->getParameter( 'resultsheader' ) .
@@ -321,7 +321,7 @@ class Parse {
 
 		$cachePeriod = $this->parameters->getParameter( 'cacheperiod' ) ?? 3600;
 		$expiry = match ( true ) {
-			$this->config->get( 'DPLAlwaysCacheResults' ) =>
+			$this->config->get( ConfigNames::AlwaysCacheResults ) =>
 				$cachePeriod >= 3600 ? $cachePeriod : 3600,
 			$this->parameters->getParameter( 'allowcachedresults' ) => $cachePeriod,
 			default => 0,
@@ -605,20 +605,20 @@ class Parse {
 
 		// Too many categories.
 		if (
-			$totalCategories > $this->config->get( 'DPLMaxCategoryCount' ) &&
-			!$this->config->get( 'DPLAllowUnlimitedCategories' )
+			$totalCategories > $this->config->get( ConfigNames::MaxCategoryCount ) &&
+			!$this->config->get( ConfigNames::AllowUnlimitedCategories )
 		) {
 			$this->logger->addMessage( Constants::FATAL_TOOMANYCATS,
-				(string)$this->config->get( 'DPLMaxCategoryCount' )
+				(string)$this->config->get( ConfigNames::MaxCategoryCount )
 			);
 
 			return false;
 		}
 
 		// Not enough categories.
-		if ( $totalCategories < $this->config->get( 'DPLMinCategoryCount' ) ) {
+		if ( $totalCategories < $this->config->get( ConfigNames::MinCategoryCount ) ) {
 			$this->logger->addMessage( Constants::FATAL_TOOFEWCATS,
-				(string)$this->config->get( 'DPLMinCategoryCount' )
+				(string)$this->config->get( ConfigNames::MinCategoryCount )
 			);
 
 			return false;
