@@ -1,3 +1,10 @@
+# Version 4.0.5
+* Fixes collation issue when using `LOWER` with `REGEXP`.
+* Preserve case for `userdateformat` parameter.
+* `$wgDplSettings` is deprecated, use new `$wgDPL*` settings.
+  * Setting `$wgDplSettings` in `LocalSettings.php` will still work for temporary backward compatibility, and will just set it's equivalent version of the new configuration option.
+  * Usage of `$wgDplSettings` now emits deprecation warnings if used.
+ 
 # Version 4.0.4
 * If the `alwaysCacheResults` config is enabled, then ignore a decreased `cacheperiod`. `cacheperiod` will still work for increasing the cache but it can not be decreased. This is to prevent bypassing the config by setting a very low `cacheperiod`.
 * Fixes `namespace` and `notnamespace` to only skip invalid namespaces and not prevent any from being used if any invalid namespace is found at all.
