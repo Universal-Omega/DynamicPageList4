@@ -533,8 +533,8 @@ class Parameters extends ParametersData {
 			return false;
 		}
 
-		$max = $this->config->get( 'allowUnlimitedResults' ) ? INF :
-			$this->config->get( 'maxResultCount' );
+		$max = $this->config->get( ConfigNames::AllowUnlimitedResults ) ? INF :
+			$this->config->get( ConfigNames::MaxResultCount );
 
 		$this->setParameter( 'count', min( (int)$option, $max ) );
 		return true;
@@ -545,7 +545,7 @@ class Parameters extends ParametersData {
 	 */
 	private function _namespace( string $option ): bool {
 		$contLang = MediaWikiServices::getInstance()->getContentLanguage();
-		$allowedNamespaces = $this->config->get( 'allowedNamespaces' );
+		$allowedNamespaces = $this->config->get( ConfigNames::AllowedNamespaces );
 		$data = $this->getParameter( 'namespace' ) ?? [];
 		foreach ( explode( '|', $option ) as $parameter ) {
 			$parameter = trim( $parameter );

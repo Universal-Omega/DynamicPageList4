@@ -5,6 +5,7 @@ declare( strict_types = 1 );
 namespace MediaWiki\Extension\DynamicPageList4\HookHandlers;
 
 use MediaWiki\Extension\DynamicPageList4\Config;
+use MediaWiki\Extension\DynamicPageList4\ConfigNames;
 use MediaWiki\Extension\DynamicPageList4\Parse;
 use MediaWiki\Extension\DynamicPageList4\SectionTranscluder;
 use MediaWiki\Extension\DynamicPageList4\Utils;
@@ -95,7 +96,7 @@ class Main implements ParserFirstCallInitHook {
 		// create list and do a recursive parse of the output
 
 		$parse = new Parse();
-		if ( $this->config->get( 'recursiveTagParse' ) ) {
+		if ( $this->config->get( ConfigNames::RecursiveTagParse ) ) {
 			$input = $parser->recursiveTagParse( $input, $frame );
 		}
 

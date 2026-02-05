@@ -44,24 +44,65 @@
 		}
 	},
 	"config": {
-		"DplSettings": {
-			"value": {
-				"allowedNamespaces": [],
-				"allowUnlimitedCategories": false,
-				"allowUnlimitedResults": false,
-				"alwaysCacheResults": false,
-				"categoryStyleListCutoff": 6,
-				"functionalRichness": 3,
-				"maxCategoryCount": 8,
-				"maxQueryTime": 10000,
-				"maxResultCount": 500,
-				"minCategoryCount": 0,
-				"overrideParameterDefaults": [],
-				"queryCacheTime": 0,
-				"recursivePreprocess": true,
-				"recursiveTagParse": false,
-				"runFromProtectedPagesOnly": false
-			}
+		"DPLAllowedNamespaces": {
+			"description": "Namespaces DynamicPageList4 is allowed to query.",
+			"value": []
+		},
+		"DPLAllowUnlimitedCategories": {
+			"description": "Allow unlimited categories in a DPL query.",
+			"value": false
+		},
+		"DPLAllowUnlimitedResults": {
+			"description": "Allow unlimited result counts in a DPL query.",
+			"value": false
+		},
+		"DPLAlwaysCacheResults": {
+			"description": "Always cache DPL query results.",
+			"value": false
+		},
+		"DPLCategoryStyleListCutoff": {
+			"description": "Cutoff for switching category style list formatting.",
+			"value": 6
+		},
+		"DPLFunctionalRichness": {
+			"description": "Controls which DPL features are enabled.",
+			"value": 3
+		},
+		"DPLMaxCategoryCount": {
+			"description": "Maximum number of categories allowed in a DPL query.",
+			"value": 8
+		},
+		"DPLMaxQueryTime": {
+			"description": "Maximum execution time for a DPL query (ms).",
+			"value": 10000
+		},
+		"DPLMaxResultCount": {
+			"description": "Maximum number of pages returned by a DPL query.",
+			"value": 500
+		},
+		"DPLMinCategoryCount": {
+			"description": "Minimum number of categories required in a DPL query.",
+			"value": 0
+		},
+		"DPLOverrideParameterDefaults": {
+			"description": "Overrides default values for DPL parameters.",
+			"value": []
+		},
+		"DPLQueryCacheTime": {
+			"description": "Cache lifetime for DPL queries (seconds).",
+			"value": 0
+		},
+		"DPLRecursivePreprocess": {
+			"description": "Enable recursive preprocessing of DPL output.",
+			"value": true
+		},
+		"DPLRecursiveTagParse": {
+			"description": "Enable recursive parsing of DPL tags.",
+			"value": false
+		},
+		"DPLRunFromProtectedPagesOnly": {
+			"description": "Restrict DPL usage to protected pages only.",
+			"value": false
 		}
 	},
 	"TrackingCategories": [

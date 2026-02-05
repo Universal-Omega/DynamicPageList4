@@ -246,8 +246,8 @@ class Query {
 		}
 
 		// Partially taken from intersection
-		$queryCacheTime = $this->config->get( 'queryCacheTime' );
-		$maxQueryTime = $this->config->get( 'maxQueryTime' );
+		$queryCacheTime = $this->config->get( ConfigNames::QueryCacheTime );
+		$maxQueryTime = $this->config->get( ConfigNames::MaxQueryTime );
 
 		if ( $maxQueryTime ) {
 			$this->queryBuilder->setMaxExecutionTime( $maxQueryTime );

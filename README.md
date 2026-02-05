@@ -22,35 +22,35 @@ These are DPL4's configuration settings and along with their default values. To 
 
 | Setting                                      | Default | Description                                                                                                                                                                                                                      |
 |:--------------------------------------------|:--------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| $wgDplSettings['allowedNamespaces']         | []      | By default all existing namespaces are used when DPL4 initializes. Customize this setting with an array of namespace constants to restrict DPL4 to work only in those namespaces.                                   |
-| $wgDplSettings['allowUnlimitedCategories']  | false   | Set this to true to ignore `maxCategoryCount` and allow unlimited categories. Please note that large amounts of categories in a query can slow down or crash servers.                                                          |
-| $wgDplSettings['allowUnlimitedResults']     | false   | Set this to true to ignore `maxResultCount` and allow unlimited results. Please note that large result sets may result in slow or failed page loads.                                                                         |
-| $wgDplSettings['alwaysCacheResults']        | false   | Set this to true to ignore `allowcachedresults` and always enable the parser cache.                                                                                                                                               |
-| $wgDplSettings['categoryStyleListCutoff']   | 6       | Maximum number of items in a category list before being cut off.                                                                                                                                                                   |
-| $wgDplSettings['functionalRichness']        | 3       | Set the level of parameters available to end users.                                                                                                                                    |
-| $wgDplSettings['maxCategoryCount']          | 8       | Maximum number of categories to allow in queries.                                                                                                                                                                                     |
-| $wgDplSettings['maxQueryTime']              | 10000   | Maximum allowed time for database queries in milliseconds.                                                                                                                                                                            |
-| $wgDplSettings['maxResultCount']            | 500     | Maximum number of results to return from a query.                                                                                                                                                                                     |
-| $wgDplSettings['minCategoryCount']          | 0       | Minimum number of categories to allow in queries.                                                                                                                                        |
-| $wgDplSettings['overrideParameterDefaults'] | []      | An associative array of parameter names and their override values. These values replace the default parameter values defined in `ParametersData`, but only if the current defaults differ.                                       |
-| $wgDplSettings['queryCacheTime']            | 0       | Can help with situations where you have a template with the same query used on a large number of pages all being refreshed at once. The query cache cannot be purged. Suggested value between 30 to 600.                      |
-| $wgDplSettings['recursivePreprocess']       | true    | Use `Parser::recursivePreprocess()` to improve performance by preserving the internal cache, reducing redundant template parsing.                                                                                                    |
-| $wgDplSettings['recursiveTagParse']         | false   | Do recursive tag parsing on `<dpl>` parser tags converting tags and functions such as magic words like `{{PAGENAME}}`. This is similar to the `{{#dpl}}` parser function call, but may not work exactly the same in all cases.   |
-| $wgDplSettings['runFromProtectedPagesOnly'] | false   | Set this to true to allow DPL4 to run from protected pages only. This is recommended if wiki administrators are having issues with malicious users creating computationally intensive queries.                            |
+| $wgDPLAllowedNamespaces         | []      | By default all existing namespaces are used when DPL4 initializes. Customize this setting with an array of namespace constants to restrict DPL4 to work only in those namespaces.                                   |
+| $wgDPLAllowUnlimitedCategories  | false   | Set this to true to ignore `$wgDPLMaxCategoryCount` and allow unlimited categories. Please note that large amounts of categories in a query can slow down or crash servers.                                                          |
+| $wgDPLAllowUnlimitedResults     | false   | Set this to true to ignore `$wgDPLMaxResultCount` and allow unlimited results. Please note that large result sets may result in slow or failed page loads.                                                                         |
+| $wgDPLAlwaysCacheResults        | false   | Set this to true to ignore `allowcachedresults` and always enable the parser cache.                                                                                                                                               |
+| $wgDPLCategoryStyleListCutoff   | 6       | Maximum number of items in a category list before being cut off.                                                                                                                                                                   |
+| $wgDPLFunctionalRichness        | 3       | Set the level of parameters available to end users.                                                                                                                                    |
+| $wgDPLMaxCategoryCount          | 8       | Maximum number of categories to allow in queries.                                                                                                                                                                                     |
+| $wgDPLMaxQueryTime              | 10000   | Maximum allowed time for database queries in milliseconds.                                                                                                                                                                            |
+| $wgDPLMaxResultCount            | 500     | Maximum number of results to return from a query.                                                                                                                                                                                     |
+| $wgDPLMinCategoryCount          | 0       | Minimum number of categories to allow in queries.                                                                                                                                        |
+| $wgDPLOverrideParameterDefaults | []      | An associative array of parameter names and their override values. These values replace the default parameter values defined in `ParametersData`, but only if the current defaults differ.                                       |
+| $wgDPLQueryCacheTime            | 0       | Can help with situations where you have a template with the same query used on a large number of pages all being refreshed at once. The query cache cannot be purged. Suggested value between 30 to 600.                      |
+| $wgDPLRecursivePreprocess       | true    | Use `Parser::recursivePreprocess()` to improve performance by preserving the internal cache, reducing redundant template parsing.                                                                                                    |
+| $wgDPLRecursiveTagParse         | false   | Do recursive tag parsing on `<dpl>` parser tags converting tags and functions such as magic words like `{{PAGENAME}}`. This is similar to the `{{#dpl}}` parser function call, but may not work exactly the same in all cases.   |
+| $wgDPLRunFromProtectedPagesOnly | false   | Set this to true to allow DPL4 to run from protected pages only. This is recommended if wiki administrators are having issues with malicious users creating computationally intensive queries.                            |
 
 The global variable `$wgNonincludableNamespaces` is automatically respected by DPL4. It will prevent the contents of the listed namespaces from appearing in DPL4's output.
 
-**Note: `$wgDplSettings['maxResultCount']` is a LIMIT *on the SQL query itself*. Some DPL4 query parameters like `includematch` are applied *after* the SQL query, however, so results here may easily be misleading.**
+**Note: `$wgDPLMaxResultCount` is a LIMIT *on the SQL query itself*. Some DPL4 query parameters like `includematch` are applied *after* the SQL query, however, so results here may easily be misleading.**
 
 ### Functional Richness
 
 DynamicPageList4 has many features which are unlocked based on the maximum functional richness level. There are some that can cause high CPU or database load and should be used sparingly.
 
-* `$wgDplSettings['functionalRichness'] = 0` is equivalent to Wikimedia's [DynamicPageList](https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:DynamicPageList_(Wikimedia))
-* `$wgDplSettings['functionalRichness'] = 1` adds additional formatting parameters
-* `$wgDplSettings['functionalRichness'] = 2` adds performance equivalent features for templates and pagelinks
-* `$wgDplSettings['functionalRichness'] = 3` allows more-expensive page inclusion features and regular expression queries.
-* `$wgDplSettings['functionalRichness'] = 4` not recommended for public websites. Includes debugging parameters for testing and development.
+* `$wgDPLFunctionalRichness = 0` is equivalent to Wikimedia's [DynamicPageList](https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:DynamicPageList_(Wikimedia))
+* `$wgDPLFunctionalRichness = 1` adds additional formatting parameters
+* `$wgDPLFunctionalRichness = 2` adds performance equivalent features for templates and pagelinks
+* `$wgDPLFunctionalRichness = 3` allows more-expensive page inclusion features and regular expression queries.
+* `$wgDPLFunctionalRichness = 4` not recommended for public websites. Includes debugging parameters for testing and development.
 
 
 ## Usage
