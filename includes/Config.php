@@ -17,38 +17,31 @@ class Config extends MultiConfig {
 	private function __construct() {
 		$globalConfig = new GlobalVarConfig();
 
-		// Legacy, historically: $wgDplSettings, deprecated in favor of $wgDPL*.
-		$legacySettings = [];
+		$legacy = [];
 		if ( $globalConfig->has( 'DplSettings' ) && is_array( $globalConfig->get( 'DplSettings' ) ) ) {
-			$legacySettings = $globalConfig->get( 'DplSettings' );
+			$legacy = $globalConfig->get( 'DplSettings' );
 		}
 
-		[ $normalizedSettings, $usedLegacy ] = self::buildConfigFromGlobalsAndLegacy( $globalConfig, $legacySettings );
+		if ( $legacy === [] ) {
+			parent::__construct( [ $globalConfig ] );
+			return;
+		}
 
-		if ( $usedLegacy ) {
+		$overrides = self::buildOverridesFromLegacy( $legacy );
+		if ( $overrides !== [] ) {
 			MWDebug::deprecatedMsg(
-				msg: '$wgDplSettings is deprecated (use $wgDPL* globals instead)',
+				msg: '$wgDplSettings is deprecated (use $wgDPL* variables instead)',
 				component: 'DynamicPageList4'
 			);
 		}
 
 		parent::__construct( [
-			new HashConfig( $normalizedSettings ),
+			new HashConfig( $overrides ),
 			$globalConfig,
 		] );
 	}
 
-	/**
-	 * Prefer $wgDPL* globals, fallback to legacy $wgDplSettings array.
-	 *
-	 * @return array{0: array, 1: bool} [ settingsArray, usedLegacy ]
-	 */
-	private static function buildConfigFromGlobalsAndLegacy(
-		GlobalVarConfig $globalConfig,
-		array $legacySettings
-	): array {
-		$usedLegacy = false;
-
+	private static function buildOverridesFromLegacy( array $legacySettings ): array {
 		$map = [
 			'allowedNamespaces' => ConfigNames::AllowedNamespaces,
 			'allowUnlimitedCategories' => ConfigNames::AllowUnlimitedCategories,
@@ -67,20 +60,14 @@ class Config extends MultiConfig {
 			'runFromProtectedPagesOnly' => ConfigNames::RunFromProtectedPagesOnly,
 		];
 
-		$settings = [];
-		foreach ( $map as $key => $newGlobalName ) {
-			if ( isset( $legacySettings[$key] ) ) {
-				$settings[$key] = $legacySettings[$key];
-				$usedLegacy = true;
-				continue;
-			}
-
-			if ( $globalConfig->has( $newGlobalName ) ) {
-				$settings[$key] = $globalConfig->get( $newGlobalName );
+		$overrides = [];
+		foreach ( $map as $legacyKey => $newName ) {
+			if ( isset( $legacySettings[$legacyKey] ) ) {
+				$overrides[$newName] = $legacySettings[$legacyKey];
 			}
 		}
 
-		return [ $settings, $usedLegacy ];
+		return $overrides;
 	}
 
 	public static function getInstance(): self {
