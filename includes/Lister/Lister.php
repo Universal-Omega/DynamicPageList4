@@ -15,7 +15,6 @@ use MediaWiki\Parser\Parser;
 use MediaWiki\Parser\Sanitizer;
 use MediaWiki\Registration\ExtensionRegistry;
 use MediaWiki\Title\Title;
-use PageImages\PageImages;
 use function array_filter;
 use function array_slice;
 use function array_values;
@@ -534,8 +533,9 @@ class Lister {
 
 			if ( ExtensionRegistry::getInstance()->isLoaded( 'PageImages' ) ) {
 				// Get the PageImage URL.
-				$pageImage = PageImages::getPageImage( $article->mTitle );
-				if ( !$pageImage || !$pageImage->exists() ) {
+				$pageImages = MediaWikiServices::getInstance()->getService( 'PageImages.PageImages' );
+				$pageImage = $pageImages->getImage( $article->mTitle );
+				if ( $pageImage === null || !$pageImage->exists() ) {
 					return '';
 				}
 

@@ -5,8 +5,8 @@ declare( strict_types = 1 );
 namespace MediaWiki\Extension\DynamicPageList4\Lister;
 
 use MediaWiki\Extension\DynamicPageList4\Article;
+use MediaWiki\MediaWikiServices;
 use MediaWiki\Registration\ExtensionRegistry;
-use PageImages\PageImages;
 use function trim;
 use const NS_CATEGORY;
 use const NS_FILE;
@@ -47,8 +47,10 @@ class GalleryList extends Lister {
 				$itemPageLink = "[[:$item|$item]]";
 			}
 
-			$pageImage = PageImages::getPageImage( $article->mTitle );
-			if ( $pageImage && $pageImage->exists() ) {
+			$pageImages = MediaWikiServices::getInstance()->getService( 'PageImages.PageImages' );
+			$pageImage = $pageImages->getImage( $article->mTitle );
+
+			if ( $pageImage !== null && $pageImage->exists() ) {
 				// Successfully got a page image, wrapping it.
 				$item = $this->getItemStart() . $pageImage->getName() . $this->itemEnd .
 					"$itemPageLink{$this->itemEnd}link=$item";
