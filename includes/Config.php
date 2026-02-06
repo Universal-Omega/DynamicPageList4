@@ -4,10 +4,10 @@ declare( strict_types = 1 );
 
 namespace MediaWiki\Extension\DynamicPageList4;
 
-use MediaWiki\Config\GlobalVarConfig;
 use MediaWiki\Config\HashConfig;
 use MediaWiki\Config\MultiConfig;
 use MediaWiki\Debug\MWDebug;
+use MediaWiki\MediaWikiServices;
 use function is_array;
 
 class Config extends MultiConfig {
@@ -15,15 +15,16 @@ class Config extends MultiConfig {
 	private static ?self $instance = null;
 
 	private function __construct() {
-		$globalConfig = new GlobalVarConfig();
+		$configFactory = MediaWikiServices::getInstance()->getConfigFactory();
+		$config = $configFactory->makeConfig( 'DynamicPageList4' );
 
 		$legacy = [];
-		if ( $globalConfig->has( 'DplSettings' ) && is_array( $globalConfig->get( 'DplSettings' ) ) ) {
-			$legacy = $globalConfig->get( 'DplSettings' );
+		if ( $config->has( 'DplSettings' ) && is_array( $config->get( 'DplSettings' ) ) ) {
+			$legacy = $config->get( 'DplSettings' );
 		}
 
 		if ( $legacy === [] ) {
-			parent::__construct( [ $globalConfig ] );
+			parent::__construct( [ $config ] );
 			return;
 		}
 
@@ -37,7 +38,7 @@ class Config extends MultiConfig {
 
 		parent::__construct( [
 			new HashConfig( $overrides ),
-			$globalConfig,
+			$config,
 		] );
 	}
 
