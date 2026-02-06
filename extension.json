@@ -105,6 +105,9 @@
 			"value": false
 		}
 	},
+	"ConfigRegistry": {
+		"DynamicPageList4": "MediaWiki\\Config\\GlobalVarConfig::newInstance"
+	},
 	"TrackingCategories": [
 		"dpl-tracking-category",
 		"dpl-tag-tracking-category",
