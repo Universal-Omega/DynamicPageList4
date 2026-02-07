@@ -444,7 +444,7 @@ class Query {
 		}
 
 		if ( $dbType === 'mysql' ) {
-			$fieldExpr = "LOWER(" . $this->applyCollation( $field ) . ")";
+			$fieldExpr = 'LOWER(' . $this->applyCollation( $field ) . ')';
 			if ( $operator === 'REGEXP' ) {
 				return $this->buildRegexpExpression( $fieldExpr, $value );
 			}
