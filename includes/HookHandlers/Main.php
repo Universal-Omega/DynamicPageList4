@@ -139,7 +139,6 @@ class Main implements ParserFirstCallInitHook {
 
 		if ( $reset['templates'] ?? false ) {
 			$refProp = new ReflectionProperty( $parserOutput, 'mTemplates' );
-			$refProp->setAccessible( true );
 			$refProp->setValue( $parserOutput, $saveTemplates );
 		}
 
@@ -149,7 +148,6 @@ class Main implements ParserFirstCallInitHook {
 
 		if ( $reset['images'] ?? false ) {
 			$refProp = new ReflectionProperty( $parserOutput, 'mImages' );
-			$refProp->setAccessible( true );
 			$refProp->setValue( $parserOutput, $saveImages );
 		}
 
