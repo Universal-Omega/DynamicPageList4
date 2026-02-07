@@ -60,7 +60,6 @@ class Reset implements ParserAfterTidyHook {
 	 */
 	private function setParserOutputProperty( object $object, string $property, mixed $value ): void {
 		$refProp = new ReflectionProperty( $object, $property );
-		$refProp->setAccessible( true );
 		$refProp->setValue( $object, $value );
 	}
 }
