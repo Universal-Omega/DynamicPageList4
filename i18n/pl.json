@@ -17,7 +17,7 @@
 	"dpl_log_1": "Błąd – Błędny parametr „$1”: „$2”! Pomoc: <code>$1= <i>empty string</i> (Main)$3</code>.",
 	"dpl_log_2": "Błąd – Błędny parametr „$1”: „$2”! Pomoc: <code>$1= <i>full pagename</i></code>.",
 	"dpl_log_3": "Błąd – zbyt wiele kategorii! Maksymalnie $1. Pomoc: zwiększ wartość <code>$wgDPLMaxCategoryCount</code> aby określić więcej kategorii lub ustaw <code>$wgDPLAllowUnlimitedCategories = true;</code> w celu wyłączeniu limitu (ustaw zmienną w pliku konfiguracyjnym <code>LocalSettings.php</code> wiki).",
-	"dpl_log_4": "Błąd – zbyt mało kategorii! Minimalnie $1. Pomoc: zmniejsz wartość decrease <code>$wgDPLMinCategoryCount</code> aby określić mniej kategorii (ustaw zmienną w pliku konfiguracyjnym <code>LocalSettings.php</code> wiki).",
+	"dpl_log_4": "Błąd – zbyt mało kategorii! Minimum to $1. Wskazówka: zmniejsz wartość <code>$wgDPLMinCategoryCount</code> aby określić mniej kategorii (ustaw tę zmienną w pliku konfiguracyjnym <code>LocalSettings.php</code> wiki).",
 	"dpl_log_5": "Błąd – nie odnaleziono kryteriów wyboru! Musisz użyć przynajmniej jednego z poniższych parametrów: category, namespace, titlematch, linksto, uses, createdby, modifiedby, lastmodifiedby lub ich wariantów „not”.",
 	"dpl_log_6": "Błąd – musisz wybrać przynajmniej jedną kategorię aby użyć „addfirstcategorydate=true” lub „ordermethod=categoryadd”.",
 	"dpl_log_7": "Błąd – nie możesz użyć „addfirstcategorydate=true” lub „ordermethod=categoryadd” jeśli podasz więcej niż jedną kategorię.",

@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Kly",
-			"Lakejason0"
+			"Lakejason0",
+			"LowensteinYang"
 		]
 	},
 	"intersection-desc": "可顯示一個分類或彙總多個分類內最新項目的清單",
@@ -35,7 +36,7 @@
 	"dpl_log_21": "查詢：<code>$0</code>",
 	"dpl_log_22": "警告：沒有為「$1 」提供參數選項。（缺少「=」）",
 	"dpl_log_23": "錯誤：因為伺服器超載，導致無法顯示此清單。請稍後再試。",
-	"dpl_log_24": "錯誤： <code>$wgDPLRunFromProtectedPagesOnly</code>被設定，但頁面「$1」未被編輯保護。",
+	"dpl_log_24": "錯誤：<code>$wgDPLRunFromProtectedPagesOnly</code>被設定，但頁面「$1」未被編輯保護。",
 	"dpl_log_25": "錯誤：$1",
 	"dpl_articlecount": "此標題下{{PLURAL:$1|有$1個條目}}。",
 	"dpl_query_error": "DynamicPageList4 擴充功能（版本為$1）產生了導致資料庫錯誤的 SQL 語句。<br/>該錯誤可能是 DynamicPageList4 內部產生，也可能是您的操作有誤，尤其是使用類似於「categoryregexp」「titleregexp」等參數所導致。不支援使用非貪婪的（<code>*?</code>）比對模式。<br/>錯誤訊息：<br/><code>$2</code>",

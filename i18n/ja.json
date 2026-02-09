@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ant176"
+			"Ant176",
+			"Omotecho"
 		]
 	},
 	"intersection-desc": "単一カテゴリ内または複数カテゴリ内において最近更新された項目を箇条書きで表示",
