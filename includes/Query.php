@@ -524,7 +524,7 @@ class Query {
 				->caller( __METHOD__ )
 				->getSQL();
 
-			$this->queryBuilder->select( "rev_comment_text = ($subquery)" );
+			$this->queryBuilder->select( [ 'rev_comment_text' => "($subquery)" ] );
 		}
 	}
 
