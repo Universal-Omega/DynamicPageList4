@@ -688,7 +688,6 @@ class Lister {
 				for ( $sp = 1, $len = count( $secPieces ); $sp < $len; $sp++ ) {
 					if ( $multiSep !== null ) {
 						$secPiece[$s] .= str_replace( '%SECTION%',
-							// @phan-suppress-next-line PhanCoalescingAlwaysNullInLoop
 							$sectionHeading[$sp] ?? '',
 							$this->replaceTagCount( $multiSep, $filteredCount )
 						);
