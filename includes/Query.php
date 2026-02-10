@@ -23,7 +23,6 @@ use Wikimedia\Rdbms\IReadableDatabase;
 use Wikimedia\Rdbms\LikeMatch;
 use Wikimedia\Rdbms\LikeValue;
 use Wikimedia\Rdbms\SelectQueryBuilder;
-use Wikimedia\Rdbms\Subquery;
 use Wikimedia\Timestamp\TimestampException;
 use function array_map;
 use function array_merge;
@@ -525,7 +524,7 @@ class Query {
 				->caller( __METHOD__ )
 				->getSQL();
 
-			$this->queryBuilder->select( [ 'rev_comment_text' => new Subquery( $subquery ) ] );
+			$this->queryBuilder->select( [ 'rev_comment_text' => "($subquery)" ] );
 		}
 	}
 
