@@ -34,7 +34,7 @@
 	"dpl_log_21": "Consulta: <code>$0</code>",
 	"dpl_log_22": "Advertimento: Nulle option de parametro fornite pro '$1'. ('=' manca)",
 	"dpl_log_23": "Error: Le lista non pote esser monstrate perque le servitores es in supercarga. Per favor tenta lo de novo plus tarde.",
-	"dpl_log_24": "Error: <code>$wgDPLRunFromProtectedPagesOnly</code> es definite, ma le pagina '$1' non es protegite contra modification.",
+	"dpl_log_24": "Error: <code>$wgDPLRunFromProtectedPagesOnly</code> es definite, ma le pagina ‘$1’ non es protegite contra modification.",
 	"dpl_log_25": "Error: $1",
 	"dpl_articlecount": "Il ha $1 articulo{{PLURAL:$1||s}} in iste capite.",
 	"dpl_query_error": "Le extension DynamicPageList4 (version $1) ha producite un declaration SQL que ha causate un error del base de datos.<br/>Le ration pote esser un error interne de DynamicPageList4 o un error que tu ha facite; particularmente quando se usa parametros como 'categoryregexp' o 'titleregexp'. Le uso de patronos de correspondentia <code>*?</code> non avide non es supportate. <br/>Le message de error esseva:<br/><code>$2</code>",

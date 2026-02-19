@@ -4,7 +4,8 @@
 			"Eihel",
 			"JLTRY",
 			"MacOS Weed",
-			"Verdy p"
+			"Verdy p",
+			"Wladek92"
 		]
 	},
 	"intersection-desc": "Génère une liste à puces des éléments les plus récents membres d’une catégorie ou une intersection de plusieurs catégories",
@@ -16,8 +17,8 @@
 	"dpl-desc": "Un générateur de rapports très flexible pour les wikis basés sur MediaWiki",
 	"dpl_log_1": "Erreur : paramètre « $1 » incorrect : « $2 » ! Aide : <code>$1=<i>chaîne vide</i> (Principal)$3</code>.",
 	"dpl_log_2": "Erreur : paramètre « $1 » incorrect : « $2 » ! Aide : <code>$1=<i>nom de page complet</i></code>.",
-	"dpl_log_3": "Erreur : trop de catégories ! Maximum : $1. Aide : augmentez <code>$wgDPLMaxCategoryCount</code> pour spécifier plus de catégories ou définissez <code>$wgDPLAllowUnlimitedCategories = true;</code> pour n’avoir aucune limitation. (Définissez la variable dans le fichier de configuration <code>LocalSettings.php</code> du wiki.)",
-	"dpl_log_4": "Erreur : trop peu de catégories ! Minimum : $1. Aide : diminuez <code>$wgDPLMinCategoryCount</code> pour spécifier moins de catégories. (Définissez la variable dans le fichier de configuration <code>LocalSettings.php</code> du wiki.)",
+	"dpl_log_3": "Erreur : trop de catégories ! Maximum : $1. Aide : augmentez <code>$wgDPLMaxCategoryCount</code> pour spécifier plus de catégories ou définissez <code>$wgDPLAllowUnlimitedCategories = true;</code> pour supprimer la limite (définissez la variable dans le fichier de configuration <code>LocalSettings.php</code> du wiki).",
+	"dpl_log_4": "Erreur : trop peu de catégories ! Minimum : $1. Aide : diminuez <code>$wgDPLMinCategoryCount</code> pour spécifier moins de catégories (définissez la variable dans le fichier de configuration <code>LocalSettings.php</code> du wiki).",
 	"dpl_log_5": "Erreur : aucun critère de sélection trouvé ! Vous devez utiliser au moins un des paramètres suivants : catégorie, espace de noms, correspondance de titre, liens vers, utilisations, créé par, modifié par, dernière modification par, ou bien leurs variantes « non ».",
 	"dpl_log_6": "Erreur : au moins une catégorie doit être choisie si vous souhaitez utiliser « addfirstcategorydate=true » ou « ordermethod=categoryadd ».",
 	"dpl_log_7": "Erreur : si vous incluez plus d’une catégorie, vous ne pouvez utiliser ni « addfirstcategorydate=true », ni « ordermethod=categoryadd ».",
