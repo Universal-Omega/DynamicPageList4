@@ -280,10 +280,9 @@ jobs:
               "${DOCKER_REGISTRY}/${DOCKER_ORG}/${DOCKER_IMAGE}:${DOCKER_LATEST_TAG}" \
               --skip-zuul \
               --packages-source composer \
-              -c "/bin/bash -c 'curl -sL https://raw.githubusercontent.com/wikimedia/integration-config/refs/heads/master/dockerfiles/quibble-bullseye-php81-coverage/mwext-phpunit-coverage.sh -o mwext-phpunit-coverage && \
-                curl -sL https://raw.githubusercontent.com/wikimedia/integration-config/refs/heads/master/dockerfiles/quibble-bullseye-php81-coverage/phpunit-suite-edit.py -o phpunit-suite-edit && \
-                curl -sL https://raw.githubusercontent.com/wikimedia/integration-config/refs/heads/master/dockerfiles/quibble-bullseye-php81-coverage/phpunit-junit-edit.py -o phpunit-junit-edit && \
-                rm -rf /workspace/src/extensions/*/vendor/squizlabs/php_codesniffer /workspace/src/extensions/*/vendor/composer/pcre && \
+              -c "/bin/bash -c 'curl -sL https://raw.githubusercontent.com/wikimedia/integration-config/refs/heads/master/dockerfiles/quibble-coverage/mwext-phpunit-coverage.sh -o mwext-phpunit-coverage && \
+                curl -sL https://raw.githubusercontent.com/wikimedia/integration-config/refs/heads/master/dockerfiles/quibble-coverage/phpunit-suite-edit.py -o phpunit-suite-edit && \
+                curl -sL https://raw.githubusercontent.com/wikimedia/integration-config/refs/heads/master/dockerfiles/quibble-coverage/phpunit-junit-edit.py -o phpunit-junit-edit && \
                 chmod +x mwext-phpunit-coverage phpunit-suite-edit phpunit-junit-edit && \
                 sed -i \"s|phpunit-suite-edit|./phpunit-suite-edit|g\" mwext-phpunit-coverage && \
                 sed -i \"s|phpunit-junit-edit|./phpunit-junit-edit|g\" mwext-phpunit-coverage && \
