@@ -280,7 +280,7 @@ jobs:
               "${DOCKER_REGISTRY}/${DOCKER_ORG}/${DOCKER_IMAGE}:${DOCKER_LATEST_TAG}" \
               --skip-zuul \
               --packages-source composer \
-              -c "/bin/bash -c 'curl -sL https://raw.githubusercontent.com/wikimedia/integration-config/refs/heads/master/dockerfiles/quibble-coverage/mwext-phpunit-coverage.sh -o mwext-phpunit-coverage && \
+              -c "/bin/bash -c 'curl -sL https://raw.githubusercontent.com/wikimedia/integration-config/58795d98e27ceaa2606d12fcb14d8509b5571467/dockerfiles/quibble-coverage/mwext-phpunit-coverage.sh -o mwext-phpunit-coverage && \
                 curl -sL https://raw.githubusercontent.com/wikimedia/integration-config/refs/heads/master/dockerfiles/quibble-coverage/phpunit-suite-edit.py -o phpunit-suite-edit && \
                 curl -sL https://raw.githubusercontent.com/wikimedia/integration-config/refs/heads/master/dockerfiles/quibble-coverage/phpunit-junit-edit.py -o phpunit-junit-edit && \
                 chmod +x mwext-phpunit-coverage phpunit-suite-edit phpunit-junit-edit && \
