@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Hakimi97"
+			"Hakimi97",
+			"SNN95"
 		]
 	},
 	"intersection-desc": "Mewujudkan pengeluaran senarai item terkini dalam sesebuah kategori atau kesatuan beberapa buah kategori",
@@ -14,7 +15,7 @@
 	"dpl_log_1": "Ralat: Parameter '$1' salah: '$2'! Bantuan: <code>$1= <i>empty string</i> (Main)$3</code>.",
 	"dpl_log_2": "Ralat: Parameter '$1' salah: '$2'! Bantuan: <code>$1= <i>full pagename</i></code>.",
 	"dpl_log_3": "Ralat: Terlalu banyak kategori! Maksimum: $1. Bantuan: tingkatkan <code>$wgDPLMaxCategoryCount</code> untuk menentukan lebih banyak kategori atau tetapkan <code>$wgDPLAllowUnlimitedCategories = true;</code> tanpa had. (Tetapkan pembolehubah dalam fail konfigurasi <code>LocalSettings.php</code> wiki.)",
-	"dpl_log_4": "Ralat: Terlalu sedikit kategori! Minimum: $1. Bantuan: kurangkan <code>$wgDPLMinCategoryCount</code> untuk menentukan lebih sedikit kategori. (Tetapkan pembolehubah dalam fail konfigurasi <code>LocalSettings.php</code> wiki.)",
+	"dpl_log_4": "Ralat: Kategori terlalu sedikit! Minimum: $1. Bantuan: kurangkan <code>$wgDPLMinCategoryCount</code> untuk menentukan bilangan kategori yang lebih sedikit. (Tetapkan pembolehubah ini dalam fail konfigurasi <code>LocalSettings.php</code> wiki tersebut.)",
 	"dpl_log_5": "Ralat: Tiada kriteria pemilihan ditemui! Anda mesti menggunakan sekurang-kurangnya satu daripada parameter berikut: kategori, ruang nama, padanan tajuk, pautan, kegunaan, dicipta oleh, diubahsuai oleh, diubahsuai terakhir oleh atau varian 'not'nya",
 	"dpl_log_6": "Ralat: Sekurang-kurangnya satu kategori mesti dipilih untuk menggunakan 'addfirstcategorydate=true' atau 'ordermethod=categoryadd'.",
 	"dpl_log_7": "Ralat: Jika anda memasukkan lebih daripada satu kategori, anda tidak boleh menggunakan 'addfirstcategorydate=true' atau 'ordermethod=categoryadd'.",
