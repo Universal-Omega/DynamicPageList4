@@ -2376,9 +2376,10 @@ class Query {
 	 * @return string The field expression for the image file title
 	 */
 	private function getImageLinksTitleField( string $ilAlias, string $ltAlias ): string {
-		// LinksMigration covers imagelinks starting in MW 1.45/1.46.
-		// Check if the new schema is active (il_target_id column present).
+		// LinksMigration covers imagelinks starting in MW 1.46. It will throw an
+		// InvalidArgumentException on earlier versions where it is not covered.
 		try {
+			// Check if the new schema is active (il_target_id column present).
 			$queryInfo = $this->linksMigration->getQueryInfo( 'imagelinks' );
 			$isNew = in_array( 'linktarget', $queryInfo['tables'], true );
 		} catch ( InvalidArgumentException ) {
