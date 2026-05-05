@@ -1,3 +1,10 @@
+# Version 4.0.6
+* Added ConfigRegistry and used with ConfigFactory for retrieving configs.
+* Added support for the imagelinks migration in MediaWiki 1.46.
+* Removed usage of deprecated `ReflectionProperty::setAccessible()`.
+* Removed non-functional loop check from SectionTranscluder.
+* Replaced deprecated `PageImages::getPageImage()`.
+
 # Version 4.0.5
 * Fixes collation issue when using `LOWER` with `REGEXP`.
 * Preserve case for `userdateformat` parameter.
