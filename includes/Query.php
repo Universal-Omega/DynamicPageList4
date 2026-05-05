@@ -4,6 +4,7 @@ declare( strict_types = 1 );
 
 namespace MediaWiki\Extension\DynamicPageList4;
 
+use InvalidArgumentException;
 use MediaWiki\Extension\DynamicPageList4\Exceptions\QueryException;
 use MediaWiki\ExternalLinks\LinkFilter;
 use MediaWiki\Linker\LinksMigration;
@@ -2377,8 +2378,15 @@ class Query {
 	private function getImageLinksTitleField( string $ilAlias, string $ltAlias ): string {
 		// LinksMigration covers imagelinks starting in MW 1.45/1.46.
 		// Check if the new schema is active (il_target_id column present).
-		$queryInfo = $this->linksMigration->getQueryInfo( 'imagelinks' );
-		if ( in_array( 'linktarget', $queryInfo['tables'], true ) ) {
+		try {
+			$queryInfo = $this->linksMigration->getQueryInfo( 'imagelinks' );
+			$isNew = in_array( 'linktarget', $queryInfo['tables'], true );
+		} catch ( InvalidArgumentException ) {
+			// Pre-1.46 MW where LinksMigration doesn't know imagelinks
+			$isNew = false;
+		}
+
+		if ( $isNew ) {
 			// MW 1.46+: join linktarget via il_target_id
 			$this->queryBuilder->join( 'linktarget', $ltAlias, [
 				"$ilAlias.il_target_id = $ltAlias.lt_id",
