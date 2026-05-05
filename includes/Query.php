@@ -151,8 +151,9 @@ class Query {
 
 		if ( $this->parameters->getParameter( 'openreferences' ) ) {
 			if ( $this->parameters->getParameter( 'imagecontainer' ) ) {
-				$this->queryBuilder->select( 'il_to' );
 				$this->queryBuilder->table( 'imagelinks', 'ic' );
+				$ilToField = $this->getImageLinksTitleField( 'ic', 'ic_lt' );
+				$this->queryBuilder->select( [ 'lt_title' => $ilToField ] );
 			} else {
 				$this->queryBuilder->table( 'pagelinks', 'pl' );
 				$this->queryBuilder->join( 'linktarget', 'lt', 'pl.pl_target_id = lt.lt_id' );
@@ -1037,13 +1038,15 @@ class Query {
 	 */
 	private function _imagecontainer( array $option ): void {
 		$this->queryBuilder->table( 'imagelinks', 'ic' );
-		$this->queryBuilder->select( [ 'sortkey' => 'ic.il_to' ] );
+
+		$ilToField = $this->getImageLinksTitleField( 'ic', 'ic_lt' );
+		$this->queryBuilder->select( [ 'sortkey' => $ilToField ] );
 
 		$where = [];
 		if ( !$this->parameters->getParameter( 'openreferences' ) ) {
 			$where = [
 				'p.page_namespace = ' . NS_FILE,
-				'p.page_title = ic.il_to',
+				"p.page_title = $ilToField",
 			];
 		}
 
@@ -1067,7 +1070,9 @@ class Query {
 		}
 
 		$this->queryBuilder->table( 'imagelinks', 'il' );
-		$this->queryBuilder->select( [ 'image_sel_title' => 'il.il_to' ] );
+
+		$ilToField = $this->getImageLinksTitleField( 'il', 'il_lt' );
+		$this->queryBuilder->select( [ 'image_sel_title' => $ilToField ] );
 
 		$where = [ 'p.page_id = il.il_from' ];
 
@@ -1075,14 +1080,12 @@ class Query {
 		foreach ( $option as $linkGroup ) {
 			foreach ( $linkGroup as $link ) {
 				$dbkey = $link->getDBkey();
-				$fieldExpr = 'il.il_to';
-
 				if ( $this->ignoreCase ) {
-					$ors[] = $this->caseInsensitiveComparison( $fieldExpr, '=', $dbkey );
+					$ors[] = $this->caseInsensitiveComparison( $ilToField, '=', $dbkey );
 					continue;
 				}
 
-				$ors[] = $this->dbr->expr( $fieldExpr, '=', $dbkey );
+				$ors[] = $this->dbr->expr( $ilToField, '=', $dbkey );
 			}
 		}
 
@@ -2361,5 +2364,31 @@ class Query {
 		}
 
 		return "$clAlias.cl_to";
+	}
+
+	/**
+	 * Add a linktarget join for imagelinks and return the title field expression.
+	 * For MW 1.46+ adds linktarget join, for MW 1.45 returns empty (uses il_to directly).
+	 *
+	 * @param string $ilAlias Alias for the imagelinks table (e.g. 'il', 'ic')
+	 * @param string $ltAlias Alias to use for the joined linktarget row
+	 * @return string The field expression for the image file title
+	 */
+	private function getImageLinksTitleField( string $ilAlias, string $ltAlias ): string {
+		// LinksMigration covers imagelinks starting in MW 1.45/1.46.
+		// Check if the new schema is active (il_target_id column present).
+		$queryInfo = $this->linksMigration->getQueryInfo( 'imagelinks' );
+		if ( in_array( 'linktarget', $queryInfo['tables'], true ) ) {
+			// MW 1.46+: join linktarget via il_target_id
+			$this->queryBuilder->join( 'linktarget', $ltAlias, [
+				"$ilAlias.il_target_id = $ltAlias.lt_id",
+				"$ltAlias.lt_namespace" => NS_FILE,
+			] );
+
+			return "$ltAlias.lt_title";
+		}
+
+		// MW 1.45: il_to is still the direct title column
+		return "$ilAlias.il_to";
 	}
 }
