@@ -378,7 +378,7 @@ class Parse {
 				$imageContainer = $this->parameters->getParameter( 'imagecontainer' ) ?? [];
 				if ( $imageContainer !== [] ) {
 					$pageNamespace = NS_FILE;
-					$pageTitle = $row->il_to;
+					$pageTitle = $row->lt_title;
 				} else {
 					// Maybe non-existing title
 					$pageNamespace = (int)$row->lt_namespace;
