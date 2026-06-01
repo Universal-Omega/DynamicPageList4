@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"HakanIST",
 			"Hedda",
 			"SaldırganSincap"
 		]
@@ -15,7 +16,7 @@
 	"dpl_log_1": "Hata: Yanlış '$1' parametresi: '$2'! Yardım: <code>$1= <i>empty string</i> (Main)$3</code>.",
 	"dpl_log_2": "Hata: Yanlış '$1' parametresi: '$2'! Yardım: <code>$1= <i>tam sayfa adı</i></code>.",
 	"dpl_log_3": "Hata: Çok fazla kategori! Maksimum: $1. Yardım: Daha fazla kategori belirtmek için <code>$wgDPLMaxCategoryCount</code> ögesini artırın veya sınırlama olmaksızın <code>$wgDPLAllowUnlimitedCategories = true;</code> ögesini ayarlayın. (Vikinin <code>LocalSettings.php</code> yapılandırma dosyasındaki değişkeni ayarlayın.)",
-	"dpl_log_4": "Hata: Çok az kategori var! Minimum: $1. Yardım: daha az kategori belirtmek için <code>$wgDPLMinCategoryCount</code> ögesini azaltın. (Vikinin <code>LocalSettings.php</code> yapılandırma dosyasındaki değişkeni ayarlayın.)",
+	"dpl_log_4": "Hata: Çok az kategori! Minimum: $1. Yardım: Daha az kategori belirtmek için <code>$wgDPLMinCategoryCount</code> değerini azaltın.",
 	"dpl_log_5": "Hata: Seçim kriteri bulunamadı! Aşağıdaki parametrelerden en az birini kullanmalısınız: category, namespace, titlematch, linksto, uses, createdby, modifiedby, lastmodifiedby veya 'not' varyantları",
 	"dpl_log_6": "Hata: 'addfirstcategorydate=true' veya 'ordermethod=categoryadd' kullanmak için en az bir kategori seçilmelidir.",
 	"dpl_log_7": "Hata: Birden fazla kategori eklerseniz, 'addfirstcategorydate=true' veya 'ordermethod=categoryadd' kullanamazsınız.",
@@ -39,6 +40,8 @@
 	"dpl_log_25": "Hata: $1",
 	"dpl_articlecount": "Bu başlıkta {{PLURAL:$1|bir madde|$1 madde}} var.",
 	"dpl_query_error": "DynamicPageList4 uzantısı (sürüm $1), bir Veritabanı hatasına yol açan bir SQL deyimi oluşturdu.<br/>Bunun nedeni, DynamicPageList4'ün dahili bir hatası veya sizin yaptığınız bir hata olabilir; özellikle 'categoryregexp' veya 'titleregexp' gibi parametreler kullanılırken. Açgözlü olmayan <code>*?</code> kullanımı eşleşen kalıplar desteklenmiyor.<br/>Hata mesajı şuydu:<br/><code>$2</code>",
+	"dpl-template-deleted": "Kullanımdan kalkmış içerik dahil etme şablonu kaldırılıyor (DynamicPageList4 ile artık kullanılmıyor).",
+	"dpl-tracking-category": "DynamicPageList4 kullanan sayfalar",
 	"dpl-tag-tracking-category": "DynamicPageList4 ayrıştırıcı etiketi kullanan sayfalar",
 	"dpl-intersection-tracking-category": "DynamicPageList4 Intersection ayrıştırıcı etiketini kullanan sayfalar",
 	"dpl-parserfunc-tracking-category": "DynamicPageList4 ayrıştırıcı işlevini kullanan sayfalar",
