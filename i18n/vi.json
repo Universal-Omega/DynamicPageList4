@@ -1,0 +1,28 @@
+{
+	"@metadata": {
+		"authors": [
+			"SussyRed2000"
+		]
+	},
+	"intersection-desc": "Cho ra một danh sách được gạch đầu hàng chứa các mục gần đây nhất được xếp vào một thể loại hoặc một sự giao nhau của một số thể loại",
+	"intersection_toomanycats": "Lỗi: Quá nhiều thể loại!",
+	"intersection_toofewcats": "Lỗi: Quá ít thể loại!",
+	"intersection_noresults": "Lỗi: Không có kết quả!",
+	"intersection_noincludecats": "Lỗi: Bạn cần bao gồm ít nhất một thể loại hoặc chỉ định một không gian tên!",
+	"intersection_pcerror": "Danh sách này không thể được hiển thị vì máy chủ đang quá tải. Vui lòng thử lại sau.",
+	"dpl-desc": "Một công cụ tạo báo cáo cực kỳ linh hoạt cho các MediaWiki",
+	"dpl_log_1": "Lỗi: Tham số '$1' sai: '$2'! Trợ giúp: <code>$1= <i>chuỗi trống</i> (Chính)$3</code>.",
+	"dpl_log_2": "Lỗi: Tham số '$1' sai: '$2'! Trợ giúp: <code>$1= <i>tên trang đầy đủ</i></code>.",
+	"dpl_log_3": "Lỗi: Quá nhiều thể loại! Tối đa: $1. Trợ giúp: tăng <code>$wgDPLMaxCategoryCount</code> để chỉ định nhiều thể loại hơn hoặc chỉnh <code>$wgDPLAllowUnlimitedCategories = true;</code> để không có giới hạn. (Thiết lập biến trong tệp cấu hình <code>LocalSettings.php</code> của wiki.)",
+	"dpl_log_4": "Lỗi: Quá ít thể loại! Tối thiểu: $1. Trợ giúp: giảm <code>$wgDPLMinCategoryCount</code> để chỉ định ít thể loại hơn. (Thiết lập biến trong tệp cấu hình <code>LocalSettings.php</code> của wiki.)",
+	"dpl_log_5": "Lỗi: Không tìm thấy tiêu chí nào được lựa chọn! Bạn cần phải sử dụng ít nhất một trong các tham số sau: category, namespace, titlematch, linksto, uses, createdby, modifiedby, lastmodifiedby, hoặc các biến thể 'not' của chúng",
+	"dpl_log_6": "Lỗi: Cần phải chọn ít nhất một thể loại để sử dụng 'addfirstcategorydate=true' hoặc 'ordermethod=categoryadd'.",
+	"dpl_log_7": "Lỗi: Nếu bạn bao gồm nhiều hơn một thể loại, bạn sẽ không thể sử dụng 'addfirstcategorydate=true' hoặc 'ordermethod=categoryadd'.",
+	"dpl_log_8": "Lỗi: Chỉ có thể thêm một loại ngày tháng một lúc.",
+	"dpl_log_9": "Lỗi: Cần phải sử dụng tham số '$1' với 'ordermethod=[ $2 ]'",
+	"dpl_log_10": "Lỗi: Chỉ số cho phần chiếm ưu thế cần phải nằm giữa 1 và số lượng đối số includepage ($0 trong trường hợp này)",
+	"dpl_log_11": "Lỗi: Không thể thực hiện phép toán logic trên các trang chưa phân loại (ví dụ: với tham số 'category') vì chế độ xem $0 không tồn tại trên cơ sở dữ liệu! Trợ giúp: hãy yêu cầu bảo quản viên cơ sở dữ liệu thực thi truy vấn này: <code>$1</code>.",
+	"dpl_log_12": "Lỗi: Việc chỉ định \"openreferences\" không tương thích với một tùy chọn khác được chỉ định. Vui lòng xóa tùy chọn khác đó hoặc \"openreferences\". Xem hướng dẫn để biết thêm chi tiết.",
+	"dpl_log_13": "Cảnh báo: Đã bỏ qua tham số '$1' chưa rõ. Trợ giúp: các tham số có sẵn: <code>$2</code>.",
+	"dpl_log_14": "Cảnh báo: Bỏ qua tùy chọn '$2' không hợp lệ cho tham số '$1'."
+}
