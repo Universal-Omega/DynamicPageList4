@@ -13,24 +13,24 @@ jobs:
     strategy:
       matrix:
         include:
-          # Legacy MediaWiki stable - PHP 8.2 (phan)
+          # Legacy MediaWiki stable - PHP 8.3 (phan)
           - mw: 'REL1_44'
-            php: 8.2
-            php-docker: 82
+            php: 8.3
+            php-docker: 83
             experimental: false
             stage: phan
 
-          # Legacy MediaWiki stable - PHP 8.2 (phpunit)
+          # Legacy MediaWiki stable - PHP 8.3 (phpunit)
           - mw: 'REL1_44'
-            php: 8.2
-            php-docker: 82
+            php: 8.3
+            php-docker: 83
             experimental: false
             stage: phpunit
 
-          # Latest MediaWiki stable - PHP 8.2 (phan)
+          # Latest MediaWiki stable - PHP 8.3 (phan)
           - mw: 'REL1_45'
-            php: 8.2
-            php-docker: 82
+            php: 8.3
+            php-docker: 83
             experimental: true
             stage: phan
 
@@ -48,10 +48,10 @@ jobs:
             experimental: true
             stage: phan
 
-          # Latest MediaWiki stable - PHP 8.2 (phpunit)
+          # Latest MediaWiki stable - PHP 8.3 (phpunit)
           - mw: 'REL1_45'
-            php: 8.2
-            php-docker: 82
+            php: 8.3
+            php-docker: 83
             experimental: false
             stage: phpunit
 
@@ -69,17 +69,17 @@ jobs:
             experimental: false
             stage: phpunit
 
-          # Latest MediaWiki stable - PHP 8.2 (coverage)
+          # Latest MediaWiki stable - PHP 8.3 (coverage)
           - mw: 'REL1_45'
-            php: 8.2
-            php-docker: 82
+            php: 8.3
+            php-docker: 83
             experimental: false
             stage: coverage
 
-          # Latest MediaWiki stable - PHP 8.2 (composer-test)
+          # Latest MediaWiki stable - PHP 8.3 (composer-test)
           - mw: 'REL1_45'
-            php: 8.2
-            php-docker: 82
+            php: 8.3
+            php-docker: 83
             experimental: false
             stage: composer-test
 
