@@ -1,0 +1,31 @@
+{
+	"@metadata": {
+		"authors": [
+			"Meno25"
+		]
+	},
+	"intersection-desc": "يُخرج قائمةً مُرقمةً بأحدث العناصر الموجودة في فئةٍ ما، أو تقاطع عدة فئات.",
+	"intersection_toomanycats": "خطأ: عدد الفئات كبير جدًا!",
+	"intersection_toofewcats": "خطأ: عدد الفئات قليل جدًا!",
+	"intersection_noresults": "خطأ: لا توجد نتائج!",
+	"intersection_noincludecats": "خطأ: يجب عليك تضمين فئة واحدة على الأقل، أو تحديد مساحة اسم!",
+	"intersection_pcerror": "لا يمكن عرض هذه القائمة بسبب الضغط الزائد على الخوادم. يرجى المحاولة مرة أخرى لاحقاً.",
+	"dpl-desc": "مولد تقارير عالي المرونة لمواقع ميدياويكي",
+	"dpl_log_8": "خطأ: لا يمكن إضافة سوى نوع تاريخ واحد في كل مرة.",
+	"dpl_log_10": "خطأ: يجب أن يكون فهرس القسم المهيمن بين 1 وعدد وسائط includepage ( $0 في هذه الحالة)",
+	"dpl_log_11": "خطأ: لا يمكن إجراء عمليات منطقية على صفحات \"غير مصنفة\" (مثل استخدام المعامل \"category\") لأن العرض $0 غير موجود في قاعدة البيانات! المساعدة: اطلب من مسؤول قاعدة البيانات تنفيذ هذا الاستعلام: <code>$1</code> .",
+	"dpl_log_12": "خطأ: تحديد \"openreferences\" غير متوافق مع خيار آخر محدد. يُرجى إزالة ذلك الخيار الآخر أو \"openreferences\". راجع الدليل لمزيد من التفاصيل.",
+	"dpl_log_13": "تحذير: تم تجاهل المعامل غير المعروف ' $1 '. المساعدة: المعاملات المتاحة: <code>$2</code> .",
+	"dpl_log_14": "تحذير: تم تخطي الخيار غير الصحيح ' $2 ' للمعامل ' $1 '.",
+	"dpl_log_16": "تحذير: لا توجد نتائج.",
+	"dpl_log_25": "خطأ: $1",
+	"dpl-tracking-category": "الصفحات التي تستخدم DynamicPageList4",
+	"dpl-tag-tracking-category": "الصفحات التي تستخدم علامة محلل DynamicPageList4",
+	"dpl-intersection-tracking-category": "الصفحات التي تستخدم علامة تحليل التقاطع DynamicPageList4",
+	"dpl-parserfunc-tracking-category": "الصفحات التي تستخدم دالة تحليل DynamicPageList4",
+	"dplnum-parserfunc-tracking-category": "الصفحات التي تستخدم دالة تحليل DynamicPageList4 dplnum",
+	"dplvar-parserfunc-tracking-category": "الصفحات التي تستخدم دالة تحليل DynamicPageList4 dplvar",
+	"dplreplace-parserfunc-tracking-category": "الصفحات التي تستخدم دالة محلل DynamicPageList4 dplreplace",
+	"dplchapter-parserfunc-tracking-category": "الصفحات التي تستخدم دالة تحليل DynamicPageList4 dplchapter",
+	"dplmatrix-parserfunc-tracking-category": "الصفحات التي تستخدم دالة محلل DynamicPageList4 dplmatrix"
+}
