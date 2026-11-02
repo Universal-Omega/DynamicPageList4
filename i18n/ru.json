@@ -27,5 +27,12 @@
 	"dpl_log_24": "Ошибка: <code>$wgDPLRunFromProtectedPagesOnly</code> установлен, однако страница '$1' не защищена от редактирования.",
 	"dpl_log_25": "Ошибка: $1",
 	"dpl_query_error": "Расширение DynamicPageList4 (версия $1) создало инструкцию SQL, которая привела к ошибке базы данных.<br>Причиной может быть внутренняя ошибка DynamicPageList4 или ошибка, допущенная вами (особенно при использовании таких параметров, как «categoryregexp» или «titleregexp»). Использование нежадных сопоставляющих шаблонов <code>*?</code> не поддерживается.<br>Сообщение об ошибке:<br><code>$2</code>",
-	"dplreplace-parserfunc-tracking-category": "Страницы, использующие функцию парсера DynamicPageList4 dplreplace"
+	"dpl-tracking-category": "Страницы, использующие DynamicPageList4",
+	"dpl-tag-tracking-category": "Страницы, использующие тег парсера DynamicPageList4",
+	"dpl-parserfunc-tracking-category": "Страницы, использующие функцию парсера DynamicPageList4",
+	"dplnum-parserfunc-tracking-category": "Страницы, использующие функцию парсера dplnum из DynamicPageList4",
+	"dplvar-parserfunc-tracking-category": "Страницы, использующие функцию парсера dplvar из DynamicPageList4",
+	"dplreplace-parserfunc-tracking-category": "Страницы, использующие функцию парсера DynamicPageList4 dplreplace",
+	"dplchapter-parserfunc-tracking-category": "Страницы, использующие функцию парсера dplchapter из DynamicPageList4",
+	"dplmatrix-parserfunc-tracking-category": "Страницы, использующие функцию парсера dplmatrix из DynamicPageList4"
 }
