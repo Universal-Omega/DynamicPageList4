@@ -50,7 +50,9 @@ use function str_replace;
 use function str_starts_with;
 use function strtotime;
 use function substr;
+use function version_compare;
 use function wfMessage;
+use const MW_VERSION;
 use const NS_CATEGORY;
 use const NS_FILE;
 use const NS_MAIN;
@@ -282,7 +284,7 @@ class Query {
 
 		$services = MediaWikiServices::getInstance();
 		if ( method_exists( $services, 'getWANObjectCache' ) ) {
-			// MW 1.47+
+			// @phan-suppress-next-line PhanUndeclaredMethod MW 1.47+
 			$cache = $services->getWANObjectCache();
 		} else {
 			$cache = $services->getMainWANObjectCache();
