@@ -286,7 +286,9 @@ class Query {
 			$cache->makeKey( 'DPL4Query', hash( 'sha256', $query ) ),
 			$queryCacheTime,
 			function ( mixed $oldVal, int &$ttl, array &$setOpts ) use ( $worker ): array|false {
-				$setOpts += Database::getCacheSetOptions( $this->dbr );
+				if ( version_compare( MW_VERSION, '1.47', '<' ) ) {
+					$setOpts += Database::getCacheSetOptions( $this->dbr );
+				}
 				$res = $worker->execute();
 				if ( $res === false ) {
 					// Do not cache errors.
