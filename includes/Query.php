@@ -50,7 +50,9 @@ use function str_replace;
 use function str_starts_with;
 use function strtotime;
 use function substr;
+use function version_compare;
 use function wfMessage;
+use const MW_VERSION;
 use const NS_CATEGORY;
 use const NS_FILE;
 use const NS_MAIN;
@@ -280,13 +282,21 @@ class Query {
 			return $worker->execute();
 		}
 
-		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$services = MediaWikiServices::getInstance();
+		if ( method_exists( $services, 'getWANObjectCache' ) ) {
+			// @phan-suppress-next-line PhanUndeclaredMethod MW 1.47+
+			$cache = $services->getWANObjectCache();
+		} else {
+			$cache = $services->getMainWANObjectCache();
+		}
 
 		return $cache->getWithSetCallback(
 			$cache->makeKey( 'DPL4Query', hash( 'sha256', $query ) ),
 			$queryCacheTime,
 			function ( mixed $oldVal, int &$ttl, array &$setOpts ) use ( $worker ): array|false {
-				$setOpts += Database::getCacheSetOptions( $this->dbr );
+				if ( version_compare( MW_VERSION, '1.47', '<' ) ) {
+					$setOpts += Database::getCacheSetOptions( $this->dbr );
+				}
 				$res = $worker->execute();
 				if ( $res === false ) {
 					// Do not cache errors.
