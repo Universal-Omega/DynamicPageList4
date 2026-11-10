@@ -280,7 +280,13 @@ class Query {
 			return $worker->execute();
 		}
 
-		$cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
+		$services = MediaWikiServices::getInstance();
+		if ( method_exists( $services, 'getWANObjectCache' ) ) {
+			// MW 1.47+
+			$cache = $services->getWANObjectCache();
+		} else {
+			$cache = $services->getMainWANObjectCache();
+		}
 
 		return $cache->getWithSetCallback(
 			$cache->makeKey( 'DPL4Query', hash( 'sha256', $query ) ),
