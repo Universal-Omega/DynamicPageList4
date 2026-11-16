@@ -1,0 +1,20 @@
+{
+	"@metadata": {
+		"authors": [
+			"Robby",
+			"Volvox"
+		]
+	},
+	"intersection_toomanycats": "Feeler: Zevill Kategorien!",
+	"intersection_toofewcats": "Feeler: Ze mann Kategorien!",
+	"intersection_noresults": "Feeler: Keng Resultater!",
+	"dpl_log_16": "Opgepasst: Keng Resultater.",
+	"dpl_log_25": "Feeler: $1",
+	"dpl-tracking-category": "Säiten, déi DynamicPageList4 benotzen",
+	"dpl-parserfunc-tracking-category": "Säiten, déi eng DynamicPageList4-Parserfunktioun benotzen",
+	"dplnum-parserfunc-tracking-category": "Säiten, déi d'DynamicPageList4-Parserfunktioun dplnum benotzen",
+	"dplvar-parserfunc-tracking-category": "Säiten, déi d'DynamicPageList4-Parserfunktioun dplvar benotzen",
+	"dplreplace-parserfunc-tracking-category": "Säiten, déi d'DynamicPageList4-Parserfunktioun dplreplace benotzen",
+	"dplchapter-parserfunc-tracking-category": "Säiten, déi d'DynamicPageList4-Parserfunktioun dplchapter benotzen",
+	"dplmatrix-parserfunc-tracking-category": "Säiten, déi d'DynamicPageList4-Parserfunktioun dplmatrix benotzen"
+}
