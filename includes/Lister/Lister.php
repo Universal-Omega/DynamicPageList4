@@ -347,10 +347,16 @@ class Lister {
 			'%TITLE%' => $this->replaceTagTitle( $title ),
 			'%DISPLAYTITLE%' => $this->replaceTagTitle( $article->mDisplayTitle ?: $title ),
 			'%COUNT%' => (string)$article->mCounter,
-			'%COUNTFS%' => (string)floor( log( $article->mCounter ) * 0.7 ),
-			'%COUNTFS2%' => (string)floor( sqrt( log( $article->mCounter ) ) ),
+			'%COUNTFS%' => $article->mCounter > 0
+				? (string)floor( log( $article->mCounter ) * 0.7 )
+				: '',
+			'%COUNTFS2%' => $article->mCounter > 0
+				? (string)floor( sqrt( log( $article->mCounter ) ) )
+				: '',
 			'%SIZE%' => (string)$article->mSize,
-			'%SIZEFS%' => (string)floor( sqrt( log( $article->mSize ) ) * 2.5 - 5 ),
+			'%SIZEFS%' => $article->mSize > 0
+				? (string)floor( sqrt( log( $article->mSize ) ) * 2.5 - 5 )
+				: '',
 			'%DATE%' => $article->getDate(),
 			'%REVISION%' => (string)$article->mRevision,
 			'%CONTRIBUTION%' => (string)$article->mContribution,
